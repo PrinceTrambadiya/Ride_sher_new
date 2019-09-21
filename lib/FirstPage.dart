@@ -55,7 +55,7 @@ class _FirstPageState extends State<FirstPage> {
                 child: Center(
                     child: MaterialButton(
                   splashColor: Colors.black,
-                  child: Text("As a Driver", style: TextStyle(fontSize: 18)),
+                  child: Text("DRIVER", style: TextStyle(fontSize: 18)),
                   onPressed: () {
                     setState(() {
                       Navigator.push(
@@ -82,7 +82,7 @@ class _FirstPageState extends State<FirstPage> {
                   child: Center(
                       child: MaterialButton(
                     splashColor: Colors.black,
-                    child: Text("As a Rider", style: TextStyle(fontSize: 18)),
+                    child: Text("RIDER", style: TextStyle(fontSize: 18)),
                     onPressed: () {
                       setState(() {
                       Navigator.push(
@@ -110,7 +110,7 @@ class _FirstPageState extends State<FirstPage> {
                   child: Center(
                       child: MaterialButton(
                     splashColor: Colors.black,
-                    child: Text("Log Out", style: TextStyle(fontSize: 18)),
+                    child: Text("LOGOUT", style: TextStyle(fontSize: 18)),
                     onPressed: () {
                       logout();
                     },
