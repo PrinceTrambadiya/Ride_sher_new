@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:map_demo/GoogleMap/Map.dart' ;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Driver_details.dart';
+import 'Driver_home_page.dart';
 
 class FirstPage extends StatefulWidget {
   @override
@@ -61,7 +62,7 @@ class _FirstPageState extends State<FirstPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => driver_details()));
+                              builder: (context) => Driver_home_page()));
                     });
                   },
                   padding: EdgeInsets.fromLTRB(76, 5, 76, 5),

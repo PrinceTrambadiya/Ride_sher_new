@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
         //'/ConfirmPassword': (BuildContext context) => new ConfirmPassword(),
         '/Forgetpassword': (BuildContext context) => new Forgetpassword(),
         '/driver_details': (BuildContext context) => new driver_details(),
+
       },
     );
   }
