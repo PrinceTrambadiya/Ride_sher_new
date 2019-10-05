@@ -24,6 +24,7 @@ class Map extends StatefulWidget {
 }
 
 class _MapState extends State<Map> {
+  LatLng pickupmarkers;
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
@@ -48,6 +49,19 @@ class _MapState extends State<Map> {
                   markers: appState.markers,
                   onCameraMove: appState.onCameraMove,
                   polylines: appState.polyLines,
+                  onTap: (LatLng point) {
+                    pickupmarkers = point;
+                    appState.markers.add(Marker(
+                        markerId: MarkerId(pickupmarkers.toString()),
+                        position: pickupmarkers,
+                        infoWindow: InfoWindow(
+                            title: 'pick up point', snippet: "go here"),
+                        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)));
+                    appState.pickupmarkers.add(
+                        Marker(markerId: MarkerId(pickupmarkers.toString())));
+                    print(appState.pickupmarkers);
+                    appState.notifyListeners();
+                  },
                 ),
 
                 Positioned(
