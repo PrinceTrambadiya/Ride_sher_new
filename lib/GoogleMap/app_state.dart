@@ -9,6 +9,7 @@ class AppState with ChangeNotifier {
   static LatLng _initialPosition;
   LatLng _lastPosition = _initialPosition;
   final Set<Marker> _markers = {};
+  final Set<Marker> _pickupmarkers = {};
   final Set<Polyline> _polyLines = {};
   GoogleMapController _mapController;
   GoogleMapsServices _googleMapsServices = GoogleMapsServices();
@@ -19,6 +20,7 @@ class AppState with ChangeNotifier {
   GoogleMapsServices get googleMapsServices => _googleMapsServices;
   GoogleMapController get mapController => _mapController;
   Set<Marker> get markers => _markers;
+  Set<Marker> get pickupmarkers => _pickupmarkers;
   Set<Polyline> get polyLines => _polyLines;
 
   AppState() {
