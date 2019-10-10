@@ -33,6 +33,7 @@ import 'Login.dart';
 import 'Forgetpassword.dart';
 import 'welcome.dart';
 import 'Driver_details.dart';
+import 'Add_Trip.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
         //'/ConfirmPassword': (BuildContext context) => new ConfirmPassword(),
         '/Forgetpassword': (BuildContext context) => new Forgetpassword(),
         '/driver_details': (BuildContext context) => new driver_details(),
+        '/Add_Trip': (BuildContext context) => new Add_Trip(),
 
       },
     );

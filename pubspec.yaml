@@ -31,6 +31,7 @@ dependencies:
   rxdart: ^0.22.1+1
 
   geoflutterfire: ^2.0.3+5
+  toast: ^0.1.5
 
   location: ^2.3.5
   google_maps_flutter: ^0.5.20+2

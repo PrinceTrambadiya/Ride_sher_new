@@ -35,6 +35,7 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
     print(mobile);
     if (mobile != "") {
       print('add');
+     // print(mobile);
       addData(mobile);
     } else {
       print('nathi aayo number');
@@ -58,7 +59,7 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
       address = data[0]['address'];
     });
 
-//
+
 //    print(name);
 //    print(email);
 //    print(dob);

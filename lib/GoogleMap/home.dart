@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:map_demo/GoogleMap/app_state.dart';
 import 'package:provider/provider.dart';
+import 'package:map_demo/Add_Trip.dart';
+import 'package:map_demo/Driver_details.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toast/toast.dart';
+
+String _uname = '';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -22,10 +31,49 @@ class Map extends StatefulWidget {
   @override
   _MapState createState() => _MapState();
 }
+var data;
 
 class _MapState extends State<Map> {
   LatLng pickupmarkers;
+  var mobile='' , CarName='' , CarModelNumber = '', CarNumberPlate ='', DriverLicence='';
   @override
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getPrefrence();
+  }
+
+  _getPrefrence() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    _uname = pref.getString('saved_uname');
+    mobile = _uname.toString();
+    addData(mobile);
+    // print(mobile);
+  }
+
+  Future<void> addData(mobile) async {
+
+  //  print(mobile);
+    final response = await http.post(
+        "https://ridesher.000webhostapp.com/Fatch_Driverdata.php",
+        body: {
+          "mobile": mobile,
+        });
+
+    data = json.decode(response.body);
+//    var typePass = pass;
+    setState(() {
+         CarName = data[0]['car_name'];
+//         CarModelNumber = data[0]['car_model_number'];
+//         CarNumberPlate = data[0]['car_numberplate'];
+//         CarNumberPlate = data[0]['driver_licence_number'];
+    });
+
+    print(CarName);
+  }
+
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     return SafeArea(
@@ -56,14 +104,14 @@ class _MapState extends State<Map> {
                         position: pickupmarkers,
                         infoWindow: InfoWindow(
                             title: 'pick up point', snippet: "go here"),
-                        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)));
+                        icon: BitmapDescriptor.defaultMarkerWithHue(
+                            BitmapDescriptor.hueBlue)));
                     appState.pickupmarkers.add(
                         Marker(markerId: MarkerId(pickupmarkers.toString())));
                     print(appState.pickupmarkers);
                     appState.notifyListeners();
                   },
                 ),
-
                 Positioned(
                   bottom: 100.0,
                   right: 15.0,
@@ -102,7 +150,6 @@ class _MapState extends State<Map> {
                     ),
                   ),
                 ),
-
                 Positioned(
                   bottom: 45.0,
                   right: 15.0,
@@ -145,8 +192,58 @@ class _MapState extends State<Map> {
                     ),
                   ),
                 ),
+                Positioned(
+                  child: MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        if(CarName != "")
+                          {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Add_Trip()));
+                          }
+                        else
+                          {
+                            setState(() {
+                              Toast.show("Please Fill Driver Details", context, duration: Toast.LENGTH_SHORT,gravity: Toast.BOTTOM );
+                            });
+                          }
+
+                      });
+                    },
+                    child: Text("Add Trip"),
+                    color: Colors.red,
+                  ),
+                ),
+                Positioned(
+                  bottom:700 ,
+                  child: MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        if(CarName == "")
+                          {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => driver_details()));
+                          }
+                        else
+                          {
+                            setState(() {
+                              Toast.show("Already Filled", context, duration: Toast.LENGTH_SHORT,gravity: Toast.BOTTOM );
+                            });
+                          }
+
+                      });
+                    },
+                    child: Text("Add Details"),
+                    color: Colors.red,
+                  ),
+                )
               ],
             ),
     );
   }
+
 }
