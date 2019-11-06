@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'Signup.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+String _uname = '', _name = '', _email = '',_carName='',_carNumberPlate='',_dob='',_driving_licence='',_rcbook='';
 
 class Profile extends StatefulWidget {
   @override
@@ -8,6 +11,45 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   @override
+
+  var mobile = '';
+
+  var name = "", email = "", dob = "", address = "",carName='',carNumberPlate='',DriverLicence='',rcBook='';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _getPrefrence();
+    super.initState();
+  }
+
+  _getPrefrence() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    _uname = pref.getString('saved_uname');
+    _name = pref.getString('name');
+    _email = pref.getString('email');
+    _carName = pref.getString('CarName');
+    _carNumberPlate = pref.getString('CarNumberPlate');
+    _dob = pref.getString('dob');
+    _driving_licence = pref.getString('DriverLicence');
+    _rcbook = pref.getString('RcNumber');
+    setState(() {
+      mobile = _uname.toString();
+      name = _name.toString();
+      email = _email.toString();
+      carName = _carName.toString();
+      carNumberPlate = _carNumberPlate.toString();
+      dob = _dob.toString();
+      DriverLicence = _driving_licence.toString();
+      rcBook = _rcbook.toString();
+//      print(mobile);
+//      print(name);
+//      print(email);
+//      print(carName);
+//      print(carNumberPlate);
+    });
+  }
+
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
@@ -24,13 +66,13 @@ class _ProfileState extends State<Profile> {
                 //color: Colors.yellow,
                   child: Column(children: <Widget>[
                     Text(
-                      'Prince Trambadiya',
+                      name,
                       style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
                       child: Text(
-                        'Developer',
+                        'User',
                         style: TextStyle(
                           fontSize: 18,
                         ),
@@ -51,7 +93,7 @@ class _ProfileState extends State<Profile> {
                             onPressed: () {
                             },
                             child: CircleAvatar(
-                              backgroundImage: AssetImage('assets/image1.jpg'),
+                              backgroundImage: AssetImage('images/logo_.jpg'),
                               radius: 50,
                             )),
                         IconButton(
@@ -71,97 +113,22 @@ class _ProfileState extends State<Profile> {
               color: Colors.grey,
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Text(
-                          '1.5K',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                          child: Text(
-                            'Posts',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Text(
-                          '2.5K',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                          child: Text(
-                            'Followers',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Text(
-                          '10K',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                          child: Text(
-                            'Comments',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Text(
-                          '1.2K',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                          child: Text('Following'),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Divider(
-              height: 10,
-              color: Colors.grey,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 35, 15, 35),
+              padding: const EdgeInsets.fromLTRB(15, 25, 15, 25),
               child: Container(
                 child: Column(
                   children: <Widget>[
                     Text(
-                      'Google Developer Expert for Flutter.',
-                      style: TextStyle(fontSize: 16),
+                      'Driver Licence',
+                      style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'Passionate #flutter,#Android',
+                      DriverLicence,
                       style: TextStyle(fontSize: 16),
                     ),
-                    Text(
-                      'Developer.#Enterpreneur #YouTuber',
-                      style: TextStyle(fontSize: 16),
-                    ),
+//                    Text(
+//                      'Developer.#Enterpreneur #YouTuber',
+//                      style: TextStyle(fontSize: 16),
+//                    ),
                   ],
                 ),
               ),
@@ -184,7 +151,7 @@ class _ProfileState extends State<Profile> {
                             Column(
                               children: <Widget>[
                                 Text(
-                                  'Website',
+                                  'Car Name',
                                   style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold),
@@ -192,7 +159,7 @@ class _ProfileState extends State<Profile> {
                                 Padding(
                                   padding:
                                   const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                  child: Text('about.me/imprince013'),
+                                  child: Text(carName),
                                 )
                               ],
                             )
@@ -205,7 +172,7 @@ class _ProfileState extends State<Profile> {
                               child: Column(
                                 children: <Widget>[
                                   Text(
-                                    'Phone',
+                                    'Car NamePlate',
                                     style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold),
@@ -213,7 +180,7 @@ class _ProfileState extends State<Profile> {
                                   Padding(
                                     padding:
                                     const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                    child: Text('+919512252645'),
+                                    child: Text(carNumberPlate),
                                   )
                                 ],
                               ),
@@ -227,7 +194,7 @@ class _ProfileState extends State<Profile> {
                               child: Column(
                                 children: <Widget>[
                                   Text(
-                                    'Youtube',
+                                  'RC Number',
                                     style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold),
@@ -235,7 +202,7 @@ class _ProfileState extends State<Profile> {
                                   Padding(
                                     padding:
                                     const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                    child: Text('youtube.com/imprince'),
+                                    child: Text(rcBook),
                                   )
                                 ],
                               ),
@@ -253,7 +220,7 @@ class _ProfileState extends State<Profile> {
                             Column(
                               children: <Widget>[
                                 Text(
-                                  'Location',
+                                  'Mobile',
                                   style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold),
@@ -261,7 +228,7 @@ class _ProfileState extends State<Profile> {
                                 Padding(
                                   padding:
                                   const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                  child: Text('Ahmedabad'),
+                                  child: Text(mobile),
                                 )
                               ],
                             )
@@ -282,7 +249,7 @@ class _ProfileState extends State<Profile> {
                                   Padding(
                                     padding:
                                     const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                    child: Text('prince@gmail.com'),
+                                    child: Text(email),
                                   )
                                 ],
                               ),
@@ -296,7 +263,7 @@ class _ProfileState extends State<Profile> {
                               child: Column(
                                 children: <Widget>[
                                   Text(
-                                    'Facebook',
+                                    'Date Of Birth',
                                     style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold),
@@ -304,7 +271,7 @@ class _ProfileState extends State<Profile> {
                                   Padding(
                                     padding:
                                     const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                    child: Text('fb.com/imprince013'),
+                                    child: Text(dob),
                                   )
                                 ],
                               ),
@@ -321,19 +288,104 @@ class _ProfileState extends State<Profile> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: press,
-        child: Icon(Icons.person_add),
-        backgroundColor: Colors.black,
-      ),
+//      floatingActionButton: FloatingActionButton(
+//        onPressed: press,
+//        child: Icon(Icons.person_add),
+//        backgroundColor: Colors.black,
+//      ),
     );
   }
 
-  void press() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Signup()));
-  }
-
+//  void press() {
+//    Navigator.push(context, MaterialPageRoute(builder: (context) => Signup()));
+//  }
   void message() {}
   void call() {}
   void photo() {}
+
 }
+
+
+
+
+
+
+
+
+
+
+//            Padding(
+//              padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+//              child: Container(
+//                child: Row(
+//                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                  children: <Widget>[
+//                    Column(
+//                      children: <Widget>[
+//                        Text(
+//                          '1.5K',
+//                          style: TextStyle(
+//                              fontWeight: FontWeight.bold, fontSize: 20),
+//                        ),
+//                        Padding(
+//                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+//                          child: Text(
+//                            'Posts',
+//                            style: TextStyle(fontSize: 16),
+//                          ),
+//                        ),
+//                      ],
+//                    ),
+//                    Column(
+//                      children: <Widget>[
+//                        Text(
+//                          '2.5K',
+//                          style: TextStyle(
+//                              fontWeight: FontWeight.bold, fontSize: 20),
+//                        ),
+//                        Padding(
+//                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+//                          child: Text(
+//                            'Followers',
+//                            style: TextStyle(fontSize: 16),
+//                          ),
+//                        ),
+//                      ],
+//                    ),
+//                    Column(
+//                      children: <Widget>[
+//                        Text(
+//                          '10K',
+//                          style: TextStyle(
+//                              fontWeight: FontWeight.bold, fontSize: 20),
+//                        ),
+//                        Padding(
+//                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+//                          child: Text(
+//                            'Comments',
+//                            style: TextStyle(fontSize: 16),
+//                          ),
+//                        ),
+//                      ],
+//                    ),
+//                    Column(
+//                      children: <Widget>[
+//                        Text(
+//                          '1.2K',
+//                          style: TextStyle(
+//                              fontWeight: FontWeight.bold, fontSize: 20),
+//                        ),
+//                        Padding(
+//                          padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+//                          child: Text('Following'),
+//                        ),
+//                      ],
+//                    )
+//                  ],
+//                ),
+//              ),
+//            ),
+//            Divider(
+//              height: 10,
+//              color: Colors.grey,
+//            ),
