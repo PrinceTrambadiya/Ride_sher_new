@@ -26,6 +26,7 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:map_demo/GoogleMap/Map.dart' as prefix0;
 import 'package:provider/provider.dart';
 import 'FirstPage.dart';
 import 'GoogleMap/app_state.dart';
@@ -34,6 +35,9 @@ import 'Forgetpassword.dart';
 import 'welcome.dart';
 import 'Driver_details.dart';
 import 'Add_Trip.dart';
+import 'Profile.dart';
+import 'GoogleMap/Map.dart';
+import 'Driver_home_page.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
@@ -64,6 +68,9 @@ class MyApp extends StatelessWidget {
         '/Forgetpassword': (BuildContext context) => new Forgetpassword(),
         '/driver_details': (BuildContext context) => new driver_details(),
         '/Add_Trip': (BuildContext context) => new Add_Trip(),
+        '/Profile': (BuildContext context) => new Profile(),
+        '/Map': (BuildContext context) => new Map(),
+        '/Driver_home_page': (BuildContext context) => new Driver_home_page(),
 
       },
     );

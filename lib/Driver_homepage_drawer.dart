@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import 'Profile.dart';
 
 String _uname = '', _name = '', _email = '';
 
@@ -91,6 +92,14 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
           ListTile(
             leading: Icon(Icons.person),
             title: Text('Profile'),
+            onTap: (){
+              setState(() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Profile()));
+              });
+            },
           ),
           ListTile(
             leading: Icon(Icons.airport_shuttle),

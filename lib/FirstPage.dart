@@ -173,10 +173,11 @@ class _FirstPageState extends State<FirstPage> {
                   child: Text("RIDER", style: TextStyle(fontSize: 18)),
                   onPressed: () {
                     setState(() {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Driver_home_page()));
+//                      Navigator.push(
+//                          context,
+//                          MaterialPageRoute(
+//                              builder: (context) => Driver_home_page()));
+                      Navigator.pushReplacementNamed(context, '/Driver_home_page');
                     });
                   },
                   padding: EdgeInsets.fromLTRB(76, 5, 76, 5),
@@ -200,8 +201,9 @@ class _FirstPageState extends State<FirstPage> {
                     child: Text("DRIVER", style: TextStyle(fontSize: 18)),
                     onPressed: () {
                       setState(() {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Map()));
+//                        Navigator.push(context,
+//                            MaterialPageRoute(builder: (context) => Map()));
+                        Navigator.pushReplacementNamed(context, '/Map');
                       });
                     },
                     padding: EdgeInsets.fromLTRB(80, 5, 80, 5),
