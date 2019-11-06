@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-String _uname = '',_name='',_email='';
+String _uname = '', _name = '', _email = '';
 
 //"name":"Prince Trambadiya","password":"123","email":"princetrambadiya123@gmail.com","mobile":"9512252645","dob":"12\/12\/1998","address":"Ahmedabad"
 
@@ -39,42 +39,17 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
       email = _email.toString();
     });
 
-
     print(mobile);
     if (mobile != "") {
       print('add');
-     // print(mobile);
+      // print(mobile);
 //      print(name);
 //      print(email);
-    //  addData(mobile);
+      //  addData(mobile);
     } else {
       print('nathi aayo number');
     }
   }
-
-//  Future<void> addData(mobile) async {
-//    final response = await http
-//        .post("https://ridesher.000webhostapp.com/Fatch_data.php", body: {
-//      "mobile": mobile,
-//    });
-//
-//    data = json.decode(response.body);
-////    var typePass = pass;
-////    var fatchPass = data[0]['password'];
-//
-//    setState(() {
-//      name = data[0]['name'];
-//      email = data[0]['email'];
-//      dob = data[0]['dob'];
-//      address = data[0]['address'];
-//    });
-//
-//
-////    print(name);
-////    print(email);
-////    print(dob);
-////    print(address);
-//  }
 
   Widget build(BuildContext context) {
     return new Drawer(
@@ -114,12 +89,51 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
           //                   .
 
           ListTile(
-            leading: Icon(Icons.strikethrough_s),
-            title: Text('Sunny'),
-            trailing: Icon(Icons.strikethrough_s),
-          )
+            leading: Icon(Icons.person),
+            title: Text('Profile'),
+          ),
+          ListTile(
+            leading: Icon(Icons.airport_shuttle),
+            title: Text('Trips'),
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Setting'),
+          ),
+          ListTile(
+            leading: Icon(Icons.contacts),
+            title: Text('Contact us'),
+          ),
+          ListTile(
+            leading: Icon(Icons.account_box),
+            title: Text('About us'),
+          ),
         ],
       ),
     );
   }
 }
+
+//  Future<void> addData(mobile) async {
+//    final response = await http
+//        .post("https://ridesher.000webhostapp.com/Fatch_data.php", body: {
+//      "mobile": mobile,
+//    });
+//
+//    data = json.decode(response.body);
+////    var typePass = pass;
+////    var fatchPass = data[0]['password'];
+//
+//    setState(() {
+//      name = data[0]['name'];
+//      email = data[0]['email'];
+//      dob = data[0]['dob'];
+//      address = data[0]['address'];
+//    });
+//
+//
+////    print(name);
+////    print(email);
+////    print(dob);
+////    print(address);
+//  }

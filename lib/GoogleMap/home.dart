@@ -82,6 +82,12 @@ class _MapState extends State<Map> {
     final appState = Provider.of<AppState>(context);
     return Scaffold(
       drawer: Driver_homepage_drawer(),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: bottomSheet,
+        tooltip: 'Cklick',
+
+      ),
       body: Container(
         child: SafeArea(
           child: appState.initialPosition == null
@@ -199,14 +205,6 @@ class _MapState extends State<Map> {
                                 EdgeInsets.only(left: 15.0, top: 16.0),
                           ),
                         ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 45,
-                      child: FloatingActionButton(
-                        child: Icon(Icons.add),
-                        onPressed: bottomSheet,
-                        tooltip: 'Cklick',
                       ),
                     ),
                   ],
