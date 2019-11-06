@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:flutter/material.dart' as prefix0;
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 String _uname = '';
 
@@ -13,15 +14,16 @@ class driver_details extends StatefulWidget {
 
 class _driver_detailsState extends State<driver_details> {
   FocusNode car_name;
-  FocusNode car_model_number;
+  FocusNode rc_book_number;
   FocusNode car_numberPlate;
   FocusNode driver_licence;
 
   var error = Text('Error');
   var mobile='';
+  var cn,crc,cnp,dl;
 
   TextEditingController ccar_name = new TextEditingController();
-  TextEditingController ccar_model_number = new TextEditingController();
+  TextEditingController crc_book_number = new TextEditingController();
   TextEditingController ccarr_numberPlate = new TextEditingController();
   TextEditingController cdriver_licence = new TextEditingController();
 
@@ -42,12 +44,22 @@ class _driver_detailsState extends State<driver_details> {
     var url = "https://ridesher.000webhostapp.com/insert_driver_details.php";
     http.post(url, body: {
       "car_name": ccar_name.text,
-      "car_model_number": ccar_model_number.text,
+      "rc_book_number": crc_book_number.text,
       "car_numberplate": ccarr_numberPlate.text,
       "driver_licence_number": cdriver_licence.text,
       "mobile": mobile,
     });
   }
+
+//  Future<void> savedPrefrence(String carName, String rcBook, String carNumberPlate , String driverLicence) async {
+//    SharedPreferences pref = await SharedPreferences.getInstance();
+//    pref.setString('carName', carName);
+//    pref.setString('rcBook', rcBook);
+//    pref.setString('carNumberPlate', carNumberPlate);
+//    pref.setString('driverLicence', driverLicence);
+//    pref.commit();
+//    return;
+//  }
 
   void alertBox() {
     setState(() {
@@ -72,6 +84,8 @@ class _driver_detailsState extends State<driver_details> {
               onPressed: () {
                 setState(() {
                   addData();
+               //   savedPrefrence(cn,crc,cnp,dl);
+                  Navigator.pop(context);
                   Navigator.pop(context);
                   Navigator.pushReplacementNamed(context, '/FirstPage');
                 });
@@ -122,7 +136,7 @@ class _driver_detailsState extends State<driver_details> {
                   textInputAction: TextInputAction.next,
                   autofocus: true,
                   onSubmitted: (text) {
-                    FocusScope.of(context).requestFocus(car_model_number);
+                    FocusScope.of(context).requestFocus(rc_book_number);
                   },
                   textCapitalization: TextCapitalization.words,
                   controller: ccar_name,
@@ -141,12 +155,12 @@ class _driver_detailsState extends State<driver_details> {
                 padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
                 child: TextField(
                   textInputAction: TextInputAction.next,
-                  focusNode: car_model_number,
+                  focusNode: rc_book_number,
                   onSubmitted: (text) {
                     FocusScope.of(context).requestFocus(car_numberPlate);
                   },
                   textCapitalization: TextCapitalization.words,
-                  controller: ccar_model_number,
+                  controller: crc_book_number,
                   style: TextStyle(color: Colors.white),
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
@@ -154,7 +168,7 @@ class _driver_detailsState extends State<driver_details> {
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.circular(20.0)),
-                      hintText: 'Car Model Number',
+                      hintText: 'RC Book Number',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0))),
                 ),
@@ -235,14 +249,14 @@ class _driver_detailsState extends State<driver_details> {
 
   void enterDetails() {
     setState(() {
-      var cn = ccar_name.text;
-      var cm = ccar_model_number.text;
-      var cnp = ccarr_numberPlate.text;
-      var dl = cdriver_licence.text;
-      if (cn != "" && cm != "" && cnp != "" && dl != "") {
+       cn = ccar_name.text;
+       crc = crc_book_number.text;
+       cnp = ccarr_numberPlate.text;
+       dl = cdriver_licence.text;
+      if (cn != "" && crc != "" && cnp != "" && dl != "") {
         //validUser();
         alertBox();
-        addData();
+//        addData();
       } else {
         error;
       }

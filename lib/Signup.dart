@@ -14,7 +14,7 @@ String emailValue = '';
 String mobileValue = '';
 Pattern pattern =
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-Pattern pattern2 = r'^[789]\d{9}$';
+Pattern pattern2 = r'^[6789]\d{9}$';
 
 class _SignupState extends State<Signup> {
   FocusNode namefocus;
@@ -90,12 +90,10 @@ class _SignupState extends State<Signup> {
             side: BorderSide(style: BorderStyle.solid),
             borderRadius: BorderRadius.circular(30)),
         title: Text('User Verifaction'),
-        content:
-            TextField(
-              controller: centerOPT,
-              decoration: InputDecoration(hintText: 'Enter OTP'),
-            ),
-
+        content: TextField(
+          controller: centerOPT,
+          decoration: InputDecoration(hintText: 'Enter OTP'),
+        ),
         actions: <Widget>[
           FlatButton(
               onPressed: () {
@@ -149,10 +147,10 @@ class _SignupState extends State<Signup> {
                   fit: BoxFit.fill,
                   colorFilter:
                       ColorFilter.mode(Colors.black87, BlendMode.hardLight))),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
                 child: Row(
@@ -381,23 +379,26 @@ class _SignupState extends State<Signup> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(100, 5, 100, 0),
-
                 child: Container(
                   height: 50,
                   width: 300,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       gradient:
-                      LinearGradient(colors: [Colors.blue, Colors.cyan])),
+                          LinearGradient(colors: [Colors.blue, Colors.cyan])),
                   child: Center(
-                      child: MaterialButton(splashColor: Colors.black,child: Text("GENERATE OTP",
-                          style: TextStyle(fontSize: 16)),
-                        onPressed: (){
-                          signup();
-                        },padding: EdgeInsets.fromLTRB(35,5,35,5),height: 50,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                      )),
+                      child: MaterialButton(
+                    splashColor: Colors.black,
+                    child: Text("GENERATE OTP", style: TextStyle(fontSize: 16)),
+                    onPressed: () {
+                      signup();
+                    },
+                    padding: EdgeInsets.fromLTRB(35, 5, 35, 5),
+                    height: 50,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                  )),
                 ),
-
               ),
             ],
           ),

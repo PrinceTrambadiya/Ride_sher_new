@@ -1,27 +1,141 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:map_demo/GoogleMap/Map.dart' ;
+import 'package:map_demo/GoogleMap/Map.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Driver_details.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 import 'Driver_home_page.dart';
+
+String _uname = '';
 
 class FirstPage extends StatefulWidget {
   @override
   _FirstPageState createState() => _FirstPageState();
 }
 
+var data;
+
 class _FirstPageState extends State<FirstPage> {
   var ls = new List();
+  var mobile = '';
+
+  var name = "", email = "", dob = "", address = "";
+
+  var CarName = '',
+      RcNumber = '',
+      CarNumberPlate = '',
+      DriverLicence = '';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _getPrefrence();
+    super.initState();
+  }
 
   removeData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove("saved_uname");
     prefs.remove("saved_pass");
+    prefs.remove("name");
+    prefs.remove("email");
+    prefs.remove("dob");
+    prefs.remove("address");
+    prefs.remove("CarName");
+    prefs.remove("RcNumber");
+    prefs.remove("CarNumberPlate");
+    prefs.remove("DriverLicence");
   }
 
   logout() {
     removeData();
     Navigator.pushReplacementNamed(context, '/Login');
+  }
+
+  _getPrefrence() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    _uname = pref.getString('saved_uname');
+    mobile = _uname.toString();
+    print(mobile);
+    if (mobile != "") {
+      print('add');
+      // print(mobile);
+      addData(mobile);
+      addData1(mobile);
+    } else {
+      print('nathi aayo number');
+    }
+  }
+
+  Future<void> addData(mobile) async {
+    final response = await http
+        .post("https://ridesher.000webhostapp.com/Fatch_data.php", body: {
+      "mobile": mobile,
+    });
+
+    data = json.decode(response.body);
+//    var typePass = pass;
+//    var fatchPass = data[0]['password'];
+
+    setState(() {
+      name = data[0]['name'];
+      email = data[0]['email'];
+      dob = data[0]['dob'];
+      address = data[0]['address'];
+      savedPrefrence(name, email, dob, address);
+    });
+
+//    print(name);
+//    print(email);
+//    print(dob);
+//    print(address);
+  }
+
+
+  Future<void> savedPrefrence(
+      String name, String email, String dob, String address) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString('name', name);
+    pref.setString('email', email);
+    pref.setString('dob', dob);
+    pref.setString('address', address);
+    pref.commit();
+    return;
+  }
+
+  Future<void> addData1(mobile) async {
+    //  print(mobile);
+    final response = await http
+        .post("https://ridesher.000webhostapp.com/Fatch_Driverdata.php", body: {
+      "mobile": mobile,
+    });
+
+    data = json.decode(response.body);
+//    var typePass = pass;
+    setState(() {
+      CarName = data[0]['car_name'];
+      RcNumber = data[0]['rc_book_number'];
+         CarNumberPlate = data[0]['car_numberplate'];
+      DriverLicence = data[0]['driver_licence_number'];
+      savedPrefrence1(CarName,RcNumber,CarNumberPlate,DriverLicence);
+    });
+//    print(CarName);
+//    print(RcNumber);
+//    print(CarNumberPlate);
+//    print(CarNumberPlate);
+  }
+
+  Future<void> savedPrefrence1(
+      String CarName, String RcNumber, String CarNumberPlate, String DriverLicence) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString('CarName', CarName);
+    pref.setString('RcNumber', RcNumber);
+    pref.setString('CarNumberPlate', CarNumberPlate);
+    pref.setString('DriverLicence', DriverLicence);
+    pref.commit();
+    return;
   }
 
   @override
@@ -86,11 +200,9 @@ class _FirstPageState extends State<FirstPage> {
                     child: Text("DRIVER", style: TextStyle(fontSize: 18)),
                     onPressed: () {
                       setState(() {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Map()));
-                    });
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Map()));
+                      });
                     },
                     padding: EdgeInsets.fromLTRB(80, 5, 80, 5),
                     height: 50,

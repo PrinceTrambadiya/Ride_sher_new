@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 String _uname = 'hi', _pass = '';
 
 class Welcome extends StatefulWidget {
@@ -12,7 +11,7 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
-  int flag= 0;
+  int flag = 0;
   _getPrefrence() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     _uname = pref.getString('saved_uname');
@@ -21,7 +20,7 @@ class _WelcomeState extends State<Welcome> {
     print(_pass);
     if (_uname != 'hi') {
 //      Navigator.pushReplacementNamed(context, '/FirstPage');
-      flag =1;
+      flag = 1;
       print("bar");
     }
   }
@@ -33,10 +32,10 @@ class _WelcomeState extends State<Welcome> {
 
   void callback() {
 //    _getPrefrence();
-    if(flag==1){
-    Navigator.pushReplacementNamed(context, '/FirstPage');
-    }
-    else Navigator.pushReplacementNamed(context, '/Login');
+    if (flag == 1) {
+      Navigator.pushReplacementNamed(context, '/FirstPage');
+    } else
+      Navigator.pushReplacementNamed(context, '/Login');
   }
 
   @override
@@ -54,7 +53,12 @@ class _WelcomeState extends State<Welcome> {
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[Text('WELCOME TO RIDESHER',style: TextStyle(color: Colors.red,fontSize: 35),)],
+            children: <Widget>[
+              Text(
+                'RIDESHARE',
+                style: TextStyle(color: Colors.blueAccent, fontSize: 35),
+              )
+            ],
           ),
         ),
       ),
