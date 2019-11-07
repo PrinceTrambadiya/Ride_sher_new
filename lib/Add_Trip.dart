@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'Dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
+import 'package:http/http.dart' as http;
 
 String _uname = '', _name = '', _email = '',_carName='',_carNumberPlate='';
 
@@ -12,17 +13,21 @@ class Add_Trip extends StatefulWidget {
 }
 
 class _Add_TripState extends State<Add_Trip> {
-  var mobile = '';
 
-  var name = "", email = "", dob = "", address = "",carName='',carNumberPlate='';
+  var name = "", email = "", dob = "", address = "",carName='',carNumberPlate='',ride_id='',ststus=0;
+
+  var mobile = '', start_date = "", start_time = "", start_point = '', end_point = '', seats_available = '',cost='',pick_up='';
+
+  int availableSeats1;
+
 
   TextEditingController cSeats = new TextEditingController();
   TextEditingController cStartPoint = new TextEditingController();
   TextEditingController cEndPoint = new TextEditingController();
   TextEditingController cPickUp = new TextEditingController();
+  TextEditingController cCost = new TextEditingController();
   DateTime _date = new DateTime.now();
   TimeOfDay _time = new TimeOfDay.now();
-  var date = "", time = "", sp = '', ep = '', as = '';
 
   @override
   void initState() {
@@ -60,22 +65,51 @@ class _Add_TripState extends State<Add_Trip> {
   _getPrefrence() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     _uname = pref.getString('saved_uname');
-    _name = pref.getString('name');
-    _email = pref.getString('email');
-    _carName = pref.getString('CarName');
-    _carNumberPlate = pref.getString('CarNumberPlate');
+//    _name = pref.getString('name');
+//    _email = pref.getString('email');
+//    _carName = pref.getString('CarName');
+//    _carNumberPlate = pref.getString('CarNumberPlate');
     setState(() {
       mobile = _uname.toString();
-      name = _name.toString();
-      email = _email.toString();
-      carName = _carName.toString();
-      carNumberPlate = _carNumberPlate.toString();
+//      name = _name.toString();
+//      email = _email.toString();
+//      carName = _carName.toString();
+//      carNumberPlate = _carNumberPlate.toString();
 //      print(mobile);
 //      print(name);
 //      print(email);
 //      print(carName);
 //      print(carNumberPlate);
     });
+  }
+
+  void addData() {
+//    print('Bunty');
+//    print(start_time.toString());
+//    print(start_date.toString());
+//    print(start_point.toString());
+//    print(end_point.toString());
+//    print(pick_up.toString());
+//    print(seats_available.toString());
+//    print(mobile.toString());
+//    print(ststus.toString());
+//    print(cost.toString());
+//    print(ride_id.toString());
+
+    var url = "https://ridesher.000webhostapp.com/insert_panding_trips.php";
+    http.post(url, body: {
+      "ride_id": ride_id.toString(),
+      "mobile": mobile.toString(),
+      "start_point": start_point.toString(),
+      "end_point": end_point.toString(),
+      "pick_up": pick_up.toString(),
+      "seats_available": seats_available.toString(),
+      "cost": cost.toString(),
+      "start_date": start_date.toString(),
+      "start_time": start_time.toString(),
+      "ststus": ststus.toString(),
+    });
+
   }
 
   Widget build(BuildContext context) {
@@ -105,6 +139,11 @@ class _Add_TripState extends State<Add_Trip> {
                   keyboardType: TextInputType.number,
                   controller: cSeats,
                 ),
+                Text('Cost'),
+                TextField(
+                  keyboardType: TextInputType.number,
+                  controller: cCost,
+                ),
 //            Row(
 //              children: <Widget>[
 //                TextField(
@@ -120,7 +159,7 @@ class _Add_TripState extends State<Add_Trip> {
                   },
                   child: Text('Date'),
                 ),
-                Text('Date selected : ${_date.toLocal()}'),
+                Text('Date selected : ${_date.toLocal().toString().substring(0,10)}'),
                 Text('\n\nSelect Time Of Trip'),
                 RaisedButton(
                   onPressed: () {
@@ -148,22 +187,29 @@ class _Add_TripState extends State<Add_Trip> {
 
   void addTrip() {
     setState(() {
-      var sp = cStartPoint.text;
-      var ep = cEndPoint.text;
-      var as = cSeats.text;
-      int as1 = int.parse(as);
-      var pp = cPickUp.text;
-      date = _date.toLocal().toString();
-      time = _time.format(context);
+       start_point = cStartPoint.text;
+       end_point = cEndPoint.text;
+       seats_available = cSeats.text;
+       availableSeats1 = int.parse(seats_available);
+       pick_up = cPickUp.text;
+       cost = cCost.text;
+      start_date =  _date.toLocal().toString().substring(0,10);
+      start_time = _time.format(context);
+      ride_id = mobile + '_' + start_date + '_' + start_time;
 
-        if(sp == '' || ep=='' || pp== '' || as1 == ''  || date == '' || time == '')
+//      TimeOfDay _time1 = new TimeOfDay.now();
+//      var time1 = _time1.format(context);
+//      DateTime _date1 = new DateTime.now();
+//      var date1 = _date.toLocal().toString().substring(0,10);
+
+        if(start_point == '' || end_point=='' || pick_up== '' || availableSeats1 == ''  || start_date == '' || start_time == '')
           {
             setState(() {
               Toast.show("Please fill all the details.", context,
                   duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
             });
           }
-        else if(as1 > 7)
+        else if(availableSeats1 > 7)
           {
             setState(() {
               Toast.show('Available seats should be 7 or less than 7.', context,
@@ -173,20 +219,13 @@ class _Add_TripState extends State<Add_Trip> {
         else
           {
             setState(() {
+              addData();
               Toast.show('Trip successfuly added..', context,
                   duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
             });
           }
 
-//      print(sp);
-//      print(ep);
-//      print(pp);
-//      print(as);
-//      print(date);
-//      print(time);
-//      print(mobile);
-//      print(email);
-//      print(name);
+
     });
   }
 }

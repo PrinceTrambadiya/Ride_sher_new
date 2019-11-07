@@ -18,7 +18,7 @@ class _WelcomeState extends State<Welcome> {
     _pass = pref.getString('saved_pass');
     print(_uname);
     print(_pass);
-    if (_uname != 'hi') {
+    if (_uname != null) {
 //      Navigator.pushReplacementNamed(context, '/FirstPage');
       flag = 1;
       print("bar");
