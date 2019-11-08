@@ -85,7 +85,7 @@ class _MapState extends State<Map> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: bottomSheet,
-        tooltip: 'Cklick',
+        tooltip: 'Click',
 
       ),
       body: Container(
