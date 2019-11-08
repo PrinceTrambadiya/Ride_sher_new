@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'Profile.dart';
+import 'Aboutus.dart';
+import 'Contactus.dart';
 
 String _uname = '', _name = '', _email = '';
 
