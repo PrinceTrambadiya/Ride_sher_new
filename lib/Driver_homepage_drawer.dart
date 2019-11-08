@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:map_demo/Setting.dart';
+import 'package:map_demo/Trips.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'Profile.dart';
@@ -59,7 +61,7 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
       child: ListView(
         children: <Widget>[
           new DrawerHeader(
-              decoration: BoxDecoration(color: Colors.black),
+              decoration: BoxDecoration(color: Colors.indigoAccent),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -106,18 +108,50 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
           ListTile(
             leading: Icon(Icons.airport_shuttle),
             title: Text('Trips'),
+            onTap: (){
+              setState(() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Trips()));
+              });
+            },
           ),
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Setting'),
+            onTap: (){
+              setState(() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Setting()));
+              });
+            },
           ),
           ListTile(
             leading: Icon(Icons.contacts),
             title: Text('Contact us'),
+            onTap: (){
+              setState(() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Contactus()));
+              });
+            },
           ),
           ListTile(
             leading: Icon(Icons.account_box),
             title: Text('About us'),
+            onTap: (){
+              setState(() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Aboutus()));
+              });
+            },
           ),
         ],
       ),

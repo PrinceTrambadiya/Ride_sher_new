@@ -44,7 +44,6 @@ class _MapState extends State<Map> {
       CarNumberPlate = '',
       DriverLicence = '';
   @override
-  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -84,6 +83,7 @@ class _MapState extends State<Map> {
       drawer: Driver_homepage_drawer(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
+        backgroundColor: Colors.indigoAccent,
         onPressed: bottomSheet,
         tooltip: 'Click',
 

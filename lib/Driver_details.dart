@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 //import 'package:flutter/material.dart' as prefix0;
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toast/toast.dart';
 
 String _uname = '';
+
+Pattern numberPlatePattern = r'^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$';
+Pattern driverLicencePattern = r'^(?<intro>[A-Z]{2})(?<numeric>\d{2})(?<year>\d{4})(?<tail>\d{7})$';
+Pattern rcBookPattern = r'^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$';
+
 
 
 class driver_details extends StatefulWidget {
@@ -17,6 +22,12 @@ class _driver_detailsState extends State<driver_details> {
   FocusNode rc_book_number;
   FocusNode car_numberPlate;
   FocusNode driver_licence;
+
+
+
+  RegExp regex = new RegExp(numberPlatePattern);
+  RegExp regex2 = new RegExp(driverLicencePattern);
+  RegExp regex3 = new RegExp(rcBookPattern);
 
   var error = Text('Error');
   var mobile='';
@@ -138,7 +149,7 @@ class _driver_detailsState extends State<driver_details> {
                   onSubmitted: (text) {
                     FocusScope.of(context).requestFocus(rc_book_number);
                   },
-                  textCapitalization: TextCapitalization.words,
+                  textCapitalization: TextCapitalization.characters,
                   controller: ccar_name,
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
@@ -159,7 +170,7 @@ class _driver_detailsState extends State<driver_details> {
                   onSubmitted: (text) {
                     FocusScope.of(context).requestFocus(car_numberPlate);
                   },
-                  textCapitalization: TextCapitalization.words,
+                  textCapitalization: TextCapitalization.characters,
                   controller: crc_book_number,
                   style: TextStyle(color: Colors.white),
                   keyboardType: TextInputType.text,
@@ -181,7 +192,7 @@ class _driver_detailsState extends State<driver_details> {
                   onSubmitted: (text) {
                     FocusScope.of(context).requestFocus(driver_licence);
                   },
-                  textCapitalization: TextCapitalization.words,
+                  textCapitalization: TextCapitalization.characters,
                   controller: ccarr_numberPlate,
                   style: TextStyle(color: Colors.white),
                   keyboardType: TextInputType.text,
@@ -203,7 +214,7 @@ class _driver_detailsState extends State<driver_details> {
                   onSubmitted: (text) {
                     enterDetails();
                   },
-                  textCapitalization: TextCapitalization.words,
+                  textCapitalization: TextCapitalization.characters,
                   controller: cdriver_licence,
                   keyboardType: TextInputType.text,
                   style: TextStyle(color: Colors.white),
@@ -253,12 +264,48 @@ class _driver_detailsState extends State<driver_details> {
        crc = crc_book_number.text;
        cnp = ccarr_numberPlate.text;
        dl = cdriver_licence.text;
-      if (cn != "" && crc != "" && cnp != "" && dl != "") {
-        //validUser();
-        alertBox();
+//      if (cn != "" && crc != "" && cnp != "" && dl != "") {
+//        //validUser();
+//        alertBox();
+////        addData();
+//      } else {
+//        error;
+//      }
+    if (cn == "" && crc == "" && cnp == "" && dl == "")
+      {
+        setState(() {
+          Toast.show("Please fill all the details.", context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+        });
+      }
+    else if(!regex.hasMatch(cnp))
+      {
+        setState(() {
+          Toast.show("Wrong NumberPlate.", context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+        });
+      }
+    else if(!regex2.hasMatch(dl))
+    {
+      setState(() {
+        Toast.show("Wrong Driving Licence.", context,
+            duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+      });
+    }
+    else if(!regex3.hasMatch(crc))
+    {
+      setState(() {
+        Toast.show("Wrong RcBook Number.", context,
+            duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+      });
+    }
+    else
+      {
+        setState(() {
+          //validUser();
+          alertBox();
 //        addData();
-      } else {
-        error;
+        });
       }
     });
   }

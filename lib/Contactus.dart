@@ -12,7 +12,7 @@ class _ContactusState extends State<Contactus> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Contactus"),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.indigoAccent,
       ),
       body: Column(
         children: <Widget>[

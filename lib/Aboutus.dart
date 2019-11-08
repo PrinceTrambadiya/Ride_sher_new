@@ -11,7 +11,7 @@ class _AboutusState extends State<Aboutus> {
     return Scaffold(
       appBar: AppBar(
         title: Text("About us"),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.indigoAccent,
       ),
       body: Container(
         child: Padding(

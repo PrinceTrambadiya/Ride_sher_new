@@ -142,7 +142,7 @@ class _FirstPageState extends State<FirstPage> {
 //          ],
 //        ));
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.indigoAccent,
 //      appBar: AppBar(
 //        title: Text('Home Page'),
 //      ),
@@ -162,14 +162,15 @@ class _FirstPageState extends State<FirstPage> {
               Container(
                 height: 50,
                 width: 250,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    gradient:
-                        LinearGradient(colors: [Colors.blue, Colors.cyan])),
+//                decoration: BoxDecoration(
+//                    borderRadius: BorderRadius.circular(25),
+//                    gradient:
+//                        LinearGradient(colors: [Colors.blue, Colors.cyan])),
                 child: Center(
                     child: MaterialButton(
-                  splashColor: Colors.black,
-                  child: Text("RIDER", style: TextStyle(fontSize: 18)),
+                      color: Colors.blue,
+                  splashColor: Colors.black45,
+                  child: Text("RIDER", style: TextStyle(fontSize: 18,color: Colors.white)),
                   onPressed: () {
                     setState(() {
 //                      Navigator.push(
@@ -180,24 +181,29 @@ class _FirstPageState extends State<FirstPage> {
                     });
                   },
                   padding: EdgeInsets.fromLTRB(76, 5, 76, 5),
-                  height: 50,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25)),
+                  height: 45,
+                      minWidth:250 ,
+                      shape: BeveledRectangleBorder(
+                          borderRadius: BorderRadiusDirectional.horizontal(
+                              end: Radius.elliptical(10, 10),
+                              start: Radius.elliptical(10, 10))),
                 )),
               ),
+
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
                 child: Container(
                   height: 50,
                   width: 250,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      gradient:
-                          LinearGradient(colors: [Colors.blue, Colors.cyan])),
+//                  decoration: BoxDecoration(
+//                      borderRadius: BorderRadius.circular(25),
+//                      gradient:
+//                          LinearGradient(colors: [Colors.blue, Colors.cyan])),
                   child: Center(
                       child: MaterialButton(
-                    splashColor: Colors.black,
-                    child: Text("DRIVER", style: TextStyle(fontSize: 18)),
+                        color: Colors.white,
+                    splashColor: Colors.black45,
+                    child: Text("DRIVER", style: TextStyle(fontSize: 18,color: Colors.blue )),
                     onPressed: () {
                       setState(() {
 //                        Navigator.push(context,
@@ -206,32 +212,40 @@ class _FirstPageState extends State<FirstPage> {
                       });
                     },
                     padding: EdgeInsets.fromLTRB(80, 5, 80, 5),
-                    height: 50,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25)),
+                    height: 45,
+                        minWidth: 250,
+                        shape: BeveledRectangleBorder(
+                            borderRadius: BorderRadiusDirectional.horizontal(
+                                end: Radius.elliptical(10, 10),
+                                start: Radius.elliptical(10, 10))),
                   )),
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
                 child: Container(
-                  height: 50,
+                  height: 45,
                   width: 250,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      gradient:
-                          LinearGradient(colors: [Colors.blue, Colors.cyan])),
+//                  decoration: BoxDecoration(
+//                      borderRadius: BorderRadius.circular(25),
+//                      gradient:
+//                          LinearGradient(colors: [Colors.blue, Colors.cyan])),
                   child: Center(
                       child: MaterialButton(
-                    splashColor: Colors.black,
-                    child: Text("LOGOUT", style: TextStyle(fontSize: 18)),
+                        color: Colors.blue,
+                    splashColor: Colors.black45,
+                    child: Text("LOGOUT", style: TextStyle(fontSize: 18,color: Colors.white)),
                     onPressed: () {
                       logout();
                     },
                     padding: EdgeInsets.fromLTRB(90, 5, 90, 5),
-                    height: 50,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25)),
+                    height: 45,
+                        minWidth: 230,
+                        shape: BeveledRectangleBorder(
+                            borderRadius: BorderRadiusDirectional.horizontal(
+                                end: Radius.elliptical(10, 10),
+                                start: Radius.elliptical(10, 10))),
                   )),
                 ),
               ),

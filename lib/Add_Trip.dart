@@ -206,14 +206,14 @@ class _Add_TripState extends State<Add_Trip> {
           {
             setState(() {
               Toast.show("Please fill all the details.", context,
-                  duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+                  duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
             });
           }
         else if(availableSeats1 > 7)
           {
             setState(() {
               Toast.show('Available seats should be 7 or less than 7.', context,
-                  duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+                  duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
             });
           }
         else
@@ -221,7 +221,7 @@ class _Add_TripState extends State<Add_Trip> {
             setState(() {
               addData();
               Toast.show('Trip successfuly added..', context,
-                  duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+                  duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
             });
           }
 
