@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:map_demo/GoogleMap/Map.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Driver_details.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'Driver_home_page.dart';
 
 String _uname = '';
 

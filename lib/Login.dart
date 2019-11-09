@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter/material.dart' as prefix0;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toast/toast.dart' as prefix0;
 import 'Signup.dart';
 import 'Forgetpassword.dart';
 import 'dart:convert';
@@ -9,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:math';
 import 'package:connectivity/connectivity.dart';
-import 'package:toast/toast.dart';
 import 'package:fluttertoast/fluttertoast.dart' as t;
 //import 'Shared_data.dart';
 

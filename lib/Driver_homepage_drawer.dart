@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:map_demo/Setting.dart';
 import 'package:map_demo/Trips.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 import 'Profile.dart';
 import 'Aboutus.dart';
 import 'Contactus.dart';
