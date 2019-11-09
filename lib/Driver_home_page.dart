@@ -25,31 +25,48 @@ class _Driver_home_pageState extends State<Driver_home_page> {
   var colorindex = 0;
   @override
   Widget build(BuildContext context) {
+    TextEditingController cpickUp = new TextEditingController();
+    TextEditingController cdestation = new TextEditingController();
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Rider'),
+      ),
         drawer: Driver_homepage_drawer(),
 
 //appBar: AppBar(backgroundColor: color[colorindex]),
 //      appBar: AppBar(
 //        title: Text('Driver Home Page'),
 //      ),
-        bottomNavigationBar: CurvedNavigationBar(
-            backgroundColor: color[colorindex],
-            onTap: (index) {
-              setState(() {
-                colorindex = index;
-                containerindex = index;
-              });
-            },
-            items: [
-              Icon(
-                Icons.map,
-                size: 30,
+//        bottomNavigationBar: CurvedNavigationBar(
+//            backgroundColor: color[colorindex],
+//            onTap: (index) {
+//              setState(() {
+//                colorindex = index;
+//                containerindex = index;
+//              });
+//            },
+//            items: [
+//              Icon(
+//                Icons.map,
+//                size: 30,
+//              ),
+//              Icon(
+//                Icons.account_circle,
+//                size: 30,
+//              ),
+//            ]),
+        body: Container(
+          child: Column(
+            children: <Widget>[
+              TextField(
+                controller: cpickUp,
               ),
-              Icon(
-                Icons.account_circle,
-                size: 30,
+              TextField(
+                controller: cdestation,
               ),
-            ]),
-        body: container[containerindex]);
+            ],
+          ),
+        ),
+    );
   }
 }
