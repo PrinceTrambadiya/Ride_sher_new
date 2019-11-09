@@ -26,7 +26,8 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
 
   var name = "", email = "", dob = "", address = "";
 
-  FirstPage first = new FirstPage();
+  logout log = new logout();
+
 
   @override
   void initState() {
@@ -157,10 +158,12 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.account_box),
+            leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
             onTap: (){
               setState(() {
+                log.removeData();
+                Navigator.pushReplacementNamed(context, '/Login');
               });
             },
           ),
