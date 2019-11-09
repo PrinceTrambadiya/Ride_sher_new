@@ -66,18 +66,22 @@ class _Update_driver_detailsState extends State<Update_driver_details> {
     savedPrefrence1(carName,rcBook,carNumberPlate,driverLicence);
     Navigator.pop(context);
     Navigator.pop(context);
+    Navigator.pop(context);
+    //Navigator.pop(context);
     Navigator.pushReplacementNamed(context, '/FirstPage');
   }
 
   Future<void> savedPrefrence1(
       String CarName, String RcNumber, String CarNumberPlate, String DriverLicence) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString('CarName', CarName);
-    pref.setString('RcNumber', RcNumber);
-    pref.setString('CarNumberPlate', CarNumberPlate);
-    pref.setString('DriverLicence', DriverLicence);
-    pref.commit();
-    return;
+    setState(() {
+      pref.setString('CarName', CarName);
+      pref.setString('RcNumber', RcNumber);
+      pref.setString('CarNumberPlate', CarNumberPlate);
+      pref.setString('DriverLicence', DriverLicence);
+      pref.commit();
+      return;
+    });
   }
 
   Widget build(BuildContext context) {
@@ -92,18 +96,22 @@ class _Update_driver_detailsState extends State<Update_driver_details> {
               children: <Widget>[
                 Text('Car Name'),
                 TextField(
+                  textCapitalization: TextCapitalization.characters,
                   controller: ccarName,
                 ),
                 Text('Number Plate'),
                 TextField(
+                  textCapitalization: TextCapitalization.characters,
                   controller: ccarNumberPlate,
                 ),
                 Text('Rc Book'),
                 TextField(
+                  textCapitalization: TextCapitalization.characters,
                   controller: crcBook,
                 ),
                 Text('Driving Licence'),
                 TextField(
+                  textCapitalization: TextCapitalization.characters,
                   controller: cdriverLicence,
                 ),
                 MaterialButton(

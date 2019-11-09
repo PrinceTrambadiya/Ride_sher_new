@@ -20,6 +20,7 @@ class _FirstPageState extends State<FirstPage> {
   var ls = new List();
   var mobile = '';
 
+  logout log = new logout();
   var name = "", email = "", dob = "", address = "";
 
   var CarName = '',
@@ -34,24 +35,24 @@ class _FirstPageState extends State<FirstPage> {
     super.initState();
   }
 
-  removeData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove("saved_uname");
-    prefs.remove("saved_pass");
-    prefs.remove("name");
-    prefs.remove("email");
-    prefs.remove("dob");
-    prefs.remove("address");
-    prefs.remove("CarName");
-    prefs.remove("RcNumber");
-    prefs.remove("CarNumberPlate");
-    prefs.remove("DriverLicence");
-  }
-
-  logout() {
-    removeData();
-    Navigator.pushReplacementNamed(context, '/Login');
-  }
+//  removeData() async {
+//    SharedPreferences prefs = await SharedPreferences.getInstance();
+//    prefs.remove("saved_uname");
+//    prefs.remove("saved_pass");
+//    prefs.remove("name");
+//    prefs.remove("email");
+//    prefs.remove("dob");
+//    prefs.remove("address");
+//    prefs.remove("CarName");
+//    prefs.remove("RcNumber");
+//    prefs.remove("CarNumberPlate");
+//    prefs.remove("DriverLicence");
+//  }
+//
+//    void logout() {
+//    removeData();
+//    Navigator.pushReplacementNamed(context, '/Login');
+//  }
 
   _getPrefrence() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -237,7 +238,9 @@ class _FirstPageState extends State<FirstPage> {
                     splashColor: Colors.black45,
                     child: Text("LOGOUT", style: TextStyle(fontSize: 18,color: Colors.white)),
                     onPressed: () {
-                      logout();
+//                      logout();
+                    log.removeData();
+                      Navigator.pushReplacementNamed(context, '/Login');
                     },
                     padding: EdgeInsets.fromLTRB(90, 5, 90, 5),
                     height: 45,
@@ -254,5 +257,22 @@ class _FirstPageState extends State<FirstPage> {
         ),
       ),
     );
+  }
+}
+
+class logout{
+
+  removeData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("saved_uname");
+    prefs.remove("saved_pass");
+    prefs.remove("name");
+    prefs.remove("email");
+    prefs.remove("dob");
+    prefs.remove("address");
+    prefs.remove("CarName");
+    prefs.remove("RcNumber");
+    prefs.remove("CarNumberPlate");
+    prefs.remove("DriverLicence");
   }
 }

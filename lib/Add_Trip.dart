@@ -4,6 +4,7 @@ import 'Dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
+import 'FirstPage.dart';
 
 String _uname = '', _name = '', _email = '',_carName='',_carNumberPlate='';
 
@@ -109,7 +110,10 @@ class _Add_TripState extends State<Add_Trip> {
       "start_time": start_time.toString(),
       "ststus": ststus.toString(),
     });
-
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => FirstPage()));
   }
 
   Widget build(BuildContext context) {
@@ -124,23 +128,28 @@ class _Add_TripState extends State<Add_Trip> {
               children: <Widget>[
                 Text('Starting Point'),
                 TextField(
+                  textCapitalization: TextCapitalization.characters,
                   controller: cStartPoint,
                 ),
                 Text('Ending Point'),
                 TextField(
+                  textCapitalization: TextCapitalization.characters,
                   controller: cEndPoint,
                 ),
                 Text('Pick Up Point'),
                 TextField(
+                  textCapitalization: TextCapitalization.characters,
                   controller: cPickUp,
                 ),
                 Text('Number Of Seats Available'),
                 TextField(
+                  textCapitalization: TextCapitalization.characters,
                   keyboardType: TextInputType.number,
                   controller: cSeats,
                 ),
                 Text('Cost'),
                 TextField(
+                  textCapitalization: TextCapitalization.characters,
                   keyboardType: TextInputType.number,
                   controller: cCost,
                 ),
