@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart' as prefix0;
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix1;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
-import 'FirstPage.dart';
 
 
 var name1='',email1='',dob1='', address1='',mobile1='';
@@ -67,20 +64,23 @@ class _Update_personal_detailsState extends State<Update_personal_details> {
             "address": address.toString(),"mobile": mobile.toString()});
     });
     savedPrefrence(name, email, dob, address);
-//    Navigator.pop(context);
-//    Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.pop(context);
+    Navigator.pop(context);
     Navigator.pushReplacementNamed(context, '/FirstPage');
   }
 
   Future<void> savedPrefrence(
       String name, String email, String dob, String address) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString('name', name);
-    pref.setString('email', email);
-    pref.setString('dob', dob);
-    pref.setString('address', address);
-    pref.commit();
-    return;
+    setState(() {
+      pref.setString('name', name);
+      pref.setString('email', email);
+      pref.setString('dob', dob);
+      pref.setString('address', address);
+      pref.commit();
+      return;
+    });
   }
 
   Future<Null> _selectedDate(BuildContext context) async {

@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'Profile.dart';
 import 'Aboutus.dart';
 import 'Contactus.dart';
+import 'FirstPage.dart';
 
 String _uname = '', _name = '', _email = '';
 
@@ -24,6 +25,8 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
   var mobile = '';
 
   var name = "", email = "", dob = "", address = "";
+
+  FirstPage first = new FirstPage();
 
   @override
   void initState() {
@@ -150,6 +153,14 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Aboutus()));
+              });
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.account_box),
+            title: Text('Logout'),
+            onTap: (){
+              setState(() {
               });
             },
           ),

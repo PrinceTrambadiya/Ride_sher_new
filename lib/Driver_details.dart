@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
+import 'FirstPage.dart';
 
 String _uname = '';
 
@@ -96,9 +97,13 @@ class _driver_detailsState extends State<driver_details> {
                 setState(() {
                   addData();
                //   savedPrefrence(cn,crc,cnp,dl);
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, '/FirstPage');
+//                  Navigator.pop(context);
+//                  Navigator.pop(context);
+                  //Navigator.pushReplacementNamed(context, '/FirstPage');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => FirstPage()));
                 });
               },
               child: Text('Yes',
