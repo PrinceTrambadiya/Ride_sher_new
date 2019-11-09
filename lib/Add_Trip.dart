@@ -5,8 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
 import 'FirstPage.dart';
+import 'ride_picker.dart';
 
-String _uname = '', _name = '', _email = '',_carName='',_carNumberPlate='';
+String _uname = '', _fromTo = '', _whereTo = '',_carName='',_carNumberPlate='';
 
 class Add_Trip extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class Add_Trip extends StatefulWidget {
 
 class _Add_TripState extends State<Add_Trip> {
 
-  var name = "", email = "", dob = "", address = "",carName='',carNumberPlate='',ride_id='',ststus=0;
+  var fromTo = "", whereTo = "", dob = "", address = "",carName='',carNumberPlate='',ride_id='',ststus=0;
 
   var mobile = '', start_date = "", start_time = "", start_point = '', end_point = '', seats_available = '',cost='',pick_up='';
 
@@ -23,8 +24,8 @@ class _Add_TripState extends State<Add_Trip> {
 
 
   TextEditingController cSeats = new TextEditingController();
-  TextEditingController cStartPoint = new TextEditingController();
-  TextEditingController cEndPoint = new TextEditingController();
+  TextEditingController cStartPoint;
+  TextEditingController cEndPoint;
   TextEditingController cPickUp = new TextEditingController();
   TextEditingController cCost = new TextEditingController();
   DateTime _date = new DateTime.now();
@@ -66,21 +67,26 @@ class _Add_TripState extends State<Add_Trip> {
   _getPrefrence() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     _uname = pref.getString('saved_uname');
-//    _name = pref.getString('name');
-//    _email = pref.getString('email');
+    _fromTo = pref.getString('fromTo');
+    _whereTo = pref.getString('whereTo');
 //    _carName = pref.getString('CarName');
 //    _carNumberPlate = pref.getString('CarNumberPlate');
     setState(() {
       mobile = _uname.toString();
-//      name = _name.toString();
-//      email = _email.toString();
+      fromTo = _fromTo.toString();
+      whereTo = _whereTo.toString();
 //      carName = _carName.toString();
 //      carNumberPlate = _carNumberPlate.toString();
 //      print(mobile);
 //      print(name);
 //      print(email);
 //      print(carName);
+//      print(carNumberPlate);print(carName);
 //      print(carNumberPlate);
+      cEndPoint = new TextEditingController(text: whereTo);
+      cStartPoint = new TextEditingController(text: fromTo);
+//      print(whereTo);
+//      print(fromTo);
     });
   }
 
@@ -128,13 +134,16 @@ class _Add_TripState extends State<Add_Trip> {
               children: <Widget>[
                 Text('Starting Point'),
                 TextField(
+
                   textCapitalization: TextCapitalization.characters,
                   controller: cStartPoint,
+                  enabled: false,
                 ),
                 Text('Ending Point'),
                 TextField(
                   textCapitalization: TextCapitalization.characters,
                   controller: cEndPoint,
+                  enabled: false,
                 ),
                 Text('Pick Up Point'),
                 TextField(

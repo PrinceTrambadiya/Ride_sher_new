@@ -221,13 +221,13 @@ class _TripsState extends State<Trips> {
           title: Text('Trips'),
           bottom: TabBar(isScrollable: true, tabs: <Widget>[
             Tab(
-              child: Text('   Panding      ',style: TextStyle(fontSize: 17),),
+              child: Text('   Pendind      ',style: TextStyle(fontSize: 17),),
             ),
             Tab(
               child: Text('Running      ',style: TextStyle(fontSize: 17),),
             ),
             Tab(
-              child: Text('Complate      ',style: TextStyle(fontSize: 17),),
+              child: Text('Complete      ',style: TextStyle(fontSize: 17),),
             ), Tab(
               child: Text('Booked      ',style: TextStyle(fontSize: 17),),
             ),

@@ -5,7 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Driver_details.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'Driver_home_page.dart';
+import 'ride_picker.dart';
+import 'place_item_res.dart';
 
 String _uname = '';
 
@@ -34,6 +35,13 @@ class _FirstPageState extends State<FirstPage> {
     _getPrefrence();
     super.initState();
   }
+
+  void onPlaceSelected(PlaceItemRes place, bool fromAddress) {
+    var mkId = fromAddress ? "from_address" : "to_address";
+//    _addMarker(mkId, place);
+//    addPolyline();
+  }
+
 
 //  removeData() async {
 //    SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -151,6 +159,7 @@ class _FirstPageState extends State<FirstPage> {
         child: Container(
           height: 350,
           width: 500,
+
 //          decoration: BoxDecoration(
 //            image: DecorationImage(
 //              image: AssetImage('images/firstpagebackground.gif'),
@@ -160,6 +169,10 @@ class _FirstPageState extends State<FirstPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+//              Container(
+//                //child: RidePicker(onPlaceSelected),
+//              ),
+
               Container(
                 height: 50,
                 width: 250,
@@ -174,11 +187,11 @@ class _FirstPageState extends State<FirstPage> {
                   child: Text("RIDER", style: TextStyle(fontSize: 18,color: Colors.white)),
                   onPressed: () {
                     setState(() {
-//                      Navigator.push(
-//                          context,
-//                          MaterialPageRoute(
-//                              builder: (context) => Driver_home_page()));
-                      Navigator.pushReplacementNamed(context, '/Driver_home_page');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RidePicker(onPlaceSelected)));
+                    // Navigator.pushReplacementNamed(context, '/Driver_home_page');
                     });
                   },
                   padding: EdgeInsets.fromLTRB(76, 5, 76, 5),
@@ -252,6 +265,7 @@ class _FirstPageState extends State<FirstPage> {
                   )),
                 ),
               ),
+
             ],
           ),
         ),

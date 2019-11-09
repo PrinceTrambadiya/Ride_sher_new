@@ -40,16 +40,19 @@ class AppState with ChangeNotifier {
 
   //TO CREATE ROUTE
   void createRoute(String encondedPoly) {
+    _polyLines.clear();
     _polyLines.add(Polyline(
         polylineId: PolylineId(_lastPosition.toString()),
         width: 10,
         points: _convertToLatLng(_decodePoly(encondedPoly)),
         color: Colors.blue));
         notifyListeners();
+      
   }
 
   //ADD A MARKER ON THE MAP
-  void _addMarker(LatLng location, String address) {
+  void addMarker(LatLng location, String address) {
+    _markers.clear();
     _markers.add(Marker(
         markerId: MarkerId(_lastPosition.toString()),
         position: location,
@@ -105,15 +108,23 @@ class AppState with ChangeNotifier {
   }
 
   //SEND REQUEST
-  void sendRequest(String intendedLocation) async {
+  void sendRequest(String intendedLocation, String intendedLocation2) async {
     List<Placemark> placemark =
         await Geolocator().placemarkFromAddress(intendedLocation);
     double latitude = placemark[0].position.latitude;
     double longitude = placemark[0].position.longitude;
     LatLng destination = LatLng(latitude, longitude);
-    _addMarker(destination, intendedLocation);
+
+    List<Placemark> placemark2 =
+    await Geolocator().placemarkFromAddress(intendedLocation2);
+    double latitude2 = placemark2[0].position.latitude;
+    double longitude2 = placemark2[0].position.longitude;
+    LatLng destination2 = LatLng(latitude2, longitude2);
+
+    addMarker(destination, intendedLocation);
+//    addMarker(destination2, intendedLocation2);
     String route = await _googleMapsServices.getRouteCoordinates(
-        _initialPosition, destination);
+        destination, destination2);
     createRoute(route);
     notifyListeners();
   }
