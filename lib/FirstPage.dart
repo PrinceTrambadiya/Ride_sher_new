@@ -187,11 +187,11 @@ class _FirstPageState extends State<FirstPage> {
                   child: Text("RIDER", style: TextStyle(fontSize: 18,color: Colors.white)),
                   onPressed: () {
                     setState(() {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RidePicker(onPlaceSelected)));
-                    // Navigator.pushReplacementNamed(context, '/Driver_home_page');
+//                      Navigator.push(
+//                          context,
+//                          MaterialPageRoute(
+//                              builder: (context) => RidePicker(onPlaceSelected)));
+                     Navigator.pushReplacementNamed(context, '/Driver_home_page');
                     });
                   },
                   padding: EdgeInsets.fromLTRB(76, 5, 76, 5),
