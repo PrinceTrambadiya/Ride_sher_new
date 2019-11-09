@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'Signup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String _uname = '', _name = '', _email = '',_carName='',_carNumberPlate='',_dob='',_driving_licence='',_rcbook='';

@@ -26,7 +26,6 @@
 // }
 
 import 'package:flutter/material.dart';
-import 'package:map_demo/GoogleMap/Map.dart' as prefix0;
 import 'package:provider/provider.dart';
 import 'FirstPage.dart';
 import 'GoogleMap/app_state.dart';
