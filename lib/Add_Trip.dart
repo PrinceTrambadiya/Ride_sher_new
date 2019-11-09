@@ -75,14 +75,7 @@ class _Add_TripState extends State<Add_Trip> {
       mobile = _uname.toString();
       fromTo = _fromTo.toString();
       whereTo = _whereTo.toString();
-//      carName = _carName.toString();
-//      carNumberPlate = _carNumberPlate.toString();
-//      print(mobile);
-//      print(name);
-//      print(email);
-//      print(carName);
-//      print(carNumberPlate);print(carName);
-//      print(carNumberPlate);
+
       cEndPoint = new TextEditingController(text: whereTo);
       cStartPoint = new TextEditingController(text: fromTo);
 //      print(whereTo);
@@ -116,10 +109,17 @@ class _Add_TripState extends State<Add_Trip> {
       "start_time": start_time.toString(),
       "ststus": ststus.toString(),
     });
+    removeData();
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => FirstPage()));
+  }
+
+  removeData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("fromTo");
+    prefs.remove("whereTo");
   }
 
   Widget build(BuildContext context) {
