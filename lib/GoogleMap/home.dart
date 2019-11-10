@@ -40,6 +40,8 @@ class Map extends StatefulWidget {
 var data;
 
 class _MapState extends State<Map> {
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+
   LatLng pickupmarkers;
   var mobile = '',
       CarName = '',
@@ -89,7 +91,13 @@ class _MapState extends State<Map> {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     return Scaffold(
-      drawer: Driver_homepage_drawer(),
+      key: _scaffoldKey,
+//      appBar: AppBar(
+//       backgroundColor: Colors.transparent,
+//      ),
+      drawer: Drawer(
+        child: Driver_homepage_drawer(),
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.indigoAccent,
@@ -137,6 +145,24 @@ class _MapState extends State<Map> {
                         appState.notifyListeners();
                       },
                     ),
+//                    Column(
+//                        children: <Widget>[
+//                          AppBar(
+//                            backgroundColor: Colors.transparent,
+//                            elevation: 0.0,
+//                            leading: FlatButton(
+//                              onPressed: () {
+//                                  _scaffoldKey.currentState.openDrawer();
+//                              },
+//                              child: Icon(
+//                                Icons.menu,
+//                                color: Colors.black,
+//                              ),
+//                            ),
+//                          ),
+//                        ],
+//                      ),
+
                     Positioned(
 //                      bottom: 700.0,
                     top: 60,
