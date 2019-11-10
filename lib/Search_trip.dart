@@ -22,7 +22,7 @@ class Search_trip extends StatefulWidget {
 class _Search_tripState extends State<Search_trip> {
   var pickUp = pickUp0 , destination = destination0,seatsAvailable=0;
   bool isProcess1 = true;
-  var startPoint='' , endPoint='', pickUpPoint='',cost='', seatsAvailable1='', startDate='', startTime='', rideId='',ststus='';
+  var startPoint='' , endPoint='', pickUpPoint='',cost='', seatsAvailable1='', startDate='', startTime='', rideId='',ststus='',mobile='';
 
   var progressIndicator = Container(
     child: Center(
@@ -38,7 +38,7 @@ class _Search_tripState extends State<Search_trip> {
   }
 
   Future<void> addData1(pickUp,destination,seatsAvailable) async {
-   // print('ANDAR');
+//    print('ANDAR');
 //    print(pickUp);
 //    print(destination);
 //    print(seatsAvailable);
@@ -78,6 +78,7 @@ class _Search_tripState extends State<Search_trip> {
                 rideId = data1[index]['ride_id'];
                 startPoint = data1[index]['start_point'];
                 endPoint = data1[index]['end_point'];
+                mobile = data1[index]['mobile'];
                 pickUp = data1[index]['pick_up'];
                 seatsAvailable1 = data1[index]['seats_available'];
                 cost = data1[index]['cost'];
@@ -88,7 +89,8 @@ class _Search_tripState extends State<Search_trip> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Book_trip(rideId,startPoint,endPoint,pickUp,seatsAvailable1,cost,startDate,startTime,ststus)));
+                        builder: (context) => Book_trip(rideId,startPoint,endPoint,pickUp,seatsAvailable1,cost,startDate,startTime,
+                            ststus,mobile)));
 
               });
             },

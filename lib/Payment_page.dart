@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-var cost0,seatsAvailable;
-int cost, newSeatas0, newSeatas1, newSeatas;
+String _uname = '', _name = '', _email = '';
+
+var cost0,seatsAvailable0, rideId,startPoint,endPoint,pickUp,driverMobile,startDate,startTime;
+int cost, seatAvailable2;
 
 class Payment_page extends StatefulWidget {
-  Payment_page(cost1,seatsAvailable1)
+  Payment_page(cost1,seatsAvailable1,rideId1,startPoint1,endPoint1,pickUp1,driverMobile1,startDate1,startTime1)
   {
     cost0 = cost1;
-    seatsAvailable = seatsAvailable1;
     cost = int.parse(cost0);
+    seatsAvailable0 = seatsAvailable1;
+    seatAvailable2 = int.parse(seatsAvailable0);
+    rideId = rideId1;
+    startPoint = startPoint1;
+    endPoint = endPoint1;
+    pickUp = pickUp1;
+    driverMobile = driverMobile1;
+    startDate = startDate1;
+    startTime = startTime1;
   }
 
   @override
@@ -20,9 +32,13 @@ class Payment_page extends StatefulWidget {
 
 class _Payment_pageState extends State<Payment_page> {
 
-  int totalAmount = cost;
+  int totalAmount = cost, seatAvailable = seatAvailable2, newSeatAvailable;
+  var mobile = '';
+
+  var name = "", email = "",rideId1=rideId ,startPoint1 = startPoint,endPoint1=endPoint,pickUp1 = pickUp,
+      driverMobile1=driverMobile,cost1 = cost,startDate1 = startDate, startTime1 = startTime ;
   Razorpay _razorpay;
-  var newSeatsAvailable1 = seatsAvailable;
+
 
   @override
   void initState() {
@@ -32,6 +48,7 @@ class _Payment_pageState extends State<Payment_page> {
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handelPaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handelPaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handelExternalWallat);
+    _getPrefrence();
   }
 
   @override
@@ -39,6 +56,23 @@ class _Payment_pageState extends State<Payment_page> {
     // TODO: implement dispose
     super.dispose();
     _razorpay.clear();
+  }
+
+  _getPrefrence() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    _uname = pref.getString('saved_uname');
+    _name = pref.getString('name');
+    _email = pref.getString('email');
+
+    setState(() {
+      mobile = _uname.toString();
+      name = _name.toString();
+      email = _email.toString();
+//      print(mobile);
+//      print(name);
+//      print(email);
+
+    });
   }
 
   void openCheckout() async {
@@ -60,13 +94,41 @@ class _Payment_pageState extends State<Payment_page> {
     }
   }
 
-//  void test()
-//  {
-//    setState(() {
-//      newSeatsAvailable = newSeatsAvailable1 - 1;
-//      print(newSeatsAvailable);
-//    });
-//  }
+  void test()
+  {
+    setState(() {
+      newSeatAvailable = seatAvailable - 1;
+      print(newSeatAvailable.toString());
+
+      print(rideId.toString());
+      print(name.toString());
+      print(email.toString());
+      print(mobile.toString());
+      print(startPoint1.toString());
+      print(endPoint1.toString());
+      print(pickUp1.toString());
+      print(cost1.toString());
+      print(driverMobile1.toString());
+      print(startDate1.toString());
+      print(startTime1.toString());
+
+      var url = "https://ridesher.000webhostapp.com/Insert_book_trips.php";
+      http.post(url,
+          body: {"ride_id": rideId1.toString(), "name": name.toString(), "email": email.toString(),
+            "mobile": mobile.toString()});
+
+      var url1 = "https://ridesher.000webhostapp.com/Update_AvailableSeats_details.php";
+      http.post(url1,
+          body: {"seats_available": newSeatAvailable.toString(), "ride_id": rideId1.toString()});
+
+      var url2 = "https://ridesher.000webhostapp.com/Insert_myTrip_booked.php";
+      http.post(url2,
+          body: {"ride_id": rideId1.toString(), "mobile": mobile.toString(),"start_point": startPoint1.toString(),
+            "end_point": endPoint1.toString(),"pick_up": pickUp1.toString(),
+            "cost": cost1.toString(),"driver_mobile": driverMobile1.toString(),
+            "start_date": startDate1.toString(),"start_time": startTime1.toString()});
+    });
+  }
 
   void _handelPaymentSuccess(PaymentSuccessResponse reaponce) {
     setState(() {
@@ -74,12 +136,12 @@ class _Payment_pageState extends State<Payment_page> {
       print('============================================='
           '======================================================================================='
           '==================================================');
-     // newSeatsAvailable = seatsAvailable - 1;
+      test();
       Navigator.pop(context);
       Navigator.pop(context);
       Navigator.pop(context);
       Navigator.pushReplacementNamed(context, '/Driver_home_page');
-      Fluttertoast.showToast(msg: 'SUCCESS' + reaponce.paymentId);
+      Fluttertoast.showToast(msg: 'TRIP SUCCESSFULY BOOKED' + reaponce.paymentId);
       });
 
   }

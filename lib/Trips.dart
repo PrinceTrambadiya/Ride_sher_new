@@ -10,10 +10,11 @@ class Trips extends StatefulWidget {
   _TripsState createState() => _TripsState();
 }
 String _uname = '';
-var data1, data2, data3;
+var data1, data2, data3,data4;
 bool isProcess1 = true;
 bool isProcess2 = true;
 bool isProcess3 = true;
+bool isProcess4 = true;
 
 var progressIndicator = Container(
   child: Center(
@@ -44,6 +45,7 @@ class _TripsState extends State<Trips> {
       addData1(mobile,ststus1.toString());
       addData2(mobile,ststus2.toString());
       addData3(mobile,ststus3.toString());
+      addData4(mobile);
     } else {
       print('nathi aayo number');
     }
@@ -126,6 +128,32 @@ class _TripsState extends State<Trips> {
       }
     });
   }
+
+  Future<void> addData4(mobile) async {
+    final response = await http
+        .post("https://ridesher.000webhostapp.com/Fatch_myBookd_trips.php", body: {
+      "mobile": mobile,
+    });
+
+    setState(() {
+      data4 = json.decode(response.body);
+      List data44 = data4;
+      print(data44);
+      if (data44.isEmpty)
+      {
+        setState(() {
+          isProcess4 = true;
+        });
+      }
+      else
+      {
+        setState(() {
+          isProcess4 = false;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -213,6 +241,29 @@ class _TripsState extends State<Trips> {
           );
         });
 
+    var bookd_body = ListView.builder(
+        itemCount: data4 == null ? 0 : data4.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Card(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Text(data4[index]['start_point']),
+                      Text(data4[index]['end_point']),
+                      Text(data4[index]['pick_up']),
+                      Text(data4[index]['cost']),
+                      Text(data4[index]['driver_mobile']),
+                      Text(data4[index]['start_date']),
+                      Text(data4[index]['start_time']),
+                    ],
+                  )
+              ),
+            ),
+          );
+        });
+
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -245,7 +296,7 @@ class _TripsState extends State<Trips> {
               body: isProcess3 ? progressIndicator : complate_body
             ),
             Scaffold(
-              body: progressIndicator,
+              body: isProcess4 ? progressIndicator : bookd_body
             ),
           ],
         ),
