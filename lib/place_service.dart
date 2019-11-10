@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'configs.dart';
 import 'place_item_res.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

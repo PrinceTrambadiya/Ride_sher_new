@@ -59,7 +59,7 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
   }
 
   Widget build(BuildContext context) {
-    return new Drawer(
+    return new Drawer(      
       child: ListView(
         children: <Widget>[
           new DrawerHeader(
@@ -89,7 +89,8 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
                     ),
                   )
                 ],
-              )),
+              ),
+              ),
 
           //Drawer Page Content..........
           //...

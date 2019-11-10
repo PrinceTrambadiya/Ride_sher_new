@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix0;
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
-import 'Driver_home_page.dart';
 
 var cost0,seatsAvailable;
 int cost, newSeatas0, newSeatas1, newSeatas;

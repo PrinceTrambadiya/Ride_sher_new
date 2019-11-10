@@ -13,7 +13,6 @@ class RidePicker extends StatefulWidget {
 }
 
 class _RidePickerState extends State<RidePicker> {
-
   AppState appState = AppState();
 
   PlaceItemRes fromAddress;
@@ -24,11 +23,10 @@ class _RidePickerState extends State<RidePicker> {
   void initState() {
     // TODO: implement initState
     super.initState();
-     frm = 'Pick Up';
+    frm = 'Pick Up';
 //     print('======================================================================'
 //         '==================================================================================================================');
 //     print(appState.locationController.toString());
-
   }
 
   Future<void> savedPrefrence(String fromTo, String whereTo) async {
@@ -41,7 +39,7 @@ class _RidePickerState extends State<RidePicker> {
 
   @override
   Widget build(BuildContext context) {
-  final appState = Provider.of<AppState>(context);
+    final appState = Provider.of<AppState>(context);
 
 //    print('from address   '+fromAddress.name.toString());
 //    print('to address'+toAddress.name.toString());
@@ -65,7 +63,6 @@ class _RidePickerState extends State<RidePicker> {
                     builder: (context) => RidePickerPage(
                             fromAddress == null ? "" : fromAddress.name,
                             (place, isFrom) {
-                              
                           widget.onSelected(place, isFrom);
                           fromAddress = place;
                           setState(() {
@@ -74,9 +71,9 @@ class _RidePickerState extends State<RidePicker> {
                             print(fromAddress.lat);
                             print(fromAddress.lng);
                             savedPrefrence(fromAddress.name, toAddress.name);
-                            appState.sendRequest(fromAddress.name,toAddress.name);
+                            appState.sendRequest(
+                                fromAddress.name, toAddress.name);
                           });
-
                         }, true)));
               },
               child: SizedBox(
@@ -112,10 +109,14 @@ class _RidePickerState extends State<RidePicker> {
                       padding: EdgeInsets.only(left: 40.0, right: 50.0),
                       child: Text(
                         frm,
-                         // fromAddress == null ? "where to go ?" : fromAddress.name,
+                        // fromAddress == null ? "where to go ?" : fromAddress.name,
                         /*fromAddress == null ? "pickup location" : fromAddress.name*/
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 16, color: fromAddress == null ? Colors.grey : Colors.black),
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: fromAddress == null
+                                ? Colors.grey
+                                : Colors.black),
                       ),
                     )
                   ],
@@ -136,7 +137,8 @@ class _RidePickerState extends State<RidePicker> {
                           widget.onSelected(place, isFrom);
                           toAddress = place;
                           setState(() {
-                            appState.sendRequest(toAddress.name,fromAddress.name);
+                            appState.sendRequest(
+                                toAddress.name, fromAddress.name);
                             savedPrefrence(fromAddress.name, toAddress.name);
                           });
                         }, false)));
@@ -175,7 +177,10 @@ class _RidePickerState extends State<RidePicker> {
                       child: Text(
                         toAddress == null ? "Where To Go ?" : toAddress.name,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 16, color: toAddress == null ? Colors.grey: Colors.black),
+                        style: TextStyle(
+                            fontSize: 16,
+                            color:
+                                toAddress == null ? Colors.grey : Colors.black),
                       ),
                     )
                   ],

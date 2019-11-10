@@ -54,6 +54,7 @@ class _MapState extends State<Map> {
     super.initState();
     _getPrefrence();
   }
+
   void onPlaceSelected(PlaceItemRes place, bool fromAddress) {
     var mkId = fromAddress ? "from_address" : "to_address";
 
@@ -103,7 +104,6 @@ class _MapState extends State<Map> {
         backgroundColor: Colors.indigoAccent,
         onPressed: bottomSheet,
         tooltip: 'Click',
-
       ),
       body: Container(
         child: SafeArea(
@@ -162,10 +162,21 @@ class _MapState extends State<Map> {
 //                          ),
 //                        ],
 //                      ),
-
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      top: 0,
+                      child: AppBar(
+                        iconTheme: IconThemeData(color: Colors.black),
+                        backgroundColor: Colors.transparent,
+                        elevation: 0.0,
+                        actions: <Widget>[],
+                      ),
+                    ),
                     Positioned(
 //                      bottom: 700.0,
-                    top: 60,
+                      top: 60,
                       right: 15.0,
                       left: 15.0,
                       child: Container(

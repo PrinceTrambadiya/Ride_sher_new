@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
 import 'FirstPage.dart';
-import 'ride_picker.dart';
 
 String _uname = '', _fromTo = '', _whereTo = '',_carName='',_carNumberPlate='';
 
