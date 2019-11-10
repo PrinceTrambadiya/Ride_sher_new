@@ -145,6 +145,16 @@ class _MapState extends State<Map> {
                         appState.notifyListeners();
                       },
                     ),
+                    MaterialButton(
+                      minWidth: 50,
+                      onPressed: () {
+                        _scaffoldKey.currentState.openDrawer();
+                      },
+                      child: Icon(
+                        Icons.menu,
+                        color: Colors.black,
+                      ),
+                    ),
 //                    Column(
 //                        children: <Widget>[
 //                          AppBar(
