@@ -46,8 +46,7 @@ class AppState with ChangeNotifier {
         width: 10,
         points: _convertToLatLng(_decodePoly(encondedPoly)),
         color: Colors.blue));
-        notifyListeners();
-      
+        notifyListeners();     
   }
 
   //ADD A MARKER ON THE MAP
