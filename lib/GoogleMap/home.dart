@@ -163,18 +163,6 @@ class _MapState extends State<Map> {
 //                        ],
 //                      ),
                     Positioned(
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      top: 0,
-                      child: AppBar(
-                        iconTheme: IconThemeData(color: Colors.black),
-                        backgroundColor: Colors.transparent,
-                        elevation: 0.0,
-                        actions: <Widget>[],
-                      ),
-                    ),
-                    Positioned(
 //                      bottom: 700.0,
                       top: 60,
                       right: 15.0,
