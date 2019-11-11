@@ -168,7 +168,7 @@ class _LoginState extends State<Login> {
                   Navigator.pushReplacementNamed(context, '/Login');
                 });
               },
-              child: Text('Cancle',
+              child: Text('Cancel',
                   style: TextStyle(fontSize: 25, color: Colors.red))),
           FlatButton(
               onPressed: () {

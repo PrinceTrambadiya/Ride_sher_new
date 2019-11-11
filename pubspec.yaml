@@ -27,7 +27,7 @@ dependencies:
   firebase_core: ^0.4.0+8
   location_permissions: ^2.0.2
   cloud_firestore: ^0.12.9
-
+  pull_to_refresh:
   rxdart: ^0.22.1+1
 
   geoflutterfire: ^2.0.3+5

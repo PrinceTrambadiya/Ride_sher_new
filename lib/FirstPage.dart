@@ -250,7 +250,8 @@ class _FirstPageState extends State<FirstPage> {
                     onPressed: () {
 //                      logout();
                     log.removeData();
-                      Navigator.pushReplacementNamed(context, '/Login');
+                      //Navigator.pushReplacementNamed(context, '/Login');
+                      Navigator.of(context).pushNamedAndRemoveUntil('/Login', (Route<dynamic> route) => false);
                     },
                     padding: EdgeInsets.fromLTRB(90, 5, 90, 5),
                     height: 45,
