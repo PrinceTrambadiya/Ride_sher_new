@@ -306,7 +306,6 @@ class _TripsState extends State<Trips> {
             Scaffold(
                 body: SmartRefresher(
                     enablePullDown: true,
-                    enablePullUp: true,
                     header: WaterDropHeader(
                       waterDropColor: Colors.indigoAccent,
                     ),
@@ -316,7 +315,6 @@ class _TripsState extends State<Trips> {
             Scaffold(
                 body: SmartRefresher(
                     enablePullDown: true,
-                    enablePullUp: true,
                     header: WaterDropHeader(
                       waterDropColor: Colors.indigoAccent,
                     ),
@@ -326,7 +324,6 @@ class _TripsState extends State<Trips> {
             Scaffold(
                 body: SmartRefresher(
                     enablePullDown: true,
-                    enablePullUp: true,
                     header: WaterDropHeader(
                       waterDropColor: Colors.indigoAccent,
                     ),
