@@ -3,8 +3,10 @@ import 'package:http/http.dart' as http;
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'dart:convert';
 import 'Book_trip.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 var pickUp0, destination0, data1;
+String _uname = '';
 
 class Search_trip extends StatefulWidget {
   var pickUp1, destination1;
@@ -31,7 +33,22 @@ class _Search_tripState extends State<Search_trip> {
       startTime = '',
       rideId = '',
       ststus = '',
-      mobile = '';
+      mobile = '',
+      userMobile = '';
+
+  _getPrefrence() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    _uname = pref.getString('saved_uname');
+    userMobile = _uname.toString();
+    print(userMobile);
+    if (userMobile != "") {
+      print('add');
+       print('ZZZZZZ'+userMobile);
+    } else {
+      print('nathi aayo number');
+    }
+    addData1(pickUp, destination, seatsAvailable,userMobile);
+  }
 
   var progressIndicator = Container(
     child: Center(
@@ -45,28 +62,30 @@ class _Search_tripState extends State<Search_trip> {
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
-    addData1(pickUp, destination, seatsAvailable);
+    addData1(pickUp, destination, seatsAvailable,userMobile);
     _refreshController.refreshCompleted();
   }
 
   @override
   void initState() {
     // TODO: implement initState
-    addData1(pickUp, destination, seatsAvailable);
+    _getPrefrence();
     super.initState();
   }
 
-  Future<void> addData1(pickUp, destination, seatsAvailable) async {
+  Future<void> addData1(pickUp, destination, seatsAvailable, userMobile1) async {
 //    print('ANDAR');
 //    print(pickUp);
 //    print(destination);
 //    print(seatsAvailable);
+  print('UUU'+userMobile+'   UUU');
     final response = await http.post(
         "https://ridesher.000webhostapp.com/Fatch_Search_trips.php",
         body: {
           "start_point": pickUp.toString(),
           "end_point": destination.toString(),
           "seats_available": seatsAvailable.toString(),
+          "mobile": userMobile.toString(),
         });
     setState(() {
       data1 = json.decode(response.body);

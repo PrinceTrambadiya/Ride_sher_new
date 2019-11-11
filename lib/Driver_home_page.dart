@@ -12,8 +12,8 @@ class Driver_home_page extends StatefulWidget {
 class _Driver_home_pageState extends State<Driver_home_page> {
   var containerindex = 0;
   var pickUp='', destination='';
-  TextEditingController cpickUp = new TextEditingController(text: 'delhi');
-  TextEditingController cdestination = new TextEditingController(text: 'pune');
+  TextEditingController cpickUp = new TextEditingController(text: 'A');
+  TextEditingController cdestination = new TextEditingController(text: 'B');
 
 //  static var First_container = Container(
 //    color: Colors.indigo,

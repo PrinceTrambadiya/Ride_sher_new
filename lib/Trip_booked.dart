@@ -84,6 +84,7 @@ class _Trip_bookedState extends State<Trip_booked> {
                   children: <Widget>[
                     Text(data1[index]['name']),
                     Text(data1[index]['email']),
+                    Text(data1[index]['seat_booked']),
                     Text(data1[index]['mobile']),
                   ],
                 )),

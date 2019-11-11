@@ -7,16 +7,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String _uname = '', _name = '', _email = '';
 
-var cost0,seatsAvailable0, rideId,startPoint,endPoint,pickUp,driverMobile,startDate,startTime;
-int cost, seatAvailable2;
+var cost0,seatsAvailable0, rideId,startPoint,endPoint,pickUp,driverMobile,startDate,startTime,seatSelected0;
+int cost, seatAvailable2,seatSelected2;
 
 class Payment_page extends StatefulWidget {
-  Payment_page(cost1,seatsAvailable1,rideId1,startPoint1,endPoint1,pickUp1,driverMobile1,startDate1,startTime1)
+  Payment_page(cost1,seatsAvailable1,rideId1,startPoint1,endPoint1,pickUp1,driverMobile1,startDate1,startTime1,seatSelected1)
   {
     cost0 = cost1;
     cost = int.parse(cost0);
     seatsAvailable0 = seatsAvailable1;
     seatAvailable2 = int.parse(seatsAvailable0);
+    seatSelected0 = seatSelected1;
+    seatSelected2 = int.parse(seatSelected0);
     rideId = rideId1;
     startPoint = startPoint1;
     endPoint = endPoint1;
@@ -32,7 +34,7 @@ class Payment_page extends StatefulWidget {
 
 class _Payment_pageState extends State<Payment_page> {
 
-  int totalAmount = cost, seatAvailable = seatAvailable2, newSeatAvailable;
+  int totalAmount = cost, seatAvailable = seatAvailable2, newSeatAvailable, seatSelected= seatSelected2;
   var mobile = '';
 
   var name = "", email = "",rideId1=rideId ,startPoint1 = startPoint,endPoint1=endPoint,pickUp1 = pickUp,
@@ -97,7 +99,8 @@ class _Payment_pageState extends State<Payment_page> {
   void test()
   {
     setState(() {
-      newSeatAvailable = seatAvailable - 1;
+      print(seatSelected2.toString());
+      newSeatAvailable = seatAvailable - seatSelected;
       print(newSeatAvailable.toString());
 
       print(rideId.toString());
@@ -115,7 +118,7 @@ class _Payment_pageState extends State<Payment_page> {
       var url = "https://ridesher.000webhostapp.com/Insert_book_trips.php";
       http.post(url,
           body: {"ride_id": rideId1.toString(), "name": name.toString(), "email": email.toString(),
-            "mobile": mobile.toString()});
+            "mobile": mobile.toString(), "seat_booked": seatSelected.toString()});
 
       var url1 = "https://ridesher.000webhostapp.com/Update_AvailableSeats_details.php";
       http.post(url1,
