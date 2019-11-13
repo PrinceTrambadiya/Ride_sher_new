@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-String _uname = '', _name = '', _email = '',_carName='',_carNumberPlate='',_dob='',_driving_licence='',_rcbook='';
+String _uname = '', _name = '', _email = '',_carName='',_carNumberPlate='',_dob='',_driving_licence='',_rcbook='',_gender='';
 
 class Profile extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class _ProfileState extends State<Profile> {
 
   var mobile = '';
 
-  var name = "", email = "", dob = "", address = "",carName='',carNumberPlate='',DriverLicence='',rcBook='';
+  var name = "", email = "", dob = "", gender = "",carName='',carNumberPlate='',DriverLicence='',rcBook='';
 
   @override
   void initState() {
@@ -32,6 +32,7 @@ class _ProfileState extends State<Profile> {
     _dob = pref.getString('dob');
     _driving_licence = pref.getString('DriverLicence');
     _rcbook = pref.getString('RcNumber');
+    _gender = pref.getString('gender');
     setState(() {
       mobile = _uname.toString();
       name = _name.toString();
@@ -41,6 +42,7 @@ class _ProfileState extends State<Profile> {
       dob = _dob.toString();
       DriverLicence = _driving_licence.toString();
       rcBook = _rcbook.toString();
+      gender = _gender.toString();
 //      print(mobile);
 //      print(name);
 //      print(email);
@@ -117,7 +119,7 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      'Driver Licence',
+                      'Driving Licence',
                       style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),
                     ),
                     Text(
@@ -271,6 +273,27 @@ class _ProfileState extends State<Profile> {
                                     padding:
                                     const EdgeInsets.fromLTRB(0, 5, 0, 0),
                                     child: Text(dob),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                              child: Column(
+                                children: <Widget>[
+                                  Text(
+                                    'Gender',
+                                    style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                    child: Text(gender),
                                   )
                                 ],
                               ),

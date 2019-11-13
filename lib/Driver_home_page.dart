@@ -9,9 +9,29 @@ class Driver_home_page extends StatefulWidget {
   _Driver_home_pageState createState() => _Driver_home_pageState();
 }
 
+class Gender {
+  int id;
+  String name;
+
+  Gender(this.id, this.name);
+
+  static List<Gender> getselectedGender() {
+    return <Gender>[
+      Gender(1, 'Male'),
+      Gender(2, 'Female'),
+      Gender(3, 'Both'),
+    ];
+  }
+}
+
 class _Driver_home_pageState extends State<Driver_home_page> {
+
+  List<Gender> _gender = Gender.getselectedGender();
+  List<DropdownMenuItem<Gender>> _dropDownMenuItams;
+  Gender _selectedGender;
+
   var containerindex = 0;
-  var pickUp='', destination='';
+  var pickUp='', destination='',gender='';
   TextEditingController cpickUp = new TextEditingController(text: 'A');
   TextEditingController cdestination = new TextEditingController(text: 'B');
 
@@ -26,7 +46,31 @@ class _Driver_home_pageState extends State<Driver_home_page> {
 //  //list of colors
 //  List<Color> color = [Colors.indigo, Colors.orange];
 //  var colorindex = 0;
-//  @override
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _dropDownMenuItams = buildDropDownMenuItms(_gender);
+    _selectedGender = _dropDownMenuItams[0].value;
+    super.initState();
+  }
+
+  List<DropdownMenuItem<Gender>> buildDropDownMenuItms(List gender) {
+    List<DropdownMenuItem<Gender>> items = List();
+    for (Gender seat in gender) {
+      items.add(DropdownMenuItem(value: seat, child: Text(seat.name)));
+    }
+    return items;
+  }
+
+  onChangeDropDownMenuItem(Gender sealectedGender)
+  {
+    setState(() {
+      _selectedGender = sealectedGender;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     return Scaffold(
@@ -70,6 +114,17 @@ class _Driver_home_pageState extends State<Driver_home_page> {
                 textCapitalization: TextCapitalization.words,
                 controller: cdestination,
               ),
+              SizedBox(height: 40.0,),
+              Text('Available for(Gender):'),
+              SizedBox(
+                height: 20.0,
+              ),
+              DropdownButton(
+                  value: _selectedGender,
+                  items: _dropDownMenuItams,
+                  onChanged: onChangeDropDownMenuItem),
+              // SizedBox(height: 10.0,),
+            //  Text('Gender Selected : ${_selectedGender.name}'),
               MaterialButton(onPressed: search,child: Text('Search'),color: Colors.amberAccent,)
             ],
           ),
@@ -81,6 +136,7 @@ class _Driver_home_pageState extends State<Driver_home_page> {
     setState(() {
       pickUp = cpickUp.text;
       destination = cdestination.text;
+      gender = _selectedGender.name.toString();
       if(pickUp == '' || destination == '')
         {
           setState(() {
@@ -93,7 +149,7 @@ class _Driver_home_pageState extends State<Driver_home_page> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => Search_trip(pickUp,destination)));
+                  builder: (context) => Search_trip(pickUp,destination,gender)));
         }
     });
   }

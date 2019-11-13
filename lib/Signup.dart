@@ -1,12 +1,29 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:math';
+import 'package:toast/toast.dart';
 
 var date1 = '';
 
 class Signup extends StatefulWidget {
   @override
   _SignupState createState() => _SignupState();
+}
+
+class Gender {
+  int id;
+  String name;
+
+  Gender(this.id, this.name);
+
+  static List<Gender> getselectedGender() {
+    return <Gender>[
+      Gender(1, 'Male'),
+      Gender(2, 'Female'),
+      Gender(3, 'Other'),
+    ];
+  }
 }
 
 String emailValue = '';
@@ -16,11 +33,15 @@ Pattern pattern =
 Pattern pattern2 = r'^[6789]\d{9}$';
 
 class _SignupState extends State<Signup> {
+  List<Gender> _gender = Gender.getselectedGender();
+  List<DropdownMenuItem<Gender>> _dropDownMenuItams;
+  Gender _selectedGender;
+
   FocusNode namefocus;
   FocusNode emailfocus;
   FocusNode mobilefocus;
   FocusNode dobfocus;
-  FocusNode addressfocus;
+  FocusNode genderfocus;
   FocusNode passwordfocus;
   FocusNode confirmfocus;
 
@@ -30,12 +51,14 @@ class _SignupState extends State<Signup> {
   TextEditingController cconfirmpassword = new TextEditingController();
   TextEditingController cemail = new TextEditingController();
   TextEditingController cdob = new TextEditingController();
-  TextEditingController caddress = new TextEditingController();
+  TextEditingController cgender = new TextEditingController();
   TextEditingController centerOPT = new TextEditingController();
+
+  DateTime _date = new DateTime.now();
 
   var rng = new Random();
   var random;
-  var msg = '';
+  var msg = '', gender = '',bDate='';
 
   DateTime _dateTime;
   RegExp regex = new RegExp(pattern);
@@ -60,6 +83,20 @@ class _SignupState extends State<Signup> {
     });
   }
 
+  Future<Null> _selectedDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: _date,
+        firstDate: new DateTime(2019),
+        lastDate: new DateTime(2022));
+    if (picked != null && picked != _date) {
+      print('Date selected : ${_date.toString()}');
+      setState(() {
+        _date = picked;
+      });
+    }
+  }
+
   void addData() {
     var url = "https://ridesher.000webhostapp.com/insert_registration.php";
     http.post(url, body: {
@@ -67,8 +104,8 @@ class _SignupState extends State<Signup> {
       "password": cpassword.text,
       "email": cemail.text,
       "mobile": cmobile.text,
-      "dob": cdob.text,
-      "address": caddress.text
+      "dob": bDate.toString(),
+      "gender": gender.toString()
     });
   }
 
@@ -121,7 +158,6 @@ class _SignupState extends State<Signup> {
     });
   }
 
-  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -129,11 +165,28 @@ class _SignupState extends State<Signup> {
     emailfocus = FocusNode();
     mobilefocus = FocusNode();
     dobfocus = FocusNode();
-    addressfocus = FocusNode();
+    genderfocus = FocusNode();
     passwordfocus = FocusNode();
     confirmfocus = FocusNode();
+    _dropDownMenuItams = buildDropDownMenuItms(_gender);
+    _selectedGender = _dropDownMenuItams[0].value;
   }
 
+  List<DropdownMenuItem<Gender>> buildDropDownMenuItms(List gender) {
+    List<DropdownMenuItem<Gender>> items = List();
+    for (Gender seat in gender) {
+      items.add(DropdownMenuItem(value: seat, child: Text(seat.name)));
+    }
+    return items;
+  }
+
+  onChangeDropDownMenuItem(Gender sealectedGender) {
+    setState(() {
+      _selectedGender = sealectedGender;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -237,61 +290,83 @@ class _SignupState extends State<Signup> {
                           borderRadius: BorderRadius.circular(20.0))),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
-                child: TextField(
-                  textInputAction: TextInputAction.next,
-                  focusNode: dobfocus,
-                  onSubmitted: (text) {
-                    FocusScope.of(context).requestFocus(addressfocus);
-                  },
-//                  onTap: () {
-//                    showDatePicker(
-//                            context: context,
-//                            initialDate: DateTime.now(),
-//                            firstDate: DateTime(1970),
-//                            lastDate: DateTime(2222))
-//                        .then((date) {
-//                      setState(() {
-//                        _dateTime = date;
-//                        date1 = _dateTime.toIso8601String();
-//                      });
-//                    });
+//              Padding(
+//                padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
+//                child: TextField(
+//                  textInputAction: TextInputAction.next,
+//                  focusNode: dobfocus,
+//                  onSubmitted: (text) {
+//                    FocusScope.of(context).requestFocus(genderfocus);
 //                  },
-                  controller: cdob,
-                  keyboardType: TextInputType.datetime,
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue),
-                          borderRadius: BorderRadius.circular(20.0)),
-                      hintText: 'Date Of Birth',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0))),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
-                child: TextField(
-                  textInputAction: TextInputAction.next,
-                  focusNode: addressfocus,
-                  onSubmitted: (text) {
-                    FocusScope.of(context).requestFocus(passwordfocus);
+//                  controller: cdob,
+//                  keyboardType: TextInputType.datetime,
+//                  style: TextStyle(color: Colors.white),
+//                  decoration: InputDecoration(
+//                      hintStyle: TextStyle(color: Colors.white),
+//                      enabledBorder: OutlineInputBorder(
+//                          borderSide: BorderSide(color: Colors.blue),
+//                          borderRadius: BorderRadius.circular(20.0)),
+//                      hintText: 'Date Of Birth',
+//                      border: OutlineInputBorder(
+//                          borderRadius: BorderRadius.circular(20.0))),
+//                ),
+//              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Select Date Of Birth: ',style: TextStyle(color: Colors.white),),
+                RaisedButton(
+                  onPressed: () {
+                    _selectedDate(context);
                   },
-                  textCapitalization: TextCapitalization.sentences,
-                  controller: caddress,
-                  maxLines: 4,
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue),
-                          borderRadius: BorderRadius.circular(20.0)),
-                      hintText: 'Address',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0))),
+                  child: Text('Date selected : ${_date.toLocal().toString().substring(0,10)}',style: TextStyle(color: Colors.white)),
                 ),
+              ],
+            )
+
+
+//              Padding(
+//                padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
+//                child: TextField(
+//                  textInputAction: TextInputAction.next,
+//                  focusNode: genderfocus,
+//                  onSubmitted: (text) {
+//                    FocusScope.of(context).requestFocus(passwordfocus);
+//                  },
+//                  textCapitalization: TextCapitalization.sentences,
+//                  controller: cgender,
+//                  maxLines: 4,
+//                  style: TextStyle(color: Colors.white),
+//                  decoration: InputDecoration(
+//                      hintStyle: TextStyle(color: Colors.white),
+//                      enabledBorder: OutlineInputBorder(
+//                          borderSide: BorderSide(color: Colors.blue),
+//                          borderRadius: BorderRadius.circular(20.0)),
+//                      hintText: 'Gender',
+//                      border: OutlineInputBorder(
+//                          borderRadius: BorderRadius.circular(20.0))),
+//                ),
+//              ),
+              ,Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Gender',
+                    style: TextStyle(color: Colors.white, fontSize: 17),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
+                    child: MaterialButton(
+                      color: Colors.white,
+                      onPressed: (){},
+                      child: DropdownButton(
+                          iconEnabledColor: Colors.blueAccent,
+                          value: _selectedGender,
+                          items: _dropDownMenuItams,
+                          onChanged: onChangeDropDownMenuItem),
+                    ),
+                  ),
+                ],
               ),
 //              Padding(
 //                padding: const EdgeInsets.fromLTRB(15, 5, 0, 0),
@@ -411,24 +486,53 @@ class _SignupState extends State<Signup> {
       var n = cname.text;
       var m = cmobile.text;
       var p = cpassword.text;
-      var a = caddress.text;
-      var d = cdob.text;
+      var a = cgender.text;
+      bDate = _date.toLocal().toString().substring(0,10);
       var e = cemail.text;
       var cp = cconfirmpassword.text;
-      if (regex.hasMatch(e) &&
-          regex2.hasMatch(m) &&
-          n != "" &&
-          m != "" &&
-          p != "" &&
-          a != "" &&
-          d != "" &&
-          e != "" &&
-          p == cp) {
+      gender = _selectedGender.name.toString();
+      print(gender);
+      if (n == "" ||
+          m == "" ||
+          p == "" ||
+          a == "" ||
+          bDate == "" ||
+          e == "" ||
+          p == '' ||
+          cp == '') {
+        setState(() {
+            Toast.show("Please fill all the details.", context,
+                duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+        });
+      }
+      else if(p != cp)
+        {
+          setState(() {
+            Toast.show("Both password dose not match.", context,
+                duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+          });
+        }
+
+      else if(!regex.hasMatch(e))
+      {
+        setState(() {
+          Toast.show("Enter valid Email id.", context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+        });
+      }
+
+      else if(!regex2.hasMatch(m))
+      {
+        setState(() {
+          Toast.show("Enter valid Mobile number.", context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+        });
+      }
+      else {
         //validUser();
         alertBox();
-      } else {
-        error;
       }
     });
   }
 }
+

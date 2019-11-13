@@ -176,7 +176,7 @@ class _Book_tripState extends State<Book_trip> {
                 items: _dropDownMenuItams,
                 onChanged: onChangeDropDownMenuItem),
            // SizedBox(height: 10.0,),
-            Text('Seats Selected : ${_selectedSeats.name}'),
+          //  Text('Seats Selected : ${_selectedSeats.name}'),
             MaterialButton(
               onPressed: () {
                  seatSelected = int.parse(_selectedSeats.name.toString());

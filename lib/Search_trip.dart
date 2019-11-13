@@ -5,16 +5,17 @@ import 'dart:convert';
 import 'Book_trip.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-var pickUp0, destination0, data1;
+var pickUp0, destination0, data1,gender0;
 String _uname = '';
 
 class Search_trip extends StatefulWidget {
   var pickUp1, destination1;
-  Search_trip(String pickUp1, String destination1) {
+  Search_trip(String pickUp1, String destination1, String gender1) {
     this.pickUp1 = pickUp1;
     this.destination1 = destination1;
     pickUp0 = pickUp1;
     destination0 = destination1;
+    gender0 = gender1;
   }
 
   @override
@@ -34,7 +35,8 @@ class _Search_tripState extends State<Search_trip> {
       rideId = '',
       ststus = '',
       mobile = '',
-      userMobile = '';
+      userMobile = '',
+      gender = gender0.toString();
 
   _getPrefrence() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -47,7 +49,7 @@ class _Search_tripState extends State<Search_trip> {
     } else {
       print('nathi aayo number');
     }
-    addData1(pickUp, destination, seatsAvailable,userMobile);
+    addData1(pickUp, destination, seatsAvailable,userMobile,gender);
   }
 
   var progressIndicator = Container(
@@ -62,7 +64,7 @@ class _Search_tripState extends State<Search_trip> {
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
-    addData1(pickUp, destination, seatsAvailable,userMobile);
+    addData1(pickUp, destination, seatsAvailable,userMobile,gender);
     _refreshController.refreshCompleted();
   }
 
@@ -73,7 +75,7 @@ class _Search_tripState extends State<Search_trip> {
     super.initState();
   }
 
-  Future<void> addData1(pickUp, destination, seatsAvailable, userMobile1) async {
+  Future<void> addData1(pickUp, destination, seatsAvailable, userMobile1,gender1) async {
 //    print('ANDAR');
 //    print(pickUp);
 //    print(destination);
@@ -86,6 +88,7 @@ class _Search_tripState extends State<Search_trip> {
           "end_point": destination.toString(),
           "seats_available": seatsAvailable.toString(),
           "mobile": userMobile.toString(),
+          "gender": gender.toString(),
         });
     setState(() {
       data1 = json.decode(response.body);

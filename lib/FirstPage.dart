@@ -19,7 +19,7 @@ class _FirstPageState extends State<FirstPage> {
   var mobile = '';
 
   logout log = new logout();
-  var name = "", email = "", dob = "", address = "";
+  var name = "", email = "", dob = "", gender = "";
 
   var CarName = '',
       RcNumber = '',
@@ -47,7 +47,7 @@ class _FirstPageState extends State<FirstPage> {
 //    prefs.remove("name");
 //    prefs.remove("email");
 //    prefs.remove("dob");
-//    prefs.remove("address");
+//    prefs.remove("gender");
 //    prefs.remove("CarName");
 //    prefs.remove("RcNumber");
 //    prefs.remove("CarNumberPlate");
@@ -88,24 +88,25 @@ class _FirstPageState extends State<FirstPage> {
       name = data[0]['name'];
       email = data[0]['email'];
       dob = data[0]['dob'];
-      address = data[0]['address'];
-      savedPrefrence(name, email, dob, address);
+      gender = data[0]['gender'];
+     // print('Genderrrr'+gender);
+      savedPrefrence(name, email, dob, gender);
     });
 
 //    print(name);
 //    print(email);
 //    print(dob);
-//    print(address);
+//    print(gender);
   }
 
 
   Future<void> savedPrefrence(
-      String name, String email, String dob, String address) async {
+      String name, String email, String dob, String gender) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setString('name', name);
     pref.setString('email', email);
     pref.setString('dob', dob);
-    pref.setString('address', address);
+    pref.setString('gender', gender);
     pref.commit();
     return;
   }
@@ -281,7 +282,7 @@ class logout{
     prefs.remove("name");
     prefs.remove("email");
     prefs.remove("dob");
-    prefs.remove("address");
+    prefs.remove("gender");
     prefs.remove("CarName");
     prefs.remove("RcNumber");
     prefs.remove("CarNumberPlate");

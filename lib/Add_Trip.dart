@@ -13,11 +13,30 @@ class Add_Trip extends StatefulWidget {
   _Add_TripState createState() => _Add_TripState();
 }
 
+class Gender {
+  int id;
+  String name;
+
+  Gender(this.id, this.name);
+
+  static List<Gender> getselectedGender() {
+    return <Gender>[
+      Gender(1, 'Male'),
+      Gender(2, 'Female'),
+      Gender(3, 'Both'),
+    ];
+  }
+}
+
 class _Add_TripState extends State<Add_Trip> {
+
+  List<Gender> _gender = Gender.getselectedGender();
+  List<DropdownMenuItem<Gender>> _dropDownMenuItams;
+  Gender _selectedGender;
 
   var fromTo = "", whereTo = "", dob = "", address = "",carName='',carNumberPlate='',ride_id='',ststus=0;
 
-  var mobile = '', start_date = "", start_time = "", start_point = '', end_point = '', seats_available = '',cost='',pick_up='';
+  var mobile = '', start_date = "", start_time = "", start_point = '', end_point = '', seats_available = '',cost='',pick_up='',gender='';
 
   int availableSeats1;
 
@@ -34,7 +53,24 @@ class _Add_TripState extends State<Add_Trip> {
   void initState() {
     // TODO: implement initState
     _getPrefrence();
+    _dropDownMenuItams = buildDropDownMenuItms(_gender);
+    _selectedGender = _dropDownMenuItams[0].value;
     super.initState();
+  }
+
+  List<DropdownMenuItem<Gender>> buildDropDownMenuItms(List gender) {
+    List<DropdownMenuItem<Gender>> items = List();
+    for (Gender seat in gender) {
+      items.add(DropdownMenuItem(value: seat, child: Text(seat.name)));
+    }
+    return items;
+  }
+
+  onChangeDropDownMenuItem(Gender sealectedGender)
+  {
+    setState(() {
+      _selectedGender = sealectedGender;
+    });
   }
 
   @override
@@ -107,6 +143,7 @@ class _Add_TripState extends State<Add_Trip> {
       "start_date": start_date.toString(),
       "start_time": start_time.toString(),
       "ststus": ststus.toString(),
+      "gender": gender.toString(),
     });
     removeData();
     Navigator.push(
@@ -169,6 +206,18 @@ class _Add_TripState extends State<Add_Trip> {
 //                IconButton(icon: Icon(Icons.date_range), onPressed: (){_selectTime(context);})
 //              ],
 //            ),
+
+                SizedBox(height: 40.0,),
+                Text('Available for(Gender):'),
+            SizedBox(
+              height: 20.0,
+            ),
+                DropdownButton(
+                    value: _selectedGender,
+                    items: _dropDownMenuItams,
+                    onChanged: onChangeDropDownMenuItem),
+                 SizedBox(height: 20.0,),
+               // Text('Gender Selected : ${_selectedGender.name}'),
                 Text('\n\nSelect Date Of Trip'),
                 RaisedButton(
                   onPressed: () {
@@ -213,13 +262,14 @@ class _Add_TripState extends State<Add_Trip> {
       start_date =  _date.toLocal().toString().substring(0,10);
       start_time = _time.format(context);
       ride_id = mobile + '_' + start_date + '_' + start_time;
+      gender = _selectedGender.name.toString();
 
 //      TimeOfDay _time1 = new TimeOfDay.now();
 //      var time1 = _time1.format(context);
 //      DateTime _date1 = new DateTime.now();
 //      var date1 = _date.toLocal().toString().substring(0,10);
 
-        if(start_point == '' || end_point=='' || pick_up== '' || availableSeats1 == ''  || start_date == '' || start_time == '')
+        if(start_point == '' || end_point=='' || pick_up== '' || availableSeats1 == ''  || start_date == '' || start_time == '' || gender == '')
           {
             setState(() {
               Toast.show("Please fill all the details.", context,
@@ -237,12 +287,10 @@ class _Add_TripState extends State<Add_Trip> {
           {
             setState(() {
               addData();
-              Toast.show('Trip successfuly added..', context,
+              Toast.show('Trip successfuly added.', context,
                   duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
             });
           }
-
-
     });
   }
 }
