@@ -12,11 +12,14 @@ class Trips extends StatefulWidget {
 }
 
 String _uname = '';
-var data1, data2, data3, data4;
+var data1, data2, data3, data4, data5;
+List data55 = [];
+List data44 = [];
 bool isProcess1 = true;
 bool isProcess2 = true;
 bool isProcess3 = true;
 bool isProcess4 = true;
+bool isEnable = true;
 
 var progressIndicator = Container(
   child: Center(
@@ -35,13 +38,20 @@ class _TripsState extends State<Trips> {
     _refreshController.refreshCompleted();
   }
 
-  var mobile = '', ststus1 = 0, ststus2 = 1, ststus3 = 2;
+  var mobile = '', ststus1 = 0, ststus2 = 1, ststus3 = 2,finalRideId= '';
+  bool isButtonEnable = false;
 
   @override
   void initState() {
     // TODO: implement initState
     _getPrefrence();
     super.initState();
+  }
+
+  void start_trip(){
+
+
+
   }
 
   _getPrefrence() async {
@@ -52,10 +62,12 @@ class _TripsState extends State<Trips> {
     if (mobile != "") {
       // print('add');
       // print(mobile);
+      addData4(mobile);
       addData1(mobile, ststus1.toString());
       addData2(mobile, ststus2.toString());
       addData3(mobile, ststus3.toString());
-      addData4(mobile);
+
+      addData5(mobile);
     } else {
       print('nathi aayo number');
     }
@@ -86,16 +98,37 @@ class _TripsState extends State<Trips> {
   }
 
   Future<void> addData2(mobile, ststus2) async {
-    final response = await http.post(
-        "https://ridesher.000webhostapp.com/Fatch_Panding_trips.php",
-        body: {
-          "mobile": mobile,
-          "ststus": ststus2,
-        });
+    List data22 = [];
+//    for(int i = 0 ; i<=data44.length-1 ; i++) {
+//      print(data4[i]['driver_mobile'].toString());
+//    }
+//
+//    final response = await http.post(
+//        "https://ridesher.000webhostapp.com/Fatch_Panding_trips.php",
+//        body: {
+//          "mobile": mobile,
+//          "ststus": ststus2,
+//        });
+//    data2 = json.decode(response.body);
+//    data22.add(data2);
+    print( data44[0]['ride_id'].toString());
+
+    for(int i = 0 ; i<=data44.length-1 ; i++) {
+      print('hellocncnsk&&&&&&&!!!!!!!!!!!');
+      var ride_id_final = data44[i]['ride_id'].toString();
+      final response2 = await http.post(
+          "https://ridesher.000webhostapp.com/Fatch_running_trips.php",
+          body: {
+            "mobile": mobile.toString(),
+            "ride_id": ride_id_final.toString(),
+            "ststus": ststus2,
+          });
+      data2 = json.decode(response2.body);
+      data22 = data2;
+    }
+
 
     setState(() {
-      data2 = json.decode(response.body);
-      List data22 = data2;
       //print(data22);
       if (data22.isEmpty) {
         setState(() {
@@ -110,16 +143,21 @@ class _TripsState extends State<Trips> {
   }
 
   Future<void> addData3(mobile, ststus3) async {
-    final response = await http.post(
-        "https://ridesher.000webhostapp.com/Fatch_Panding_trips.php",
-        body: {
-          "mobile": mobile,
-          "ststus": ststus3,
-        });
+    List data33 =[];
 
-    setState(() {
+    for(int i = 0 ; i<=data44.length-1 ; i++) {
+      print('hellocncnsk&&&&&&&!!!!!!!!!!!');
+      var ride_id_final = data44[i]['ride_id'].toString();
+      final response = await http.post(
+          "https://ridesher.000webhostapp.com/Fatch_running_trips.php",
+          body: {
+            "mobile": mobile.toString(),
+            "ride_id": ride_id_final.toString(),
+            "ststus": ststus3,
+          });
       data3 = json.decode(response.body);
-      List data33 = data3;
+      data33 = data3; }
+    setState(() {
       //print(data5);
       if (data33.isEmpty) {
         setState(() {
@@ -142,7 +180,7 @@ class _TripsState extends State<Trips> {
 
     setState(() {
       data4 = json.decode(response.body);
-      List data44 = data4;
+      data44 = data4;
       print(data44);
       if (data44.isEmpty) {
         setState(() {
@@ -155,6 +193,35 @@ class _TripsState extends State<Trips> {
       }
     });
   }
+
+
+  Future<void> addData5(mobile) async {
+    final response = await http.post(
+        "https://ridesher.000webhostapp.com/Fatch_Bookd_trips - status.php",
+        body: {
+          "mobile": mobile,
+        });
+
+    setState(() {
+      data5 = json.decode(response.body);
+      data55 = data5;
+      print(data55);
+    });
+  }
+  Future<void> addData6(ride_id,mobile) async {
+    final response = await http.post(
+        "https://ridesher.000webhostapp.com/Update_trip_booked_ststus 2.php",
+        body: {
+          "ride_id": ride_id,
+          "mobile": mobile.toString(),
+        });
+    setState(() {
+      setState(() {
+        isEnable = true;
+      });
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -241,21 +308,43 @@ class _TripsState extends State<Trips> {
     var booked_body = ListView.builder(
         itemCount: data4 == null ? 0 : data4.length,
         itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Container(
-                  child: Column(
-                children: <Widget>[
-                  Text(data4[index]['start_point']),
-                  Text(data4[index]['end_point']),
-                  Text(data4[index]['pick_up']),
-                  Text(data4[index]['cost']),
-                  Text(data4[index]['driver_mobile']),
-                  Text(data4[index]['start_date']),
-                  Text(data4[index]['start_time']),
-                ],
-              )),
+
+//          setState(() {
+          if(data55[index]['ststus'].toString()== '1'){
+            isEnable = false;
+          }
+          else{
+            isEnable = true;
+          }
+//          });
+          return GestureDetector(
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+
+                    child: Column(
+                  children: <Widget>[
+                    Text(data4[index]['start_point']),
+                    Text(data4[index]['end_point']),
+                    Text(data4[index]['pick_up']),
+                    Text(data4[index]['cost']),
+                    Text(data4[index]['driver_mobile']),
+                    Text(data4[index]['start_date']),
+                    Text(data4[index]['start_time']),
+                    MaterialButton(
+                     onPressed: isEnable ? null : () {
+                       setState(() {
+                         addData6(data4[index]['ride_id'].toString(),data4[index]['mobile'].toString());
+                       });
+                     },
+                      child: Text('CONFIRM'),
+                      color: Colors.amberAccent,
+                    ),
+
+                  ],
+                )),
+              ),
             ),
           );
         });

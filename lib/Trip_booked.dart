@@ -9,6 +9,7 @@ var ride_id0 = '', data1;
 class Trip_booked extends StatefulWidget {
   var ride_id1;
 
+
   Trip_booked(ride_id1) {
     this.ride_id1 = ride_id1;
     ride_id0 = ride_id1;
@@ -26,12 +27,15 @@ class _Trip_bookedState extends State<Trip_booked> {
     await Future.delayed(Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
     addData1(ride_id);
+    addData2(ride_id);
     _refreshController.refreshCompleted();
   }
 
   @override
   var ride_id = ride_id0;
   bool isProcess1 = true;
+  bool sendConfirmation = true;
+  bool startRide = false;
 
   @override
   void initState() {
@@ -52,11 +56,37 @@ class _Trip_bookedState extends State<Trip_booked> {
         body: {
           "ride_id": ride_id,
         });
+    data1 = json.decode(response.body);
+    List data11 = data1;
+      print(data11);
+      for(int i = 0 ; i<=data11.length-1;i++)
+        {
+          print(data11[i]['ststus']);
+          if(data11[i]['ststus'].toString()== '0'){
+            setState(() {
+              sendConfirmation = true;
+              startRide = false;
+            });
+          }
+          else if(data11[i]['ststus'].toString()== '2')
+            {
+              setState(() {
+                sendConfirmation = false;
+                startRide = true;
+              });
+            }
+          else{
+            setState(() {
+              sendConfirmation = false;
+              startRide = false;
+              return;
+            });
 
+          }
+        }
     setState(() {
-      data1 = json.decode(response.body);
-      List data11 = data1;
-      //print(data11);
+
+
       if (data11.isEmpty) {
         setState(() {
           isProcess1 = true;
@@ -67,6 +97,51 @@ class _Trip_bookedState extends State<Trip_booked> {
         });
       }
     });
+  }
+
+  Future<void> addData2(ride_id) async {
+    final response = await http.post(
+        "https://ridesher.000webhostapp.com/Update_trip_booked_ststus.php",
+        body: {
+          "ride_id": ride_id,
+        });
+    setState(() {
+      sendConfirmation = false;
+    });
+//    data1 = json.decode(response.body);
+//    List data11 = data1;
+//    print(data11);
+//    for(int i = 0 ; i<=data11.length-1;i++)
+//    {
+//      print(data11[i]['ststus']);
+//      if(data11[i]['ststus'].toString()== '0'){
+//        setState(() {
+//          sendConfirmation = true;
+//          startRide = false;
+//        });
+//      }
+//    }
+//    setState(() {
+//
+//
+//      if (data11.isEmpty) {
+//        setState(() {
+//          isProcess1 = true;
+//        });
+//      } else {
+//        setState(() {
+//          isProcess1 = false;
+//        });
+//      }
+//    });
+  }
+
+  Future<void> addData3(ride_id) async {
+    final response = await http.post(
+        "https://ridesher.000webhostapp.com/Update_trip_panding_ststus.php",
+        body: {
+          "ride_id": ride_id,
+        });
   }
 
   Widget build(BuildContext context) {
@@ -86,6 +161,7 @@ class _Trip_bookedState extends State<Trip_booked> {
                     Text(data1[index]['email']),
                     Text(data1[index]['seat_booked']),
                     Text(data1[index]['mobile']),
+                    //Text(data1[index]['ststus']),
                   ],
                 )),
               ),
@@ -96,15 +172,66 @@ class _Trip_bookedState extends State<Trip_booked> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Booking Details'),
+
           backgroundColor: Colors.indigoAccent,
         ),
-        body: SmartRefresher(
-            enablePullDown: true,
-            header: WaterDropHeader(
-              waterDropColor: Colors.indigoAccent,
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          backgroundColor: Colors.indigoAccent,
+          onPressed: bottomSheet,
+          tooltip: 'Click',
+        ),
+        body: Container(
+          child: SmartRefresher(
+              enablePullDown: true,
+              header: WaterDropHeader(
+                waterDropColor: Colors.indigoAccent,
+              ),
+              controller: _refreshController,
+              onRefresh: _onRefresh,
+              child: isProcess1 ? progressIndicator : booking_body),
+        ));
+  }
+  void bottomSheet() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            //   color: Colors.red,
+            height: 130,
+            child: Container(
+              decoration: BoxDecoration(
+                //     color: Colors.orange,
+                  borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(30),
+                      topRight: const Radius.circular(30))),
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                      leading: Icon(Icons.send),
+                      title: Text('Send Confirmation'),
+                    onTap: (){
+                        addData2(ride_id);
+                        sendConfirmation = false;
+                    },
+                  enabled: sendConfirmation,),
+                  ListTile(
+                      leading: Icon(Icons.local_taxi),
+                      title: Text('Start Ride'),
+                     onTap: (){
+                        setState(() {
+                          addData3(ride_id);
+                          startRide = false;
+                        });
+                     },
+                  enabled: startRide,),
+                ],
+              ),
             ),
-            controller: _refreshController,
-            onRefresh: _onRefresh,
-            child: isProcess1 ? progressIndicator : booking_body));
+          );
+        });
   }
 }
+
+
+

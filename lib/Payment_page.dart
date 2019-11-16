@@ -35,7 +35,7 @@ class Payment_page extends StatefulWidget {
 class _Payment_pageState extends State<Payment_page> {
 
   int totalAmount = cost, seatAvailable = seatAvailable2, newSeatAvailable, seatSelected= seatSelected2;
-  var mobile = '';
+  var mobile = '',ststus=0;
 
   var name = "", email = "",rideId1=rideId ,startPoint1 = startPoint,endPoint1=endPoint,pickUp1 = pickUp,
       driverMobile1=driverMobile,cost1 = cost,startDate1 = startDate, startTime1 = startTime ;
@@ -118,7 +118,7 @@ class _Payment_pageState extends State<Payment_page> {
       var url = "https://ridesher.000webhostapp.com/Insert_book_trips.php";
       http.post(url,
           body: {"ride_id": rideId1.toString(), "name": name.toString(), "email": email.toString(),
-            "mobile": mobile.toString(), "seat_booked": seatSelected.toString()});
+            "mobile": mobile.toString(), "seat_booked": seatSelected.toString(), "ststus": ststus.toString()});
 
       var url1 = "https://ridesher.000webhostapp.com/Update_AvailableSeats_details.php";
       http.post(url1,
