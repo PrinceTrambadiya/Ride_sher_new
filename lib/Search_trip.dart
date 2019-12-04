@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'Book_trip.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-var pickUp0, destination0, data1,gender0;
+var pickUp0, destination0, data1, gender0;
 String _uname = '';
 
 class Search_trip extends StatefulWidget {
@@ -45,11 +45,11 @@ class _Search_tripState extends State<Search_trip> {
     print(userMobile);
     if (userMobile != "") {
       print('add');
-       print('ZZZZZZ'+userMobile);
+      print('ZZZZZZ' + userMobile);
     } else {
       print('nathi aayo number');
     }
-    addData1(pickUp, destination, seatsAvailable,userMobile,gender);
+    addData1(pickUp, destination, seatsAvailable, userMobile, gender);
   }
 
   var progressIndicator = Container(
@@ -64,7 +64,7 @@ class _Search_tripState extends State<Search_trip> {
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
-    addData1(pickUp, destination, seatsAvailable,userMobile,gender);
+    addData1(pickUp, destination, seatsAvailable, userMobile, gender);
     _refreshController.refreshCompleted();
   }
 
@@ -75,12 +75,13 @@ class _Search_tripState extends State<Search_trip> {
     super.initState();
   }
 
-  Future<void> addData1(pickUp, destination, seatsAvailable, userMobile1,gender1) async {
+  Future<void> addData1(
+      pickUp, destination, seatsAvailable, userMobile1, gender1) async {
 //    print('ANDAR');
 //    print(pickUp);
 //    print(destination);
 //    print(seatsAvailable);
-  print('UUU'+userMobile+'   UUU');
+    print('UUU' + userMobile + '   UUU');
     final response = await http.post(
         "https://ridesher.000webhostapp.com/Fatch_Search_trips.php",
         body: {
@@ -143,69 +144,89 @@ class _Search_tripState extends State<Search_trip> {
             },
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-              child: Card(color: Colors.amberAccent.shade200,
+              child: Card(
+                color: Colors.amberAccent.shade200,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Container(
                       child: Column(
                     children: <Widget>[
                       Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('Start Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            'Start Point : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(data1[index]['start_point']),
                         ],
                       ),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                    Text('End Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                  Text(data1[index]['end_point']),
-                  ],
-                ),
-
-
+                      SizedBox(height: 7,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('Pick Up : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            'End Point : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(data1[index]['end_point']),
+                        ],
+                      ),
+                      SizedBox(height: 7,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Pick Up : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(data1[index]['pick_up']),
                         ],
                       ),
-
+                      SizedBox(height: 7,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('Seats Available : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            'Seats Available : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(data1[index]['seats_available']),
                         ],
                       ),
-
+                      SizedBox(height: 7,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('Coat : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            'Coat : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(data1[index]['cost']),
                         ],
                       ),
-
+                      SizedBox(height: 7,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('Start Date : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            'Start Date : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(data1[index]['start_date']),
                         ],
                       ),
-
+                      SizedBox(height: 7,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text('Start Time : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            'Start Time : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(data1[index]['start_time']),
                         ],
                       ),
-
                     ],
                   )),
                 ),
@@ -215,8 +236,10 @@ class _Search_tripState extends State<Search_trip> {
         });
 //    print(pickUp);
 //    print(destination);
-    return Scaffold(backgroundColor: Colors.blue.shade100,
-        appBar: AppBar(backgroundColor: Colors.deepOrange,
+    return Scaffold(
+        backgroundColor: Colors.blue.shade100,
+        appBar: AppBar(
+          backgroundColor: Colors.deepOrange,
           title: Text('Search Result'),
         ),
         body: SmartRefresher(
