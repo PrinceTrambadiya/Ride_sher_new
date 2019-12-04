@@ -241,21 +241,24 @@ class _TripsState extends State<Trips> {
                         builder: (context) => Trip_booked(ride_id)));
               });
             },
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Container(
-                    child: Column(
-                  children: <Widget>[
-                    Text(data1[index]['start_point']),
-                    Text(data1[index]['end_point']),
-                    Text(data1[index]['pick_up']),
-                    Text(data1[index]['seats_available']),
-                    Text(data1[index]['cost']),
-                    Text(data1[index]['start_date']),
-                    Text(data1[index]['start_time']),
-                  ],
-                )),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+              child: Card(color: Colors.blue.shade100,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(color: Colors.blue.shade100,
+                      child: Column(
+                    children: <Widget>[
+                      Text('Start Point : '+data1[index]['start_point']),
+                      Text('End Point : '+data1[index]['end_point']),
+                      Text('Pick Up : '+data1[index]['pick_up']),
+                      Text('Seats Available : '+data1[index]['seats_available']),
+                      Text('Cost : '+data1[index]['cost']),
+                      Text('Start Date : '+data1[index]['start_date']),
+                      Text('Start Time : '+data1[index]['start_time']),
+                    ],
+                  )),
+                ),
               ),
             ),
           );
@@ -264,21 +267,24 @@ class _TripsState extends State<Trips> {
     var running_body = ListView.builder(
         itemCount: data2 == null ? 0 : data2.length,
         itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Container(
-                  child: Column(
-                children: <Widget>[
-                  Text(data2[index]['start_point']),
-                  Text(data2[index]['end_point']),
-                  Text(data2[index]['pick_up']),
-                  Text(data2[index]['seats_available']),
-                  Text(data2[index]['cost']),
-                  Text(data2[index]['start_date']),
-                  Text(data2[index]['start_time']),
-                ],
-              )),
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+            child: Card(color: Colors.green.shade100,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                    child: Column(
+                  children: <Widget>[
+                    Text('Start Point : '+data2[index]['start_point']),
+                    Text('End Point : '+data2[index]['end_point']),
+                    Text('Pick Up : '+data2[index]['pick_up']),
+                    Text('Seats Available : '+data2[index]['seats_available']),
+                    Text('Cost : '+data2[index]['cost']),
+                    Text('Start Date : '+data2[index]['start_date']),
+                    Text('Start Time : '+data2[index]['start_time']),
+                  ],
+                )),
+              ),
             ),
           );
         });
@@ -286,21 +292,24 @@ class _TripsState extends State<Trips> {
     var complete_body = ListView.builder(
         itemCount: data3 == null ? 0 : data3.length,
         itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Container(
-                  child: Column(
-                children: <Widget>[
-                  Text(data3[index]['start_point']),
-                  Text(data3[index]['end_point']),
-                  Text(data3[index]['pick_up']),
-                  Text(data3[index]['seats_available']),
-                  Text(data3[index]['cost']),
-                  Text(data3[index]['start_date']),
-                  Text(data3[index]['start_time']),
-                ],
-              )),
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+            child: Card(color: Colors.yellow.shade100,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                    child: Column(
+                  children: <Widget>[
+                    Text('Start Time : '+data3[index]['start_point']),
+                    Text('End Point  : '+data3[index]['end_point']),
+                    Text('Pick Up : '+data3[index]['pick_up']),
+                    Text('Seats Available : '+data3[index]['seats_available']),
+                    Text('Cost : '+data3[index]['cost']),
+                    Text('Start Date : '+data3[index]['start_date']),
+                    Text('Start Time : '+data3[index]['start_time']),
+                  ],
+                )),
+              ),
             ),
           );
         });
@@ -318,32 +327,35 @@ class _TripsState extends State<Trips> {
           }
 //          });
           return GestureDetector(
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Container(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+              child: Card(color: Colors.red.shade100,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
 
-                    child: Column(
-                  children: <Widget>[
-                    Text(data4[index]['start_point']),
-                    Text(data4[index]['end_point']),
-                    Text(data4[index]['pick_up']),
-                    Text(data4[index]['cost']),
-                    Text(data4[index]['driver_mobile']),
-                    Text(data4[index]['start_date']),
-                    Text(data4[index]['start_time']),
-                    MaterialButton(
-                     onPressed: isEnable ? null : () {
-                       setState(() {
-                         addData6(data4[index]['ride_id'].toString(),data4[index]['mobile'].toString());
-                       });
-                     },
-                      child: Text('CONFIRM'),
-                      color: Colors.amberAccent,
-                    ),
+                      child: Column(
+                    children: <Widget>[
+                      Text('Start Point : '+data4[index]['start_point']),
+                      Text('End Point : '+data4[index]['end_point']),
+                      Text('Pick Up : '+data4[index]['pick_up']),
+                      Text('Cost : '+data4[index]['cost']),
+                      Text('Driver Mobile : '+data4[index]['driver_mobile']),
+                      Text('Start Date : '+data4[index]['start_date']),
+                      Text('Start Time : '+data4[index]['start_time']),
+                      MaterialButton(
+                       onPressed: isEnable ? null : () {
+                         setState(() {
+                           addData6(data4[index]['ride_id'].toString(),data4[index]['mobile'].toString());
+                         });
+                       },
+                        child: Text('CONFIRM'),
+                        color: Colors.amberAccent,
+                      ),
 
-                  ],
-                )),
+                    ],
+                  )),
+                ),
               ),
             ),
           );
@@ -351,9 +363,9 @@ class _TripsState extends State<Trips> {
 
     return DefaultTabController(
       length: 4,
-      child: Scaffold(
+      child: Scaffold(backgroundColor: Colors.blue.shade100,
         appBar: AppBar(
-          backgroundColor: Colors.indigoAccent,
+          backgroundColor: Colors.deepOrange,
           title: Text('Trips'),
           bottom: TabBar(isScrollable: true, tabs: <Widget>[
             Tab(

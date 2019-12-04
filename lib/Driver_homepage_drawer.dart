@@ -63,7 +63,7 @@ class _Driver_homepage_drawerState extends State<Driver_homepage_drawer> {
       child: ListView(
         children: <Widget>[
           new DrawerHeader(
-              decoration: BoxDecoration(color: Colors.indigoAccent),
+              decoration: BoxDecoration(color: Colors.deepOrange),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

@@ -224,13 +224,13 @@ class _LoginState extends State<Login> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('images/ride1.jpg'),
-                fit: BoxFit.fill,
-                colorFilter:
-                    ColorFilter.mode(Colors.black87, BlendMode.hardLight))),
+      body: Container(color: Colors.blue.shade50,
+//        decoration: BoxDecoration(
+//            image: DecorationImage(
+//                image: AssetImage('images/ride1.jpg'),
+//                fit: BoxFit.fill,
+//                colorFilter:
+//                    ColorFilter.mode(Colors.black87, BlendMode.hardLight))),
         child: ListView(
           children: <Widget>[
             Padding(
@@ -249,10 +249,10 @@ class _LoginState extends State<Login> {
                   FocusScope.of(context).requestFocus(passwordfocus);
                 },
                 controller: cmobile,
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(color: Colors.black, fontSize: 18),
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    hintStyle: TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.blue),
                         borderRadius: BorderRadius.circular(35.0)),
@@ -276,7 +276,7 @@ class _LoginState extends State<Login> {
                   getstarted();
                 },
                 controller: cpassword,
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(color: Colors.black, fontSize: 18),
                 obscureText: hintText1 == "Password" ? _ishidden : false,
                 decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
@@ -296,7 +296,7 @@ class _LoginState extends State<Login> {
                                   ),
                             onPressed: _visibility)
                         : null,
-                    hintStyle: TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(color: Colors.black),
                     icon: Icon(
                       Icons.lock,
                       size: 45,
@@ -341,7 +341,7 @@ class _LoginState extends State<Login> {
                   onPressed: () {
                     getstarted();
                   },
-                  padding: EdgeInsets.fromLTRB(33, 5, 33, 5),
+                  padding: EdgeInsets.fromLTRB(73, 5, 73, 5),
                   height: 50,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25)),
@@ -355,7 +355,7 @@ class _LoginState extends State<Login> {
                   padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
                   child: Text(
                     "Don't have an account?  ",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                   ),
                 ),
                 Padding(

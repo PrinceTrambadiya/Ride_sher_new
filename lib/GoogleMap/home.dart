@@ -101,7 +101,7 @@ class _MapState extends State<Map> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        backgroundColor: Colors.indigoAccent,
+        backgroundColor: Colors.deepOrange,
         onPressed: bottomSheet,
         tooltip: 'Click',
       ),
@@ -284,7 +284,7 @@ class _MapState extends State<Map> {
                       onTap: addTrip),
                   ListTile(
                       leading: Icon(Icons.details),
-                      title: Text('Car Details'),
+                      title: Text('Driver Details'),
                       onTap: addDetails),
                 ],
               ),

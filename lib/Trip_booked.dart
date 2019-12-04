@@ -151,33 +151,36 @@ class _Trip_bookedState extends State<Trip_booked> {
         itemCount: data1 == null ? 0 : data1.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Container(
-                    child: Column(
-                  children: <Widget>[
-                    Text(data1[index]['name']),
-                    Text(data1[index]['email']),
-                    Text(data1[index]['seat_booked']),
-                    Text(data1[index]['mobile']),
-                    //Text(data1[index]['ststus']),
-                  ],
-                )),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+              child: Card(color: Colors.lightGreenAccent.shade100,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                      child: Column(
+                    children: <Widget>[
+                      Text('Name : '+data1[index]['name']),
+                      Text('Email : '+data1[index]['email']),
+                      Text('Seat Booked : '+data1[index]['seat_booked']),
+                      Text('Mobile : '+data1[index]['mobile']),
+                      //Text(data1[index]['ststus']),
+                    ],
+                  )),
+                ),
               ),
             ),
           );
         });
 
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.blue.shade100,
         appBar: AppBar(
           title: Text('Booking Details'),
 
-          backgroundColor: Colors.indigoAccent,
+          backgroundColor: Colors.deepOrange,
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
-          backgroundColor: Colors.indigoAccent,
+          backgroundColor: Colors.deepOrange,
           onPressed: bottomSheet,
           tooltip: 'Click',
         ),

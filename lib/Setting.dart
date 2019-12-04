@@ -60,36 +60,62 @@ class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: Colors.deepOrange,
         title: Text('Setting'),
       ),
-      body: Container(
+      body: Container(color: Colors.blue.shade100,width: 500,
         child: Column(
           children: <Widget>[
-            MaterialButton(onPressed: (){
-              setState(() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Update_personal_details(name,email,dob,address,mobile)));
-              });
-            },child: Text('Update Personal Details'),color: Colors.amberAccent,),
-            MaterialButton(onPressed: (){
-              setState(() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Update_driver_details(carName,carNumberPlate,rcBook,DriverLicence,mobile)));
-              });
-            },child: Text('Update Driver Details'),color: Colors.amberAccent,),
-            MaterialButton(onPressed: (){
-              setState(() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ConfirmPassword(mobile)));
-              });
-            },child: Text('Change Password'),color: Colors.amberAccent,),
+            SizedBox(height: 20.0,),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+              child: Card(
+                child: ListTile(leading: Icon(Icons.person),
+                  title: Text('Update Personal Details'),onTap: (){
+                    setState(() {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Update_personal_details(name,email,dob,address,mobile)));
+                    });
+                  },
+                ),
+              ),
+            ),
+            SizedBox(height: 20.0,),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+              child: Card(
+                child: ListTile(leading: Icon(Icons.drive_eta),
+                  title: Text('Update Driver Details'),
+                  onTap: (){
+                    setState(() {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Update_driver_details(carName,carNumberPlate,rcBook,DriverLicence,mobile)));
+                    });
+                  },
+                ),
+              ),
+            ),
+            SizedBox(height: 20.0,),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+              child: Card(
+                child: ListTile(leading: Icon(Icons.drive_eta),
+                  title: Text('Change Password'),
+                onTap: (){
+                  setState(() {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ConfirmPassword(mobile)));
+                  });
+                },),
+              ),
+            ),
+
            ],
         ),
       ),

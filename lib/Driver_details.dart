@@ -120,12 +120,7 @@ class _driver_detailsState extends State<driver_details> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('images/ride1.jpg'),
-                  fit: BoxFit.fill,
-                  colorFilter:
-                      ColorFilter.mode(Colors.black87, BlendMode.hardLight))),
+
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -155,9 +150,9 @@ class _driver_detailsState extends State<driver_details> {
                   },
                   textCapitalization: TextCapitalization.characters,
                   controller: ccar_name,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.circular(20.0)),
@@ -176,10 +171,10 @@ class _driver_detailsState extends State<driver_details> {
                   },
                   textCapitalization: TextCapitalization.characters,
                   controller: crc_book_number,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.circular(20.0)),
@@ -198,10 +193,10 @@ class _driver_detailsState extends State<driver_details> {
                   },
                   textCapitalization: TextCapitalization.characters,
                   controller: ccarr_numberPlate,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.circular(20.0)),
@@ -221,9 +216,9 @@ class _driver_detailsState extends State<driver_details> {
                   textCapitalization: TextCapitalization.characters,
                   controller: cdriver_licence,
                   keyboardType: TextInputType.text,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.circular(20.0)),
@@ -248,7 +243,7 @@ class _driver_detailsState extends State<driver_details> {
                     onPressed: () {
                       enterDetails();
                     },
-                    padding: EdgeInsets.fromLTRB(35, 5, 35, 5),
+                    padding: EdgeInsets.fromLTRB(65, 5, 65, 5),
                     height: 50,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25)),

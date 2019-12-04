@@ -98,24 +98,39 @@ class _Update_personal_detailsState extends State<Update_personal_details> {
     }
   }
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return Scaffold(backgroundColor: Colors.blue.shade100,
+      appBar: AppBar(backgroundColor: Colors.deepOrange,
         title: Text('Update Personal Details'),
       ),
       body: Container(
         child: ListView(
           children: <Widget>[
-            Column(
+            Column(crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Name'),
-                TextField(
-                  controller: cname,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: Text('Name :',style: TextStyle(fontWeight: FontWeight.bold),),
                 ),
-                Text('Email'),
-                TextField(
-                  controller: cemail,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  child: TextField(
+                    controller: cname,
+                  ),
                 ),
-                Text('Date Of Birth'),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: Text('Email :',style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  child: TextField(
+                    controller: cemail,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: Text('Date Of Birth :',style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
 //                TextField(
 //                //  keyboardType: TextInputType.datetime,
 //                  controller: cdob,
@@ -125,25 +140,41 @@ class _Update_personal_detailsState extends State<Update_personal_details> {
 //                    //name1= _date.toLocal().toString().substring(0,10);
 //                  });},
 //                ),
-                RaisedButton(
-                  onPressed: () {
-                    _selectedDate(context);
-                  },
-                  child: Icon(Icons.date_range),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: RaisedButton(
+                    onPressed: () {
+                      _selectedDate(context);
+                    },
+                    child: Icon(Icons.date_range),
+                  ),
                 ),
-                Text('Date selected :'+dob2),
-                Text('Address'),
-                TextField(
-                  controller: caddress,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: Text('Date selected :'+dob2,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.deepPurple)),
                 ),
-                MaterialButton(
-                  child: Text('CONFIRM'),
-                  color: Colors.amberAccent,
-                  onPressed: () {
-                    setState(() {
-                      updateDetails();
-                    });
-                  },
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: Text('Address :',style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: TextField(
+                    controller: caddress,
+                  ),
+                ),
+                SizedBox(height: 20.0,),
+                Center(
+                  child: MaterialButton(
+                    child: Text('CONFIRM'),
+                    color: Colors.amberAccent,
+                    onPressed: () {
+                      setState(() {
+                        updateDetails();
+                      });
+                    },padding: EdgeInsets.fromLTRB(75, 15, 75, 15),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                  ),
                 ),
               ],
             ),

@@ -165,8 +165,8 @@ class _Payment_pageState extends State<Payment_page> {
   @override
   Widget build(BuildContext context) {
     TextEditingController ctotalAmmount = new TextEditingController(text: cost.toString());
-    return Scaffold(
-      appBar: AppBar(
+    return Scaffold(backgroundColor: Colors.blue.shade100,
+      appBar: AppBar(backgroundColor: Colors.deepOrange,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text("Payment"),
@@ -198,13 +198,14 @@ class _Payment_pageState extends State<Payment_page> {
             SizedBox(
               height: 15.0,
             ),
-            RaisedButton(color: Colors.redAccent,
+            RaisedButton(color: Colors.yellow,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
+                  borderRadius: BorderRadius.circular(30)),
               onPressed: openCheckout,
+              padding: EdgeInsets.fromLTRB(75, 15, 75, 15),
               child: Text(
                 'Checkout',
-                style: TextStyle(color: Colors.white, fontSize: 22),
+                style: TextStyle(color: Colors.black, fontSize: 22),
               ),
             )
           ],

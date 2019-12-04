@@ -87,16 +87,11 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: Colors.deepOrange,
         title: Text('Forget Password'),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('images/ride1.jpg'),
-                fit: BoxFit.fill,
-                colorFilter:
-                    ColorFilter.mode(Colors.black87, BlendMode.hardLight))),
+      body: Container(color: Colors.blue.shade50,
+
         child: Column(
           children: <Widget>[
             Padding(
@@ -109,10 +104,10 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
                 },
                 textInputAction: TextInputAction.next,
 
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
                 obscureText: hintText1 == "Enter New Password" ? _ishidden1 : false,
                 decoration: InputDecoration(
-                    hintStyle: TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.blue),
                         borderRadius: BorderRadius.circular(20.0)),
@@ -145,11 +140,11 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
                 textInputAction: TextInputAction.done,
 
 
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
                 obscureText:
                 hintText2 == "Enter Confirm password" ? _ishidden2 : false,
                 decoration: InputDecoration(
-                    hintStyle: TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.blue),
                         borderRadius: BorderRadius.circular(20.0)),

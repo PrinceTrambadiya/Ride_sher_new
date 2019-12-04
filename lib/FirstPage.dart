@@ -149,7 +149,7 @@ class _FirstPageState extends State<FirstPage> {
 //          ],
 //        ));
     return Scaffold(
-      backgroundColor: Colors.indigoAccent,
+      backgroundColor: Colors.blue.shade50,
 //      appBar: AppBar(
 //        title: Text('Home Page'),
 //      ),
@@ -167,10 +167,16 @@ class _FirstPageState extends State<FirstPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Row(mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Ride',style: TextStyle(fontSize: 40,color: Colors.blue),),
+                  Text(' Share',style: TextStyle(fontSize: 40,color: Colors.cyan),)
+                ],
+              ),
 //              Container(
 //                //child: RidePicker(onPlaceSelected),
 //              ),
-
+SizedBox(height: 100,),
               Container(
                 height: 50,
                 width: 250,
@@ -245,7 +251,7 @@ class _FirstPageState extends State<FirstPage> {
 //                          LinearGradient(colors: [Colors.blue, Colors.cyan])),
                   child: Center(
                       child: MaterialButton(
-                        color: Colors.blue,
+                        color: Colors.red.shade300,
                     splashColor: Colors.black45,
                     child: Text("LOGOUT", style: TextStyle(fontSize: 18,color: Colors.white)),
                     onPressed: () {
@@ -254,7 +260,7 @@ class _FirstPageState extends State<FirstPage> {
                       //Navigator.pushReplacementNamed(context, '/Login');
                       Navigator.of(context).pushNamedAndRemoveUntil('/Login', (Route<dynamic> route) => false);
                     },
-                    padding: EdgeInsets.fromLTRB(90, 5, 90, 5),
+                    padding: EdgeInsets.fromLTRB(80, 5, 80, 5),
                     height: 45,
                         minWidth: 230,
                         shape: BeveledRectangleBorder(
@@ -264,8 +270,7 @@ class _FirstPageState extends State<FirstPage> {
                   )),
                 ),
               ),
-
-            ],
+                ],
           ),
         ),
       ),

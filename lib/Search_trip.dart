@@ -141,29 +141,32 @@ class _Search_tripState extends State<Search_trip> {
                             mobile)));
               });
             },
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Container(
-                    child: Column(
-                  children: <Widget>[
-                    Text(data1[index]['start_point']),
-                    Text(data1[index]['end_point']),
-                    Text(data1[index]['pick_up']),
-                    Text(data1[index]['seats_available']),
-                    Text(data1[index]['cost']),
-                    Text(data1[index]['start_date']),
-                    Text(data1[index]['start_time']),
-                  ],
-                )),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+              child: Card(color: Colors.pink.shade200,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                      child: Column(
+                    children: <Widget>[
+                      Text('Start Point : '+data1[index]['start_point']),
+                      Text('End Point : '+data1[index]['end_point']),
+                      Text('Pick Up : '+data1[index]['pick_up']),
+                      Text('Seats Available : '+data1[index]['seats_available']),
+                      Text('Coat : '+data1[index]['cost']),
+                      Text('Start Date : '+data1[index]['start_date']),
+                      Text('Start Time : '+data1[index]['start_time']),
+                    ],
+                  )),
+                ),
               ),
             ),
           );
         });
 //    print(pickUp);
 //    print(destination);
-    return Scaffold(
-        appBar: AppBar(
+    return Scaffold(backgroundColor: Colors.blue.shade100,
+        appBar: AppBar(backgroundColor: Colors.deepOrange,
           title: Text('Search Result'),
         ),
         body: SmartRefresher(

@@ -160,43 +160,98 @@ class _Add_TripState extends State<Add_Trip> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: Colors.deepOrange,
         title: Text('Add Trip'),
       ),
-      body: Container(
+      body: Container(color: Colors.blue.shade100,
         child: ListView(
           children: <Widget>[
-            Column(
+            Column(crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Starting Point'),
-                TextField(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                  child: Text('Starting Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                  child: TextField(
 
-                  textCapitalization: TextCapitalization.characters,
-                  controller: cStartPoint,
-                  enabled: false,
+                    textCapitalization: TextCapitalization.characters,
+                    controller: cStartPoint,
+                    enabled: false,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)
+                      )
+                    ),
+                  ),
                 ),
-                Text('Ending Point'),
-                TextField(
-                  textCapitalization: TextCapitalization.characters,
-                  controller: cEndPoint,
-                  enabled: false,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                  child: Text('Ending Point :',style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
-                Text('Pick Up Point'),
-                TextField(
-                  textCapitalization: TextCapitalization.characters,
-                  controller: cPickUp,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                  child: TextField(
+                    textCapitalization: TextCapitalization.characters,
+                    controller: cEndPoint,
+                    enabled: false,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)
+                        )
+                    ),
+                  ),
                 ),
-                Text('Number Of Seats Available'),
-                TextField(
-                  textCapitalization: TextCapitalization.characters,
-                  keyboardType: TextInputType.number,
-                  controller: cSeats,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                  child: Text('Pick Up Point :',style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
-                Text('Cost'),
-                TextField(
-                  textCapitalization: TextCapitalization.characters,
-                  keyboardType: TextInputType.number,
-                  controller: cCost,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                  child: TextField(
+                    textCapitalization: TextCapitalization.characters,
+                    controller: cPickUp,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)
+                        )
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                  child: Text('Number Of Seats Available :',style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                  child: TextField(
+                    textCapitalization: TextCapitalization.characters,
+                    keyboardType: TextInputType.number,
+                    controller: cSeats,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)
+                        )
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                  child: Text('Cost :',style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                  child: TextField(
+                    textCapitalization: TextCapitalization.characters,
+                    keyboardType: TextInputType.number,
+                    controller: cCost,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)
+                        )
+                    ),
+                  ),
                 ),
 //            Row(
 //              children: <Widget>[
@@ -207,41 +262,68 @@ class _Add_TripState extends State<Add_Trip> {
 //              ],
 //            ),
 
-                SizedBox(height: 40.0,),
-                Text('Available for(Gender):'),
-            SizedBox(
-              height: 20.0,
-            ),
-                DropdownButton(
-                    value: _selectedGender,
-                    items: _dropDownMenuItams,
-                    onChanged: onChangeDropDownMenuItem),
-                 SizedBox(height: 20.0,),
+
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                  child: Text('Available for(Gender) : ',style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: DropdownButton(
+                      value: _selectedGender,
+                      items: _dropDownMenuItams,
+                      onChanged: onChangeDropDownMenuItem),
+                ),
+
                // Text('Gender Selected : ${_selectedGender.name}'),
-                Text('\n\nSelect Date Of Trip'),
-                RaisedButton(
-                  onPressed: () {
-                    _selectedDate(context);
-                  },
-                  child: Text('Date'),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: Text('Select Date Of Trip : ',style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
-                Text('Date selected : ${_date.toLocal().toString().substring(0,10)}'),
-                Text('\n\nSelect Time Of Trip'),
-                RaisedButton(
-                  onPressed: () {
-                    _selectTime(context);
-                  },
-                  child: Text('Time'),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: RaisedButton(
+                    onPressed: () {
+                      _selectedDate(context);
+                    },
+                    child: Text('Date'),
+                  ),
                 ),
-                Text('Time selected : ${_time.format(context)}'),
-                MaterialButton(
-                  child: Text('CONFIRM'),
-                  color: Colors.lightBlue,
-                  onPressed: () {
-                    setState(() {
-                      addTrip();
-                    });
-                  },
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: Text('Date selected : ${_date.toLocal().toString().substring(0,10)}'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                  child: Text('Select Time Of Trip : ',style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: RaisedButton(
+                    onPressed: () {
+                      _selectTime(context);
+                    },
+                    child: Text('Time'),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: Text('Time selected : ${_time.format(context)}'),
+                ),
+                Center(
+                  child: MaterialButton(
+                    child: Text('CONFIRM'),
+                    color: Colors.yellow,
+                    onPressed: () {
+                      setState(() {
+                        addTrip();
+                      });
+
+                    },
+                    padding: EdgeInsets.fromLTRB(75, 10, 75, 10),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                  ),
                 ),
               ],
             ),

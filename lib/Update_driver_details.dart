@@ -86,42 +86,70 @@ class _Update_driver_detailsState extends State<Update_driver_details> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: Colors.deepOrange,
         title: Text('Update Driver Details'),
       ),
-      body: Container(
+      body: Container(color: Colors.blue.shade100,
         child: ListView(
           children: <Widget>[
-            Column(
+            Column(crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Car Name'),
-                TextField(
-                  textCapitalization: TextCapitalization.characters,
-                  controller: ccarName,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: Text('Car Name :',style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
-                Text('Number Plate'),
-                TextField(
-                  textCapitalization: TextCapitalization.characters,
-                  controller: ccarNumberPlate,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  child: TextField(
+                    textCapitalization: TextCapitalization.characters,
+                    controller: ccarName,
+                  ),
                 ),
-                Text('Rc Book'),
-                TextField(
-                  textCapitalization: TextCapitalization.characters,
-                  controller: crcBook,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: Text('Number Plate :',style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
-                Text('Driving Licence'),
-                TextField(
-                  textCapitalization: TextCapitalization.characters,
-                  controller: cdriverLicence,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  child: TextField(
+                    textCapitalization: TextCapitalization.characters,
+                    controller: ccarNumberPlate,
+                  ),
                 ),
-                MaterialButton(
-                  child: Text('CONFIRM'),
-                  color: Colors.amberAccent,
-                  onPressed: () {
-                    setState(() {
-                      updateDetails();
-                    });
-                  },
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: Text('Rc Book :',style: TextStyle(fontWeight: FontWeight.bold) ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  child: TextField(
+                    textCapitalization: TextCapitalization.characters,
+                    controller: crcBook,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                  child: Text('Driving Licence :',style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  child: TextField(
+                    textCapitalization: TextCapitalization.characters,
+                    controller: cdriverLicence,
+                  ),
+                ),
+                SizedBox(height: 20.08,),
+                Center(
+                  child: MaterialButton(
+                    child: Text('CONFIRM'),
+                    color: Colors.amberAccent,
+                    onPressed: () {
+                      setState(() {
+                        updateDetails();
+                      });
+                    },padding: EdgeInsets.fromLTRB(75, 15, 75, 15),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30) ),
+                  ),
                 ),
               ],
             ),

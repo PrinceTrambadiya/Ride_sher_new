@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:map_demo/FirstPage.dart';
 import 'Driver_homepage_drawer.dart';
 import 'package:toast/toast.dart';
 import 'Search_trip.dart';
@@ -74,7 +75,7 @@ class _Driver_home_pageState extends State<Driver_home_page> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: Colors.deepOrange,
         title: Text('Rider'),
       ),
         drawer: Driver_homepage_drawer(),
@@ -101,32 +102,66 @@ class _Driver_home_pageState extends State<Driver_home_page> {
 //                size: 30,
 //              ),
 //            ]),
-        body: Container(
-          child: Column(
+        body: Container(color: Colors.blue.shade100,
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Enter PickUp Point'),
-              TextField(
-                textCapitalization: TextCapitalization.words,
-                controller: cpickUp,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                child: Text('Enter PickUp Point :',style: TextStyle(fontWeight: FontWeight.bold),),
               ),
-              Text('Enter Destination Point'),
-              TextField(
-                textCapitalization: TextCapitalization.words,
-                controller: cdestination,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                child: TextField(
+                  textCapitalization: TextCapitalization.words,
+                  controller: cpickUp,
+                ),
               ),
-              SizedBox(height: 40.0,),
-              Text('Available for(Gender):'),
-              SizedBox(
-                height: 20.0,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                child: Text('Enter Destination Point :',style: TextStyle(fontWeight: FontWeight.bold)),
               ),
-              DropdownButton(
-                  value: _selectedGender,
-                  items: _dropDownMenuItams,
-                  onChanged: onChangeDropDownMenuItem),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                child: TextField(
+                  textCapitalization: TextCapitalization.words,
+                  controller: cdestination,
+                ),
+              ),
+              SizedBox(height: 15.0,),
+              Row(
+                children: <Widget>[
+                   Padding(
+                     padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                     child: Text('Available for(Gender) : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                   ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
+                    child: DropdownButton(
+                          value: _selectedGender,
+                          items: _dropDownMenuItams,
+                          onChanged: onChangeDropDownMenuItem),
+                  ),
+
+                ],
+              ),
+
               // SizedBox(height: 10.0,),
             //  Text('Gender Selected : ${_selectedGender.name}'),
-              MaterialButton(onPressed: search,child: Text('Search'),color: Colors.amberAccent,)
+              SizedBox(height: 17.0,),
+              Center(child: MaterialButton(onPressed: search,child: Text('Search',style: TextStyle(fontSize: 15),),color: Colors.amberAccent,padding: EdgeInsets.fromLTRB(75, 15, 75, 15),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),)),
+              MaterialButton(onPressed: (){
+                setState(() {
+
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>FirstPage()));
+
+                });
+              },color: Colors.deepOrange,child: Icon(Icons.arrow_back,size: 50,),shape: CircleBorder()
+              )
             ],
+
           ),
         ),
     );

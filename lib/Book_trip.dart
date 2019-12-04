@@ -97,130 +97,146 @@ class _Book_tripState extends State<Book_trip> {
   Widget build(BuildContext context) {
     print(rideId);
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: Colors.deepOrange,
         title: Text('Booking Page'),
       ),
-      body: Container(
+      body: Container(color: Colors.blue.shade100,
         child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Text(
-                  'Start Point : ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 20, 50, 20),
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              'Start Point : ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(startPoint),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              'End Point : ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(endPoint),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              'PickUp Point : ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(pickUp),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              'Seats Available : ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(seatsAvailable),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              'Cost : ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(cost),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              'Start Date : ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(startDate),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              'Start Time : ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(startTime),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                Text(startPoint),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Text(
-                  'End Point : ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(endPoint),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Text(
-                  'PickUp Point : ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(pickUp),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Text(
-                  'Seats Available : ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(seatsAvailable),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Text(
-                  'Cost : ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(cost),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Text(
-                  'Start Date : ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(startDate),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Text(
-                  'Start Time : ',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(startTime),
-              ],
-            ),
-            SizedBox(height: 40.0,),
-            Text('Select number of seats:'),
+              ),
+
+              SizedBox(height: 40.0,),
+              Text('Select number of seats:'),
 //            SizedBox(
 //              height: 10.0,
 //            ),
-            DropdownButton(
-                value: _selectedSeats,
-                items: _dropDownMenuItams,
-                onChanged: onChangeDropDownMenuItem),
-           // SizedBox(height: 10.0,),
-          //  Text('Seats Selected : ${_selectedSeats.name}'),
-            MaterialButton(
-              onPressed: () {
-                 seatSelected = int.parse(_selectedSeats.name.toString());
-                 availableStats = int.parse(seatsAvailable.toString());
-                 print(oldcost.toString());
-                 newCost = oldcost * seatSelected;
-                 print(newCost.toString());
-                setState(() {
+              DropdownButton(
+                  value: _selectedSeats,
+                  items: _dropDownMenuItams,
+                  onChanged: onChangeDropDownMenuItem),
+             // SizedBox(height: 10.0,),
+            //  Text('Seats Selected : ${_selectedSeats.name}'),
+              SizedBox(height: 20.0,),
+              MaterialButton(
+                onPressed: () {
+                   seatSelected = int.parse(_selectedSeats.name.toString());
+                   availableStats = int.parse(seatsAvailable.toString());
+                   print(oldcost.toString());
+                   newCost = oldcost * seatSelected;
+                   print(newCost.toString());
+                  setState(() {
 
-                  if(seatSelected > availableStats)
-                    {
-                      setState(() {
-                        Toast.show('Your selected seats is more than available seats.', context,
-                            duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
-                      });
-                    }
+                    if(seatSelected > availableStats)
+                      {
+                        setState(() {
+                          Toast.show('Your selected seats is more than available seats.', context,
+                              duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+                        });
+                      }
 
-                  else
-                    {
-                      setState(() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Payment_page(
-                                    newCost.toString(),
-                                    seatsAvailable,
-                                    rideId,
-                                    startPoint,
-                                    endPoint,
-                                    pickUp,
-                                    mobile,
-                                    startDate,
-                                    startTime,
-                                seatSelected.toString())));
-                      });
-                    }
+                    else
+                      {
+                        setState(() {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Payment_page(
+                                      newCost.toString(),
+                                      seatsAvailable,
+                                      rideId,
+                                      startPoint,
+                                      endPoint,
+                                      pickUp,
+                                      mobile,
+                                      startDate,
+                                      startTime,
+                                  seatSelected.toString())));
+                        });
+                      }
 
-                });
-              },
-              child: Text('Book'),
-              color: Colors.amberAccent,
-            )
-          ],
-        ),
+                  });
+                },padding: EdgeInsets.fromLTRB(75, 15, 75, 15),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                child: Text('Book',style: TextStyle(fontSize: 15),),
+                color: Colors.amberAccent,
+              )
+            ],
+          ),
+
       ),
     );
   }

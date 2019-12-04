@@ -87,7 +87,7 @@ class _SignupState extends State<Signup> {
     final DateTime picked = await showDatePicker(
         context: context,
         initialDate: _date,
-        firstDate: new DateTime(2019),
+        firstDate: new DateTime(1960),
         lastDate: new DateTime(2022));
     if (picked != null && picked != _date) {
       print('Date selected : ${_date.toString()}');
@@ -190,15 +190,10 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
+        child: Container(color: Colors.blue.shade50,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('images/ride1.jpg'),
-                  fit: BoxFit.fill,
-                  colorFilter:
-                      ColorFilter.mode(Colors.black87, BlendMode.hardLight))),
+
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -237,9 +232,9 @@ class _SignupState extends State<Signup> {
                   },
                   textCapitalization: TextCapitalization.words,
                   controller: cname,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.circular(20.0)),
@@ -257,10 +252,10 @@ class _SignupState extends State<Signup> {
                     FocusScope.of(context).requestFocus(mobilefocus);
                   },
                   controller: cemail,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.circular(20.0)),
@@ -278,11 +273,13 @@ class _SignupState extends State<Signup> {
                     FocusScope.of(context).requestFocus(dobfocus);
                   },
                   controller: cmobile,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
+
+                      hintStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
+
                           borderSide: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.circular(20.0)),
                       hintText: 'Mobile number',
@@ -314,12 +311,12 @@ class _SignupState extends State<Signup> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('Select Date Of Birth: ',style: TextStyle(color: Colors.white),),
+                Text('Select Date Of Birth : ',style: TextStyle(color: Colors.black),),
                 RaisedButton(
                   onPressed: () {
                     _selectedDate(context);
                   },
-                  child: Text('Date selected : ${_date.toLocal().toString().substring(0,10)}',style: TextStyle(color: Colors.white)),
+                  child: Text('Date selected : ${_date.toLocal().toString().substring(0,10)}',style: TextStyle(color: Colors.black)),
                 ),
               ],
             )
@@ -351,8 +348,8 @@ class _SignupState extends State<Signup> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Gender',
-                    style: TextStyle(color: Colors.white, fontSize: 17),
+                    'Gender : ',
+                    style: TextStyle(color: Colors.black, fontSize: 17),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
@@ -391,10 +388,11 @@ class _SignupState extends State<Signup> {
                     FocusScope.of(context).requestFocus(confirmfocus);
                   },
                   controller: cpassword,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   obscureText: hintText1 == "Password" ? _ishidden1 : false,
                   decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
+
+                      hintStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.circular(20.0)),
@@ -425,11 +423,12 @@ class _SignupState extends State<Signup> {
                     signup();
                   },
                   controller: cconfirmpassword,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                   obscureText:
                       hintText2 == "Confirm password" ? _ishidden2 : false,
                   decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
+
+                      hintStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.circular(20.0)),
@@ -467,7 +466,7 @@ class _SignupState extends State<Signup> {
                     onPressed: () {
                       signup();
                     },
-                    padding: EdgeInsets.fromLTRB(35, 5, 35, 5),
+                    padding: EdgeInsets.fromLTRB(42, 5, 42, 5),
                     height: 50,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25)),

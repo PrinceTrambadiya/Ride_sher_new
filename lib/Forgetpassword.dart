@@ -123,16 +123,11 @@ class _ForgetpasswordState extends State<Forgetpassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: Colors.deepOrange,
         title: Text('Forget Password'),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('images/ride1.jpg'),
-                fit: BoxFit.fill,
-                colorFilter:
-                    ColorFilter.mode(Colors.black87, BlendMode.hardLight))),
+      body: Container(color: Colors.blue.shade50,
+
         child: Column(
           children: <Widget>[
             Padding(
@@ -144,14 +139,14 @@ class _ForgetpasswordState extends State<Forgetpassword> {
                   otp(); //otp() is function
                 },
                 controller: cmobile,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.blue),
                         borderRadius: BorderRadius.circular(20)),
                     hintText: 'Enter Mobile Number',
-                    hintStyle: TextStyle(color: Colors.white),
+                    hintStyle: TextStyle(color: Colors.black),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20))),
               ),

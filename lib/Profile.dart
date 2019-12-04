@@ -54,7 +54,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.indigoAccent,
+        backgroundColor: Colors.deepOrange,
         title: Text('Profile'),
       ),
       body: SingleChildScrollView(
@@ -85,7 +85,7 @@ class _ProfileState extends State<Profile> {
                         IconButton(
                           icon: Icon(
                             Icons.message,
-                            color: Colors.blueAccent,
+                            color: Colors.deepOrange,
                           ),
                           onPressed: message,
                           iconSize: 35,
@@ -100,7 +100,7 @@ class _ProfileState extends State<Profile> {
                         IconButton(
                           icon: Icon(
                             Icons.call,
-                            color: Colors.blueAccent,
+                            color: Colors.deepOrange,
                           ),
                           onPressed: call,
                           iconSize: 35,
