@@ -6,7 +6,11 @@ import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
 import 'FirstPage.dart';
 
-String _uname = '', _fromTo = '', _whereTo = '',_carName='',_carNumberPlate='';
+String _uname = '',
+    _fromTo = '',
+    _whereTo = '',
+    _carName = '',
+    _carNumberPlate = '';
 
 class Add_Trip extends StatefulWidget {
   @override
@@ -29,17 +33,30 @@ class Gender {
 }
 
 class _Add_TripState extends State<Add_Trip> {
-
   List<Gender> _gender = Gender.getselectedGender();
   List<DropdownMenuItem<Gender>> _dropDownMenuItams;
   Gender _selectedGender;
 
-  var fromTo = "", whereTo = "", dob = "", address = "",carName='',carNumberPlate='',ride_id='',ststus=0;
+  var fromTo = "",
+      whereTo = "",
+      dob = "",
+      address = "",
+      carName = '',
+      carNumberPlate = '',
+      ride_id = '',
+      ststus = 0;
 
-  var mobile = '', start_date = "", start_time = "", start_point = '', end_point = '', seats_available = '',cost='',pick_up='',gender='';
+  var mobile = '',
+      start_date = "",
+      start_time = "",
+      start_point = '',
+      end_point = '',
+      seats_available = '',
+      cost = '',
+      pick_up = '',
+      gender = '';
 
   int availableSeats1;
-
 
   TextEditingController cSeats = new TextEditingController();
   TextEditingController cStartPoint;
@@ -66,8 +83,7 @@ class _Add_TripState extends State<Add_Trip> {
     return items;
   }
 
-  onChangeDropDownMenuItem(Gender sealectedGender)
-  {
+  onChangeDropDownMenuItem(Gender sealectedGender) {
     setState(() {
       _selectedGender = sealectedGender;
     });
@@ -147,9 +163,7 @@ class _Add_TripState extends State<Add_Trip> {
     });
     removeData();
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => FirstPage()));
+        context, MaterialPageRoute(builder: (context) => FirstPage()));
   }
 
   removeData() async {
@@ -160,35 +174,39 @@ class _Add_TripState extends State<Add_Trip> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.deepOrange,
+      appBar: AppBar(
+        backgroundColor: Colors.deepOrange,
         title: Text('Add Trip'),
       ),
-      body: Container(color: Colors.blue.shade100,
+      body: Container(
+        color: Colors.blue.shade100,
         child: ListView(
           children: <Widget>[
-            Column(crossAxisAlignment: CrossAxisAlignment.start,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                  child: Text('Starting Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                  child: Text(
+                    'Starting Point : ',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
                   child: TextField(
-
                     textCapitalization: TextCapitalization.characters,
                     controller: cStartPoint,
                     enabled: false,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)
-                      )
-                    ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10))),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                  child: Text('Ending Point :',style: TextStyle(fontWeight: FontWeight.bold)),
+                  child: Text('Ending Point :',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
@@ -198,14 +216,13 @@ class _Add_TripState extends State<Add_Trip> {
                     enabled: false,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)
-                        )
-                    ),
+                            borderRadius: BorderRadius.circular(10))),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                  child: Text('Pick Up Point :',style: TextStyle(fontWeight: FontWeight.bold)),
+                  child: Text('Pick Up Point :',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
@@ -214,14 +231,13 @@ class _Add_TripState extends State<Add_Trip> {
                     controller: cPickUp,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)
-                        )
-                    ),
+                            borderRadius: BorderRadius.circular(10))),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                  child: Text('Number Of Seats Available :',style: TextStyle(fontWeight: FontWeight.bold)),
+                  child: Text('Number Of Seats Available :',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
@@ -231,14 +247,13 @@ class _Add_TripState extends State<Add_Trip> {
                     controller: cSeats,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)
-                        )
-                    ),
+                            borderRadius: BorderRadius.circular(10))),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                  child: Text('Cost :',style: TextStyle(fontWeight: FontWeight.bold)),
+                  child: Text('Cost :',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
@@ -248,9 +263,7 @@ class _Add_TripState extends State<Add_Trip> {
                     controller: cCost,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)
-                        )
-                    ),
+                            borderRadius: BorderRadius.circular(10))),
                   ),
                 ),
 //            Row(
@@ -261,56 +274,67 @@ class _Add_TripState extends State<Add_Trip> {
 //                IconButton(icon: Icon(Icons.date_range), onPressed: (){_selectTime(context);})
 //              ],
 //            ),
+            SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                      child: Text('Available for(Gender) : ',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
 
+                    SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: DropdownButton(
+                          value: _selectedGender,
+                          items: _dropDownMenuItams,
+                          onChanged: onChangeDropDownMenuItem),
+                    ),
+                    SizedBox(height: 10),
+                    // Text('Gender Selected : ${_selectedGender.name}'),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: Text('Select Date Of Trip : ',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                    SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _selectedDate(context);
+                        },
+                        child: Text('Date'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: Text(
+                          'Date selected : ${_date.toLocal().toString().substring(0, 10)}'),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                      child: Text('Select Time Of Trip : ',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                    SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: RaisedButton(
+                        onPressed: () {
+                          _selectTime(context);
+                        },
+                        child: Text('Time'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: Text('Time selected : ${_time.format(context)}'),
+                    ),
+                  ],
+                ),
+            SizedBox(height: 10),
 
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                  child: Text('Available for(Gender) : ',style: TextStyle(fontWeight: FontWeight.bold)),
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: DropdownButton(
-                      value: _selectedGender,
-                      items: _dropDownMenuItams,
-                      onChanged: onChangeDropDownMenuItem),
-                ),
-
-               // Text('Gender Selected : ${_selectedGender.name}'),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: Text('Select Date Of Trip : ',style: TextStyle(fontWeight: FontWeight.bold)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: RaisedButton(
-                    onPressed: () {
-                      _selectedDate(context);
-                    },
-                    child: Text('Date'),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: Text('Date selected : ${_date.toLocal().toString().substring(0,10)}'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                  child: Text('Select Time Of Trip : ',style: TextStyle(fontWeight: FontWeight.bold)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: RaisedButton(
-                    onPressed: () {
-                      _selectTime(context);
-                    },
-                    child: Text('Time'),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: Text('Time selected : ${_time.format(context)}'),
-                ),
                 Center(
                   child: MaterialButton(
                     child: Text('CONFIRM'),
@@ -319,14 +343,13 @@ class _Add_TripState extends State<Add_Trip> {
                       setState(() {
                         addTrip();
                       });
-
                     },
                     padding: EdgeInsets.fromLTRB(75, 10, 75, 10),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
                   ),
                 ),
-              ],
-            ),
+
           ],
         ),
       ),
@@ -335,13 +358,13 @@ class _Add_TripState extends State<Add_Trip> {
 
   void addTrip() {
     setState(() {
-       start_point = cStartPoint.text;
-       end_point = cEndPoint.text;
-       seats_available = cSeats.text;
-       availableSeats1 = int.parse(seats_available);
-       pick_up = cPickUp.text;
-       cost = cCost.text;
-      start_date =  _date.toLocal().toString().substring(0,10);
+      start_point = cStartPoint.text;
+      end_point = cEndPoint.text;
+      seats_available = cSeats.text;
+      availableSeats1 = int.parse(seats_available);
+      pick_up = cPickUp.text;
+      cost = cCost.text;
+      start_date = _date.toLocal().toString().substring(0, 10);
       start_time = _time.format(context);
       ride_id = mobile + '_' + start_date + '_' + start_time;
       gender = _selectedGender.name.toString();
@@ -351,28 +374,29 @@ class _Add_TripState extends State<Add_Trip> {
 //      DateTime _date1 = new DateTime.now();
 //      var date1 = _date.toLocal().toString().substring(0,10);
 
-        if(start_point == '' || end_point=='' || pick_up== '' || availableSeats1 == ''  || start_date == '' || start_time == '' || gender == '')
-          {
-            setState(() {
-              Toast.show("Please fill all the details.", context,
-                  duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
-            });
-          }
-        else if(availableSeats1 > 7)
-          {
-            setState(() {
-              Toast.show('Available seats should be 7 or less than 7.', context,
-                  duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
-            });
-          }
-        else
-          {
-            setState(() {
-              addData();
-              Toast.show('Trip successfuly added.', context,
-                  duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
-            });
-          }
+      if (start_point == '' ||
+          end_point == '' ||
+          pick_up == '' ||
+          availableSeats1 == '' ||
+          start_date == '' ||
+          start_time == '' ||
+          gender == '') {
+        setState(() {
+          Toast.show("Please fill all the details.", context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+        });
+      } else if (availableSeats1 > 7) {
+        setState(() {
+          Toast.show('Available seats should be 7 or less than 7.', context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+        });
+      } else {
+        setState(() {
+          addData();
+          Toast.show('Trip successfuly added.', context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+        });
+      }
     });
   }
 }

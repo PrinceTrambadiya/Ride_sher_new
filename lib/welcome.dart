@@ -54,10 +54,19 @@ class _WelcomeState extends State<Welcome> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'RIDESHARE',
-                style: TextStyle(color: Colors.blueAccent, fontSize: 35),
-              )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Ride',
+                    style: TextStyle(fontSize: 40, color: Colors.blue),
+                  ),
+                  Text(
+                    ' Share',
+                    style: TextStyle(fontSize: 40, color: Colors.cyan),
+                  )
+                ],
+              ),
             ],
           ),
         ),

@@ -143,19 +143,69 @@ class _Search_tripState extends State<Search_trip> {
             },
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-              child: Card(color: Colors.pink.shade200,
+              child: Card(color: Colors.amberAccent.shade200,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Container(
                       child: Column(
                     children: <Widget>[
-                      Text('Start Point : '+data1[index]['start_point']),
-                      Text('End Point : '+data1[index]['end_point']),
-                      Text('Pick Up : '+data1[index]['pick_up']),
-                      Text('Seats Available : '+data1[index]['seats_available']),
-                      Text('Coat : '+data1[index]['cost']),
-                      Text('Start Date : '+data1[index]['start_date']),
-                      Text('Start Time : '+data1[index]['start_time']),
+                      Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('Start Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['start_point']),
+                        ],
+                      ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                    Text('End Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                  Text(data1[index]['end_point']),
+                  ],
+                ),
+
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('Pick Up : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['pick_up']),
+                        ],
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('Seats Available : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['seats_available']),
+                        ],
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('Coat : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['cost']),
+                        ],
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('Start Date : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['start_date']),
+                        ],
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('Start Time : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['start_time']),
+                        ],
+                      ),
+
                     ],
                   )),
                 ),

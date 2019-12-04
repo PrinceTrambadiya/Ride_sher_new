@@ -21,10 +21,7 @@ class _FirstPageState extends State<FirstPage> {
   logout log = new logout();
   var name = "", email = "", dob = "", gender = "";
 
-  var CarName = '',
-      RcNumber = '',
-      CarNumberPlate = '',
-      DriverLicence = '';
+  var CarName = '', RcNumber = '', CarNumberPlate = '', DriverLicence = '';
 
   @override
   void initState() {
@@ -38,7 +35,6 @@ class _FirstPageState extends State<FirstPage> {
 //    _addMarker(mkId, place);
 //    addPolyline();
   }
-
 
 //  removeData() async {
 //    SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -89,7 +85,7 @@ class _FirstPageState extends State<FirstPage> {
       email = data[0]['email'];
       dob = data[0]['dob'];
       gender = data[0]['gender'];
-     // print('Genderrrr'+gender);
+      // print('Genderrrr'+gender);
       savedPrefrence(name, email, dob, gender);
     });
 
@@ -98,7 +94,6 @@ class _FirstPageState extends State<FirstPage> {
 //    print(dob);
 //    print(gender);
   }
-
 
   Future<void> savedPrefrence(
       String name, String email, String dob, String gender) async {
@@ -123,9 +118,9 @@ class _FirstPageState extends State<FirstPage> {
     setState(() {
       CarName = data[0]['car_name'];
       RcNumber = data[0]['rc_book_number'];
-         CarNumberPlate = data[0]['car_numberplate'];
+      CarNumberPlate = data[0]['car_numberplate'];
       DriverLicence = data[0]['driver_licence_number'];
-      savedPrefrence1(CarName,RcNumber,CarNumberPlate,DriverLicence);
+      savedPrefrence1(CarName, RcNumber, CarNumberPlate, DriverLicence);
     });
 //    print(CarName);
 //    print(RcNumber);
@@ -133,8 +128,8 @@ class _FirstPageState extends State<FirstPage> {
 //    print(CarNumberPlate);
   }
 
-  Future<void> savedPrefrence1(
-      String CarName, String RcNumber, String CarNumberPlate, String DriverLicence) async {
+  Future<void> savedPrefrence1(String CarName, String RcNumber,
+      String CarNumberPlate, String DriverLicence) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setString('CarName', CarName);
     pref.setString('RcNumber', RcNumber);
@@ -167,16 +162,25 @@ class _FirstPageState extends State<FirstPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Row(mainAxisAlignment: MainAxisAlignment.center,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('Ride',style: TextStyle(fontSize: 40,color: Colors.blue),),
-                  Text(' Share',style: TextStyle(fontSize: 40,color: Colors.cyan),)
+                  Text(
+                    'Ride',
+                    style: TextStyle(fontSize: 40, color: Colors.blue),
+                  ),
+                  Text(
+                    ' Share',
+                    style: TextStyle(fontSize: 40, color: Colors.cyan),
+                  )
                 ],
               ),
 //              Container(
 //                //child: RidePicker(onPlaceSelected),
 //              ),
-SizedBox(height: 100,),
+              SizedBox(
+                height: 60,
+              ),
               Container(
                 height: 50,
                 width: 250,
@@ -186,25 +190,27 @@ SizedBox(height: 100,),
 //                        LinearGradient(colors: [Colors.blue, Colors.cyan])),
                 child: Center(
                     child: MaterialButton(
-                      color: Colors.blue,
+                  color: Colors.blue,
                   splashColor: Colors.black45,
-                  child: Text("RIDER", style: TextStyle(fontSize: 18,color: Colors.white)),
+                  child: Text("RIDER",
+                      style: TextStyle(fontSize: 18, color: Colors.white)),
                   onPressed: () {
                     setState(() {
 //                      Navigator.push(
 //                          context,
 //                          MaterialPageRoute(
 //                              builder: (context) => RidePicker(onPlaceSelected)));
-                     Navigator.pushReplacementNamed(context, '/Driver_home_page');
+                      Navigator.pushReplacementNamed(
+                          context, '/Driver_home_page');
                     });
                   },
                   padding: EdgeInsets.fromLTRB(76, 5, 76, 5),
                   height: 45,
-                      minWidth:250 ,
-                      shape: BeveledRectangleBorder(
-                          borderRadius: BorderRadiusDirectional.horizontal(
-                              end: Radius.elliptical(10, 10),
-                              start: Radius.elliptical(10, 10))),
+                  minWidth: 250,
+                  shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadiusDirectional.horizontal(
+                          end: Radius.elliptical(10, 10),
+                          start: Radius.elliptical(10, 10))),
                 )),
               ),
 
@@ -219,9 +225,10 @@ SizedBox(height: 100,),
 //                          LinearGradient(colors: [Colors.blue, Colors.cyan])),
                   child: Center(
                       child: MaterialButton(
-                        color: Colors.white,
+                    color: Colors.white,
                     splashColor: Colors.black45,
-                    child: Text("DRIVER", style: TextStyle(fontSize: 18,color: Colors.blue )),
+                    child: Text("DRIVER",
+                        style: TextStyle(fontSize: 18, color: Colors.blue)),
                     onPressed: () {
                       setState(() {
 //                        Navigator.push(context,
@@ -231,11 +238,11 @@ SizedBox(height: 100,),
                     },
                     padding: EdgeInsets.fromLTRB(80, 5, 80, 5),
                     height: 45,
-                        minWidth: 250,
-                        shape: BeveledRectangleBorder(
-                            borderRadius: BorderRadiusDirectional.horizontal(
-                                end: Radius.elliptical(10, 10),
-                                start: Radius.elliptical(10, 10))),
+                    minWidth: 250,
+                    shape: BeveledRectangleBorder(
+                        borderRadius: BorderRadiusDirectional.horizontal(
+                            end: Radius.elliptical(10, 10),
+                            start: Radius.elliptical(10, 10))),
                   )),
                 ),
               ),
@@ -251,26 +258,28 @@ SizedBox(height: 100,),
 //                          LinearGradient(colors: [Colors.blue, Colors.cyan])),
                   child: Center(
                       child: MaterialButton(
-                        color: Colors.red.shade300,
+                    color: Colors.red.shade300,
                     splashColor: Colors.black45,
-                    child: Text("LOGOUT", style: TextStyle(fontSize: 18,color: Colors.white)),
+                    child: Text("LOGOUT",
+                        style: TextStyle(fontSize: 18, color: Colors.white)),
                     onPressed: () {
 //                      logout();
-                    log.removeData();
+                      log.removeData();
                       //Navigator.pushReplacementNamed(context, '/Login');
-                      Navigator.of(context).pushNamedAndRemoveUntil('/Login', (Route<dynamic> route) => false);
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/Login', (Route<dynamic> route) => false);
                     },
                     padding: EdgeInsets.fromLTRB(80, 5, 80, 5),
                     height: 45,
-                        minWidth: 230,
-                        shape: BeveledRectangleBorder(
-                            borderRadius: BorderRadiusDirectional.horizontal(
-                                end: Radius.elliptical(10, 10),
-                                start: Radius.elliptical(10, 10))),
+                    minWidth: 230,
+                    shape: BeveledRectangleBorder(
+                        borderRadius: BorderRadiusDirectional.horizontal(
+                            end: Radius.elliptical(10, 10),
+                            start: Radius.elliptical(10, 10))),
                   )),
                 ),
               ),
-                ],
+            ],
           ),
         ),
       ),
@@ -278,8 +287,7 @@ SizedBox(height: 100,),
   }
 }
 
-class logout{
-
+class logout {
   removeData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove("saved_uname");

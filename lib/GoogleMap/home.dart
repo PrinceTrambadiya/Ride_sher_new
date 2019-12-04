@@ -106,6 +106,7 @@ class _MapState extends State<Map> {
         tooltip: 'Click',
       ),
       body: Container(
+
         child: SafeArea(
           child: appState.initialPosition == null
               ? Container(
@@ -276,17 +277,20 @@ class _MapState extends State<Map> {
                   borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(30),
                       topRight: const Radius.circular(30))),
-              child: Column(
-                children: <Widget>[
-                  ListTile(
-                      leading: Icon(Icons.directions_car),
-                      title: Text('Add Trip'),
-                      onTap: addTrip),
-                  ListTile(
-                      leading: Icon(Icons.details),
-                      title: Text('Driver Details'),
-                      onTap: addDetails),
-                ],
+              child: Container(
+                color: Colors.red.shade100,
+                child: Column(
+                  children: <Widget>[
+                    ListTile(
+                        leading: Icon(Icons.directions_car),
+                        title: Text('Add Trip'),
+                        onTap: addTrip),
+                    ListTile(
+                        leading: Icon(Icons.details),
+                        title: Text('Driver Details'),
+                        onTap: addDetails),
+                  ],
+                ),
               ),
             ),
           );

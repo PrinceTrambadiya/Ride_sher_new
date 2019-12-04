@@ -58,7 +58,7 @@ class _SignupState extends State<Signup> {
 
   var rng = new Random();
   var random;
-  var msg = '', gender = '',bDate='';
+  var msg = '', gender = '', bDate = '';
 
   DateTime _dateTime;
   RegExp regex = new RegExp(pattern);
@@ -190,10 +190,10 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(color: Colors.blue.shade50,
+        child: Container(
+          color: Colors.blue.shade50,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -276,10 +276,8 @@ class _SignupState extends State<Signup> {
                   style: TextStyle(color: Colors.black),
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
-
                       hintStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
-
                           borderSide: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.circular(20.0)),
                       hintText: 'Mobile number',
@@ -308,19 +306,31 @@ class _SignupState extends State<Signup> {
 //                          borderRadius: BorderRadius.circular(20.0))),
 //                ),
 //              ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Select Date Of Birth : ',style: TextStyle(color: Colors.black),),
-                RaisedButton(
-                  onPressed: () {
-                    _selectedDate(context);
-                  },
-                  child: Text('Date selected : ${_date.toLocal().toString().substring(0,10)}',style: TextStyle(color: Colors.black)),
-                ),
-              ],
-            )
-
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Select Date Of Birth : ',
+                    style: TextStyle(color: Colors.black, fontSize: 17),
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      _selectedDate(context);
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.date_range),
+                        SizedBox(width: 7,),
+                        Text(
+                            '${_date.toLocal().toString().substring(0, 10)}',
+                            style: TextStyle(color: Colors.black)),
+                      ],
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                  ),
+                ],
+              )
 
 //              Padding(
 //                padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
@@ -344,7 +354,8 @@ class _SignupState extends State<Signup> {
 //                          borderRadius: BorderRadius.circular(20.0))),
 //                ),
 //              ),
-              ,Row(
+              ,
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
@@ -354,8 +365,8 @@ class _SignupState extends State<Signup> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
                     child: MaterialButton(
-                      color: Colors.white,
-                      onPressed: (){},
+                      //  color: Colors.white,
+                      onPressed: () {},
                       child: DropdownButton(
                           iconEnabledColor: Colors.blueAccent,
                           value: _selectedGender,
@@ -391,7 +402,6 @@ class _SignupState extends State<Signup> {
                   style: TextStyle(color: Colors.black),
                   obscureText: hintText1 == "Password" ? _ishidden1 : false,
                   decoration: InputDecoration(
-
                       hintStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
@@ -427,7 +437,6 @@ class _SignupState extends State<Signup> {
                   obscureText:
                       hintText2 == "Confirm password" ? _ishidden2 : false,
                   decoration: InputDecoration(
-
                       hintStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
@@ -462,7 +471,7 @@ class _SignupState extends State<Signup> {
                   child: Center(
                       child: MaterialButton(
                     splashColor: Colors.black,
-                    child: Text("GENERATE OTP", style: TextStyle(fontSize: 16)),
+                    child: Text("GENERATE OTP", style: TextStyle(fontSize: 15)),
                     onPressed: () {
                       signup();
                     },
@@ -486,7 +495,7 @@ class _SignupState extends State<Signup> {
       var m = cmobile.text;
       var p = cpassword.text;
       var a = cgender.text;
-      bDate = _date.toLocal().toString().substring(0,10);
+      bDate = _date.toLocal().toString().substring(0, 10);
       var e = cemail.text;
       var cp = cconfirmpassword.text;
       gender = _selectedGender.name.toString();
@@ -500,38 +509,28 @@ class _SignupState extends State<Signup> {
           p == '' ||
           cp == '') {
         setState(() {
-            Toast.show("Please fill all the details.", context,
-                duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+          Toast.show("Please fill all the details.", context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
         });
-      }
-      else if(p != cp)
-        {
-          setState(() {
-            Toast.show("Both password dose not match.", context,
-                duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
-          });
-        }
-
-      else if(!regex.hasMatch(e))
-      {
+      } else if (p != cp) {
+        setState(() {
+          Toast.show("Both password dose not match.", context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+        });
+      } else if (!regex.hasMatch(e)) {
         setState(() {
           Toast.show("Enter valid Email id.", context,
               duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
         });
-      }
-
-      else if(!regex2.hasMatch(m))
-      {
+      } else if (!regex2.hasMatch(m)) {
         setState(() {
           Toast.show("Enter valid Mobile number.", context,
               duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
         });
-      }
-      else {
+      } else {
         //validUser();
         alertBox();
       }
     });
   }
 }
-

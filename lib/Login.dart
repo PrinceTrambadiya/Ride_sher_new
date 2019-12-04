@@ -8,6 +8,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:connectivity/connectivity.dart';
 import 'package:fluttertoast/fluttertoast.dart' as t;
+import 'package:toast/toast.dart';
 //import 'Shared_data.dart';
 
 //SharedData shr;
@@ -201,13 +202,34 @@ class _LoginState extends State<Login> {
   }
 
   void getstarted() {
+    var m = cmobile.text;
+    var p = cpassword.text;
     setState(() {
-      var m = cmobile.text;
-      var p = cpassword.text;
+
       print(m);
       print(p);
-      if (regex2.hasMatch(m) && m != "" && p != "") {
-        addData(m.toString(), p);
+
+        if (m == "" ||
+            p == "")
+        {
+          setState(() {
+            Toast.show("Please fill all the details.", context,
+                duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+          });
+        }
+
+      else if(!regex2.hasMatch(m))
+      {
+        setState(() {
+          Toast.show("Enter valid Mobile number.", context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+        });
+      }
+
+      else
+        {
+          setState(() {
+            addData(m.toString(), p);
 //                      if (addData(m.toString(),p)==true) {
 //print('adddata');
 //                        if(alertBox()== true)
@@ -218,7 +240,8 @@ class _LoginState extends State<Login> {
 //                        }
 //
 //                      }
-      }
+          });
+        }
     });
   }
 
@@ -337,7 +360,7 @@ class _LoginState extends State<Login> {
                 child: Center(
                     child: MaterialButton(
                   splashColor: Colors.black,
-                  child: Text("LOGIN", style: TextStyle(fontSize: 20)),
+                  child: Text("LOGIN", style: TextStyle(fontSize: 15)),
                   onPressed: () {
                     getstarted();
                   },
