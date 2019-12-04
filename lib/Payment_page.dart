@@ -164,7 +164,7 @@ class _Payment_pageState extends State<Payment_page> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController ctotalAmmount = new TextEditingController(text: cost.toString());
+    TextEditingController ctotalAmmount = new TextEditingController(text: cost.toString() + ' ₹');
     return Scaffold(backgroundColor: Colors.blue.shade100,
       appBar: AppBar(backgroundColor: Colors.deepOrange,
         // Here we take the value from the MyHomePage object that was created by
@@ -185,7 +185,8 @@ class _Payment_pageState extends State<Payment_page> {
                   enabled: false,
                   decoration: InputDecoration(
                       hintText: 'Enter Ammount',
-                      suffixIcon: Icon(Icons.attach_money)),
+                     // suffixIcon: Icon(Icons.attach_money)
+                  ),
 //                  onChanged: (value) {
 //                    setState(() {
 //                      value = cost.toString();

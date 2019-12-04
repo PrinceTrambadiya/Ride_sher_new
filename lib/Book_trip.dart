@@ -152,7 +152,7 @@ class _Book_tripState extends State<Book_trip> {
                               'Cost : ',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            Text(cost),
+                            Text(cost+' ₹'),
                           ],
                         ),
                         Row(

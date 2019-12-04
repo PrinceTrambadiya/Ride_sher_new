@@ -202,7 +202,7 @@ class _Search_tripState extends State<Search_trip> {
                             'Coat : ',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          Text(data1[index]['cost']),
+                          Text(data1[index]['cost'] + ' ₹'),
                         ],
                       ),
                       SizedBox(height: 7,),
