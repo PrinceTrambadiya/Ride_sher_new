@@ -249,13 +249,54 @@ class _TripsState extends State<Trips> {
                   child: Container(color: Colors.blue.shade100,
                       child: Column(
                     children: <Widget>[
-                      Text('Start Point : '+data1[index]['start_point']),
-                      Text('End Point : '+data1[index]['end_point']),
-                      Text('Pick Up : '+data1[index]['pick_up']),
-                      Text('Seats Available : '+data1[index]['seats_available']),
-                      Text('Cost : '+data1[index]['cost']),
-                      Text('Start Date : '+data1[index]['start_date']),
-                      Text('Start Time : '+data1[index]['start_time']),
+                      Row(
+                        children: <Widget>[
+                          Text('Start Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['start_point']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Destination Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['end_point']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Pick Up : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['pick_up']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Seats Available : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['seats_available']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Cost : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['cost']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Start Date : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['start_date']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Start Time : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['start_time']),
+                        ],
+                      ),
                     ],
                   )),
                 ),
@@ -275,13 +316,55 @@ class _TripsState extends State<Trips> {
                 child: Container(
                     child: Column(
                   children: <Widget>[
-                    Text('Start Point : '+data2[index]['start_point']),
-                    Text('End Point : '+data2[index]['end_point']),
-                    Text('Pick Up : '+data2[index]['pick_up']),
-                    Text('Seats Available : '+data2[index]['seats_available']),
-                    Text('Cost : '+data2[index]['cost']),
-                    Text('Start Date : '+data2[index]['start_date']),
-                    Text('Start Time : '+data2[index]['start_time']),
+                    Row(
+                      children: <Widget>[
+                        Text('Start Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(data2[index]['start_point']),
+                      ],
+                    ),
+                    SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Destination Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data2[index]['end_point']),
+                        ],
+                      ),
+                    SizedBox(height: 7.0,),
+                    Row(
+                      children: <Widget>[
+                        Text('Pick Up : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(data2[index]['pick_up']),
+                      ],
+                    ),
+                    SizedBox(height: 7.0,),
+                    Row(
+                      children: <Widget>[
+                        Text('Seats Available : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(data2[index]['seats_available']),
+                      ],
+                    ),
+                    SizedBox(height: 7.0,),
+                    Row(
+                      children: <Widget>[
+                        Text('Cost : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(data2[index]['cost']),
+                      ],
+                    ),
+                    SizedBox(height: 7.0,),
+                    Row(
+                      children: <Widget>[
+                        Text('Start Date : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(data2[index]['start_date']),
+                      ],
+                    ),
+                    SizedBox(height: 7.0,),
+                    Row(
+                      children: <Widget>[
+                        Text('Start Time : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(data2[index]['start_time']),
+                      ],
+                    ),
+
                   ],
                 )),
               ),
@@ -300,13 +383,54 @@ class _TripsState extends State<Trips> {
                 child: Container(
                     child: Column(
                   children: <Widget>[
-                    Text('Start Time : '+data3[index]['start_point']),
-                    Text('End Point  : '+data3[index]['end_point']),
-                    Text('Pick Up : '+data3[index]['pick_up']),
-                    Text('Seats Available : '+data3[index]['seats_available']),
-                    Text('Cost : '+data3[index]['cost']),
-                    Text('Start Date : '+data3[index]['start_date']),
-                    Text('Start Time : '+data3[index]['start_time']),
+                    Row(
+                      children: <Widget>[
+                        Text('Start Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(data3[index]['start_point']),
+                      ],
+                    ),
+                    SizedBox(height: 7.0,),
+                    Row(
+                      children: <Widget>[
+                        Text('Destination Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(data3[index]['end_point']),
+                      ],
+                    ),
+                    SizedBox(height: 7.0,),
+                    Row(
+                      children: <Widget>[
+                        Text('Pick Up : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(data3[index]['pick_up']),
+                      ],
+                    ),
+                    SizedBox(height: 7.0,),
+                    Row(
+                      children: <Widget>[
+                        Text('Seats Available : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(data3[index]['seats_available']),
+                      ],
+                    ),
+                    SizedBox(height: 7.0,),
+                    Row(
+                      children: <Widget>[
+                        Text('Cost : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(data3[index]['cost']),
+                      ],
+                    ),
+                    SizedBox(height: 7.0,),
+                    Row(
+                      children: <Widget>[
+                        Text('Start Date : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(data3[index]['start_date']),
+                      ],
+                    ),
+                    SizedBox(height: 7.0,),
+                    Row(
+                      children: <Widget>[
+                        Text('Start Time : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(data3[index]['start_time']),
+                      ],
+                    ),
                   ],
                 )),
               ),
@@ -336,13 +460,56 @@ class _TripsState extends State<Trips> {
 
                       child: Column(
                     children: <Widget>[
-                      Text('Start Point : '+data4[index]['start_point']),
-                      Text('End Point : '+data4[index]['end_point']),
-                      Text('Pick Up : '+data4[index]['pick_up']),
-                      Text('Cost : '+data4[index]['cost']),
-                      Text('Driver Mobile : '+data4[index]['driver_mobile']),
-                      Text('Start Date : '+data4[index]['start_date']),
-                      Text('Start Time : '+data4[index]['start_time']),
+                      Row(
+                        children: <Widget>[
+                          Text('Start Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data4[index]['start_point']),
+                        ],
+                      ),
+
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Destination Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data4[index]['end_point']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Pick Up : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data4[index]['pick_up']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Cost : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data4[index]['cost']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Driver Mobile : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data4[index]['driver_mobile']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Start Date : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data4[index]['start_date']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Start Time : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data4[index]['start_time']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
                       MaterialButton(
                        onPressed: isEnable ? null : () {
                          setState(() {

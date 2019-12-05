@@ -71,7 +71,7 @@ class _AboutusState extends State<Aboutus> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.fromLTRB(15, 15, 0, 15),
-                          child: CircleAvatar(backgroundImage: AssetImage('images/sunny.jpeg',),radius: 35,),
+                          child: CircleAvatar(backgroundImage: AssetImage('images/sunny3.jpg',),radius: 35,),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),

@@ -121,11 +121,11 @@ class _SignupState extends State<Signup> {
   void alertBox() {
     setState(() {
       AlertDialog dialog = new AlertDialog(
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.green.shade200,
         shape: RoundedRectangleBorder(
             side: BorderSide(style: BorderStyle.solid),
             borderRadius: BorderRadius.circular(30)),
-        title: Text('User Verifaction'),
+        title: Text('Verifaction'),
         content: TextField(
           controller: centerOPT,
           decoration: InputDecoration(hintText: 'Enter OTP'),
@@ -150,8 +150,10 @@ class _SignupState extends State<Signup> {
                   Navigator.pushReplacementNamed(context, '/Login');
                 });
               },
+              color: Colors.blue.shade200,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
               child: Text('Done',
-                  style: TextStyle(fontSize: 25, color: Colors.red))),
+                  style: TextStyle(fontSize: 20, color: Colors.black))),
         ],
       );
       showDialog(context: context, child: dialog);

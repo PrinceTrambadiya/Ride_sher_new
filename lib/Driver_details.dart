@@ -117,7 +117,7 @@ class _driver_detailsState extends State<driver_details> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
+        child: Container(color: Colors.blue.shade50,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
 

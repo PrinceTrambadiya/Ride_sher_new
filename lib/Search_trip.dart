@@ -166,7 +166,7 @@ class _Search_tripState extends State<Search_trip> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            'End Point : ',
+                            'Destination Point : ',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(data1[index]['end_point']),

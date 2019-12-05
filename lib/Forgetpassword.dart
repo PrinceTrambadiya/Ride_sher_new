@@ -80,11 +80,11 @@ class _ForgetpasswordState extends State<Forgetpassword> {
     setState(() {
       //   validUser();
       AlertDialog dialog = new AlertDialog(
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.green.shade200,
         shape: RoundedRectangleBorder(
             side: BorderSide(style: BorderStyle.solid),
             borderRadius: BorderRadius.circular(30)),
-        title: Text('User Verifaction'),
+        title: Text('Verifaction'),
         content:
             TextField(
               controller: centerOPT,
@@ -93,7 +93,9 @@ class _ForgetpasswordState extends State<Forgetpassword> {
             ),
 
         actions: <Widget>[
+
           FlatButton(
+
               onPressed: () {
 //                                  Navigator.pop(context);
 //                                  Navigator.pop(context);
@@ -110,12 +112,16 @@ class _ForgetpasswordState extends State<Forgetpassword> {
                       MaterialPageRoute(
                           builder: (context) => ConfirmPassword(fatchmobile)));
                 });
+
               },
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              color: Colors.blue.shade300,
               child: Text('Done',
-                  style: TextStyle(fontSize: 25, color: Colors.red))),
+                  style: TextStyle(fontSize: 20, color: Colors.black))),
         ],
       );
       showDialog(context: context, child: dialog);
+
     });
   }
 

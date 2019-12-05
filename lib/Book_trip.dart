@@ -119,15 +119,17 @@ class _Book_tripState extends State<Book_trip> {
                             Text(startPoint),
                           ],
                         ),
+                        SizedBox(height: 7.0,),
                         Row(
                           children: <Widget>[
                             Text(
-                              'End Point : ',
+                              'Destination Point : ',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             Text(endPoint),
                           ],
                         ),
+                        SizedBox(height: 7.0,),
                         Row(
                           children: <Widget>[
                             Text(
@@ -137,6 +139,7 @@ class _Book_tripState extends State<Book_trip> {
                             Text(pickUp),
                           ],
                         ),
+                        SizedBox(height: 7.0,),
                         Row(
                           children: <Widget>[
                             Text(
@@ -146,6 +149,7 @@ class _Book_tripState extends State<Book_trip> {
                             Text(seatsAvailable),
                           ],
                         ),
+                        SizedBox(height: 7.0,),
                         Row(
                           children: <Widget>[
                             Text(
@@ -155,6 +159,7 @@ class _Book_tripState extends State<Book_trip> {
                             Text(cost+' ₹'),
                           ],
                         ),
+                        SizedBox(height: 7.0,),
                         Row(
                           children: <Widget>[
                             Text(
@@ -164,6 +169,7 @@ class _Book_tripState extends State<Book_trip> {
                             Text(startDate),
                           ],
                         ),
+                        SizedBox(height: 7.0,),
                         Row(
                           children: <Widget>[
                             Text(
@@ -180,7 +186,7 @@ class _Book_tripState extends State<Book_trip> {
               ),
 
               SizedBox(height: 40.0,),
-              Text('Select number of seats:'),
+              Text('Select number of seats : ',style: TextStyle(fontWeight: FontWeight.bold),),
 //            SizedBox(
 //              height: 10.0,
 //            ),

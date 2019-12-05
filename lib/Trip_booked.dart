@@ -159,10 +159,33 @@ class _Trip_bookedState extends State<Trip_booked> {
                   child: Container(
                       child: Column(
                     children: <Widget>[
-                      Text('Name : '+data1[index]['name']),
-                      Text('Email : '+data1[index]['email']),
-                      Text('Seat Booked : '+data1[index]['seat_booked']),
-                      Text('Mobile : '+data1[index]['mobile']),
+                      Row(
+                        children: <Widget>[
+                          Text('Name : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['name']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Email : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['email']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Seat Booked : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['seat_booked']),
+                        ],
+                      ),
+                      SizedBox(height: 7.0,),
+                      Row(
+                        children: <Widget>[
+                          Text('Mobile : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(data1[index]['mobile']),
+                        ],
+                      ),
                       //Text(data1[index]['ststus']),
                     ],
                   )),

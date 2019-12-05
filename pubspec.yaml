@@ -91,6 +91,8 @@ flutter:
     - images/sunny.jpeg
     - images/prince.jpeg
     - images/yash.jpeg
+    - images/Sunny2.jpg
+    - images/sunny3.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
