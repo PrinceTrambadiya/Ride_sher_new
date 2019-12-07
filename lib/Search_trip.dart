@@ -38,6 +38,8 @@ class _Search_tripState extends State<Search_trip> {
       userMobile = '',
       gender = gender0.toString();
 
+  var dataNotFound;
+
   _getPrefrence() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     _uname = pref.getString('saved_uname');
@@ -109,6 +111,17 @@ class _Search_tripState extends State<Search_trip> {
 
   @override
   Widget build(BuildContext context) {
+
+    dataNotFound = Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Center(child: Text('No Data Found.',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),))
+        ],
+      ),
+    );
+
+
     var search_body = ListView.builder(
         itemCount: data1 == null ? 0 : data1.length,
         itemBuilder: (BuildContext context, int index) {

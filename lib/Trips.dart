@@ -225,6 +225,15 @@ class _TripsState extends State<Trips> {
 
   @override
   Widget build(BuildContext context) {
+
+    var dataNotFound = Container(
+      child: Column(
+        children: <Widget>[
+          Center(child: Text('No Data Found.',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),))
+        ],
+      ),
+    );
+
     var pending_body = ListView.builder(
         itemCount: data1 == null ? 0 : data1.length,
         itemBuilder: (BuildContext context, int index) {

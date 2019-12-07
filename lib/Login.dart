@@ -49,30 +49,26 @@ class _LoginState extends State<Login> {
     passwordfocus = FocusNode();
   }
 
-
-  Future<void> check_connection() async{
+  Future<void> check_connection() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    if(connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi)
-      {
-        t.Fluttertoast.showToast(
-            msg: 'Internet Connection',
-            toastLength: t.Toast.LENGTH_SHORT,
-            timeInSecForIos: 1,
-            backgroundColor: Colors.black26,
-            textColor: Colors.white,
-            fontSize: 14.0
-        );
-        return true;
-      }
-    else{
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      t.Fluttertoast.showToast(
+          msg: 'Internet Connection',
+          toastLength: t.Toast.LENGTH_SHORT,
+          timeInSecForIos: 1,
+          backgroundColor: Colors.black26,
+          textColor: Colors.white,
+          fontSize: 14.0);
+      return true;
+    } else {
       t.Fluttertoast.showToast(
           msg: 'No Internet Connection',
           toastLength: t.Toast.LENGTH_SHORT,
           timeInSecForIos: 1,
           backgroundColor: Colors.black26,
           textColor: Colors.white,
-          fontSize: 14.0
-      );
+          fontSize: 14.0);
       return false;
     }
   }
@@ -143,13 +139,17 @@ class _LoginState extends State<Login> {
     var url1 = "https://ridesher.000webhostapp.com/sendSMS.php";
     http.post(url1, body: {
       "mobile": cmobile.text,
-      "text": random.toString(),
+      "text": 'Your R'
+          ''
+          'ide Share OTP Is ' + random.toString(),
     });
   }
 
   void alertBox() {
     setState(() {
-      //   validUser();
+        // validUser();
+//      random = rng.nextInt(1000000);
+//      print(random);
       AlertDialog dialog = new AlertDialog(
         backgroundColor: Colors.green.shade200,
         shape: RoundedRectangleBorder(
@@ -165,22 +165,25 @@ class _LoginState extends State<Login> {
           decoration: InputDecoration(hintText: 'Enter OTP'),
         ),
         actions: <Widget>[
+//          FlatButton(
+//              onPressed: () {
+//                setState(() {
+//                  Navigator.pop(context);
+//                  Navigator.pop(context);
+//                  Navigator.pushReplacementNamed(context, '/Login');
+//                });
+//              },
+//              color: Colors.red.shade300,
+//              splashColor: Colors.blue,
+//              shape: RoundedRectangleBorder(
+//                  borderRadius: BorderRadius.circular(30)),
+//              child: Text('Cancel',
+//                  style: TextStyle(fontSize: 20, color: Colors.black))),
           FlatButton(
-              onPressed: () {
-                setState(() {
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, '/Login');
-                });
-              },
-              color: Colors.red.shade300,
+              color: Colors.blue.shade300,
               splashColor: Colors.blue,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-              child: Text('Cancel',
-                  style: TextStyle(fontSize: 20, color: Colors.black))),
-          FlatButton(color: Colors.blue.shade300,
-              splashColor: Colors.blue,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
               onPressed: () {
                 var m = cmobile.text;
                 var p = cpassword.text;
@@ -189,10 +192,20 @@ class _LoginState extends State<Login> {
 //                                  Navigator.pushReplacementNamed(context, '/Login');;
                 setState(() {
 //                  if (centerOPT.text == random.toString()) {
-//
-                  //return true;
-//                  } else {
-//                   return false;
+//                    savedPrefrence(m, p);
+//                    Navigator.pop(context);
+//                    Navigator.pop(context);
+//                    Navigator.pushReplacementNamed(context, '/FirstPage');
+//                  }
+//                  else if (centerOPT.text == ''){
+//                    setState(() {
+//                      Toast.show("Please Enter OTP.", context,
+//                          duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+//                    });
+//                  }
+//                  else {
+//                    Toast.show("OTP dose not match.", context,
+//                        duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
 //                  }
 //                  Navigator.pop(context);
                   savedPrefrence(m, p);
@@ -214,31 +227,22 @@ class _LoginState extends State<Login> {
     var m = cmobile.text;
     var p = cpassword.text;
     setState(() {
-
       print(m);
       print(p);
 
-        if (m == "" ||
-            p == "")
-        {
-          setState(() {
-            Toast.show("Please fill all the details.", context,
-                duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
-          });
-        }
-
-      else if(!regex2.hasMatch(m))
-      {
+      if (m == "" || p == "") {
+        setState(() {
+          Toast.show("Please fill all the details.", context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+        });
+      } else if (!regex2.hasMatch(m)) {
         setState(() {
           Toast.show("Enter valid Mobile number.", context,
               duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
         });
-      }
-
-      else
-        {
-          setState(() {
-            addData(m.toString(), p);
+      } else {
+        setState(() {
+          addData(m.toString(), p);
 //                      if (addData(m.toString(),p)==true) {
 //print('adddata');
 //                        if(alertBox()== true)
@@ -249,14 +253,15 @@ class _LoginState extends State<Login> {
 //                        }
 //
 //                      }
-          });
-        }
+        });
+      }
     });
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(color: Colors.blue.shade50,
+      body: Container(
+        color: Colors.blue.shade50,
 //        decoration: BoxDecoration(
 //            image: DecorationImage(
 //                image: AssetImage('images/ride1.jpg'),

@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:math';
 import 'ConfirmPassword.dart';
+import 'package:toast/toast.dart';
 
 class Forgetpassword extends StatefulWidget {
   @override
@@ -72,13 +73,15 @@ class _ForgetpasswordState extends State<Forgetpassword> {
     var url1 = "https://ridesher.000webhostapp.com/sendSMS.php";
     http.post(url1, body: {
       "mobile": cmobile.text,
-      "text": random.toString(),
+      "text": 'Your Ride Share OTP Is ' + random.toString(),
     });
   }
 
   void alertBox() {
     setState(() {
-      //   validUser();
+         validUser();
+//      random = rng.nextInt(1000000);
+//      print(random);
       AlertDialog dialog = new AlertDialog(
         backgroundColor: Colors.green.shade200,
         shape: RoundedRectangleBorder(
@@ -101,16 +104,28 @@ class _ForgetpasswordState extends State<Forgetpassword> {
 //                                  Navigator.pop(context);
 //                                  Navigator.pushReplacementNamed(context, '/Login');;
                 setState(() {
-//                  if (centerOPT.text == random.toString()) {
-//                    Navigator.pushReplacementNamed(context, '/ConfirmPassword');
-//                  } else {
-//                    Navigator.pushReplacementNamed(context, '/Forgetpassword');
-//                  }
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ConfirmPassword(fatchmobile)));
+                  if (centerOPT.text == random.toString()) {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ConfirmPassword(fatchmobile)));
+                  }
+                  else if (centerOPT.text == ''){
+                    setState(() {
+                      Toast.show("Please Enter OTP.", context,
+                          duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+                    });
+                  }
+                  else {
+                    Toast.show("OTP dose not match.", context,
+                        duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+                  }
+//                  Navigator.pop(context);
+//                  Navigator.push(
+//                      context,
+//                      MaterialPageRoute(
+//                          builder: (context) => ConfirmPassword(fatchmobile)));
                 });
 
               },

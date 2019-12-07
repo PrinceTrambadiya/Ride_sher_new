@@ -114,11 +114,14 @@ class _SignupState extends State<Signup> {
     var url1 = "https://ridesher.000webhostapp.com/sendSMS.php";
     http.post(url1, body: {
       "mobile": cmobile.text,
-      "text": random.toString(),
+      "text": 'Your Ride Share OTP Is ' + random.toString(),
     });
   }
 
   void alertBox() {
+    //validUser();
+//    random = rng.nextInt(1000000);
+//    print(random);
     setState(() {
       AlertDialog dialog = new AlertDialog(
         backgroundColor: Colors.green.shade200,
@@ -141,12 +144,19 @@ class _SignupState extends State<Signup> {
 //                    addData();
 //                    Navigator.pushReplacementNamed(context, '/Login');
 //                  }
-//                  else{
+//                  else if (centerOPT.text == ''){
 //                    setState(() {
-//                      msg = 'Signup Fail';
+//                      Toast.show("Please Enter OTP.", context,
+//                          duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
 //                    });
 //                  }
-                  addData();
+//                  else{
+//                    setState(() {
+//                      Toast.show("OTP dose not match.", context,
+//                duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
+//                    });
+//                  }
+//                  addData();
                   Navigator.pushReplacementNamed(context, '/Login');
                 });
               },
@@ -496,16 +506,13 @@ class _SignupState extends State<Signup> {
       var n = cname.text;
       var m = cmobile.text;
       var p = cpassword.text;
-      var a = cgender.text;
       bDate = _date.toLocal().toString().substring(0, 10);
       var e = cemail.text;
       var cp = cconfirmpassword.text;
       gender = _selectedGender.name.toString();
-      print(gender);
       if (n == "" ||
           m == "" ||
           p == "" ||
-          a == "" ||
           bDate == "" ||
           e == "" ||
           p == '' ||
@@ -530,7 +537,6 @@ class _SignupState extends State<Signup> {
               duration: Toast.LENGTH_SHORT, gravity: Toast.TOP);
         });
       } else {
-        //validUser();
         alertBox();
       }
     });

@@ -20,7 +20,7 @@ class _AboutusState extends State<Aboutus> {
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
               child: Container(width: 400,color: Colors.grey.shade300,
-                child: Text('Uber Technologies, Inc., commonly known as Uber, is an American multinational ride-hailing company offering services that include peer-to-peer ridesharing, ride service hailing, food delivery, and a micromobility system with electric bikes and scooters. The company is based in San Francisco and has operations in over 785 metropolitan areas worldwide.[2] Its platforms can be accessed via its websites and mobile apps.'),
+            //    child: Text('Uber Technologies, Inc., commonly known as Uber, is an American multinational ride-hailing company offering services that include peer-to-peer ridesharing, ride service hailing, food delivery, and a micromobility system with electric bikes and scooters. The company is based in San Francisco and has operations in over 785 metropolitan areas worldwide.[2] Its platforms can be accessed via its websites and mobile apps.'),
               ),
             ),
             Padding(
@@ -45,7 +45,7 @@ class _AboutusState extends State<Aboutus> {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(15, 15, 0, 15),
-                          child: Text('Find codes to all the file in our github repositroy.'),
+                          child: Text('Find code of all the file in our github repositroy.'),
                         ),
 
                       ],

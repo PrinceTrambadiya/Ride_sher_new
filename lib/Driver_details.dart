@@ -239,7 +239,7 @@ class _driver_detailsState extends State<driver_details> {
                   child: Center(
                       child: MaterialButton(
                     splashColor: Colors.black,
-                    child: Text("SUBMIT", style: TextStyle(fontSize: 20)),
+                    child: Text("SUBMIT", style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
                     onPressed: () {
                       enterDetails();
                     },
