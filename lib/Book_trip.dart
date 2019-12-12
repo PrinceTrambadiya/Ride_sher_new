@@ -2,6 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Payment_page.dart';
 import 'package:toast/toast.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+
+var data1;
+
 
 var rideId,
     startPoint,
@@ -12,7 +18,8 @@ var rideId,
     startDate,
     startTime,
     ststus,
-    mobile;
+    mobile,
+    feedback = '0.0';
 
 int seatSelected, availableStats, cost2;
 
@@ -75,6 +82,7 @@ class _Book_tripState extends State<Book_trip> {
     // TODO: implement initState
     _dropDownMenuItams = buildDropDownMenuItms(_seats);
     _selectedSeats = _dropDownMenuItams[0].value;
+    reating();
     super.initState();
   }
 
@@ -92,6 +100,30 @@ class _Book_tripState extends State<Book_trip> {
       _selectedSeats = sealectedSeats;
     });
   }
+
+
+    Future<void> reating() async {
+
+      final response = await http.post(
+          "https://ridesher.000webhostapp.com/Fatch_Feedback.php",
+          body: {
+            "driver_mobile": mobile.toString(),
+          });
+      setState(() {
+        data1 = json.decode(response.body);
+        List data11 = data1;
+        print(data11);
+        if (data11.isEmpty) {
+          setState(() {
+            feedback = 'No Rating';
+          });
+        } else {
+          setState(() {
+            feedback = data11[0]['total'];
+          });
+        }
+      });
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -179,6 +211,16 @@ class _Book_tripState extends State<Book_trip> {
                             Text(startTime),
                           ],
                         ),
+                        SizedBox(height: 7.0),
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              'Rating : ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(feedback),
+                          ],
+                        )
                       ],
                     ),
                   ),

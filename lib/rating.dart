@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:map_demo/Driver_details.dart';
 import 'package:rating_bar/rating_bar.dart';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Trips.dart';
+import 'dart:convert';
+
 String _uname = '';
 
 var driver_mobile;
 var mobile;
+var sum = [] ;
+double total = 0;
+int length=0;
 class rating extends StatefulWidget {
 
   var driver_mobile1;
@@ -22,7 +28,7 @@ class rating extends StatefulWidget {
 
 
 class _ratingState extends State<rating> {
-  double _rating;
+  double _rating = 0.0 ;
   TextEditingController cFeedBack = new TextEditingController();
   
   @override
@@ -30,6 +36,7 @@ class _ratingState extends State<rating> {
     // TODO: implement initState
     print(driver_mobile);
     _getPrefrence();
+    fetchFeedback();
     super.initState();
   }
 
@@ -106,6 +113,46 @@ class _ratingState extends State<rating> {
     );
   }
 
+  Future<void> fetchFeedback() async {
+    final response = await http.post(
+        "https://ridesher.000webhostapp.com/Fatch_Feedback.php",
+        body: {
+          "driver_mobile": driver_mobile.toString(),
+        });
+    setState(() {
+      data1 = json.decode(response.body);
+      List data11 = data1;
+      print(data11);
+
+      if(data11.isEmpty)
+        {
+          setState(() {
+            total = _rating;
+          });
+        }
+      else{
+//        for(int i=0;i<=data11.length-1;i++)
+//        {
+//          setState(() {
+//            sum.add(data11[i]['rating']);
+//          });
+//        }
+//        print(sum);
+////      for(int i=0;i<=sum.length;i++)
+////        {
+////          setState(() {
+////            total = total +  int.parse(sum[i]);
+////          });
+////        }
+//        length = sum.length;
+//        print(length);
+//        print(total);
+      total = _rating;
+      }
+
+    });
+  }
+
 void addData() {
 
   setState(() {
@@ -119,7 +166,8 @@ void addData() {
       "rating": _rating.toString(),
       "feedback": feedBck.toString(),
       "driver_mobile": driver_mobile.toString(),
-      "rider_mobile": mobile.toString()
+      "rider_mobile": mobile.toString(),
+      "total": total.toString()
     });
   });
   Navigator.pop(context);
@@ -130,5 +178,4 @@ void addData() {
                         builder: (context) => Trips()));
                         
   }
-  
 }
