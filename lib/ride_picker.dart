@@ -3,7 +3,6 @@ import 'place_item_res.dart';
 import 'ride_picker_page.dart';
 import 'package:map_demo/GoogleMap/app_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:provider/provider.dart';
 
 class RidePicker extends StatefulWidget {

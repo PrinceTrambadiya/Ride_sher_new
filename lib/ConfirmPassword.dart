@@ -6,10 +6,10 @@ var mobile;
 class ConfirmPassword extends StatefulWidget {
   var mobile1;
 
-  ConfirmPassword(var mobile1) {
-    this.mobile1 = mobile1;
-    mobile = mobile1;
-  }
+    ConfirmPassword(var mobile1) {
+      this.mobile1 = mobile1;
+      mobile = mobile1;
+    }
   @override
   _ConfirmPasswordState createState() => _ConfirmPasswordState();
 }

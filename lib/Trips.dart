@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Trip_booked.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:rating_bar/rating_bar.dart';
+import 'rating.dart';
 
 class Trips extends StatefulWidget {
   @override
@@ -12,7 +14,7 @@ class Trips extends StatefulWidget {
 }
 
 String _uname = '';
-var data1, data2, data3, data4, data5;
+var data1, data2, data3, data4, data5,driver_mobile;
 List data55 = [];
 List data44 = [];
 bool isProcess1 = true;
@@ -20,7 +22,7 @@ bool isProcess2 = true;
 bool isProcess3 = true;
 bool isProcess4 = true;
 bool isEnable = true;
-
+double _rating;
 var progressIndicator = Container(
   child: Center(
     child: CircularProgressIndicator(),
@@ -38,7 +40,7 @@ class _TripsState extends State<Trips> {
     _refreshController.refreshCompleted();
   }
 
-  var mobile = '', ststus1 = 0, ststus2 = 1, ststus3 = 2,finalRideId= '';
+  var mobile = '', ststus1 = 0, ststus2 = 1, ststus3 = 2, finalRideId = '';
   bool isButtonEnable = false;
 
   @override
@@ -48,11 +50,7 @@ class _TripsState extends State<Trips> {
     super.initState();
   }
 
-  void start_trip(){
-
-
-
-  }
+  void start_trip() {}
 
   _getPrefrence() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -111,9 +109,9 @@ class _TripsState extends State<Trips> {
 //        });
 //    data2 = json.decode(response.body);
 //    data22.add(data2);
-    print( data44[0]['ride_id'].toString());
+    print(data44[0]['ride_id'].toString());
 
-    for(int i = 0 ; i<=data44.length-1 ; i++) {
+    for (int i = 0; i <= data44.length - 1; i++) {
       print('hellocncnsk&&&&&&&!!!!!!!!!!!');
       var ride_id_final = data44[i]['ride_id'].toString();
       final response2 = await http.post(
@@ -126,7 +124,6 @@ class _TripsState extends State<Trips> {
       data2 = json.decode(response2.body);
       data22 = data2;
     }
-
 
     setState(() {
       //print(data22);
@@ -143,9 +140,9 @@ class _TripsState extends State<Trips> {
   }
 
   Future<void> addData3(mobile, ststus3) async {
-    List data33 =[];
+    List data33 = [];
 
-    for(int i = 0 ; i<=data44.length-1 ; i++) {
+    for (int i = 0; i <= data44.length - 1; i++) {
       print('hellocncnsk&&&&&&&!!!!!!!!!!!');
       var ride_id_final = data44[i]['ride_id'].toString();
       final response = await http.post(
@@ -156,7 +153,8 @@ class _TripsState extends State<Trips> {
             "ststus": ststus3,
           });
       data3 = json.decode(response.body);
-      data33 = data3; }
+      data33 = data3;
+    }
     setState(() {
       //print(data5);
       if (data33.isEmpty) {
@@ -194,7 +192,6 @@ class _TripsState extends State<Trips> {
     });
   }
 
-
   Future<void> addData5(mobile) async {
     final response = await http.post(
         "https://ridesher.000webhostapp.com/Fatch_Bookd_trips - status.php",
@@ -208,7 +205,8 @@ class _TripsState extends State<Trips> {
       print(data55);
     });
   }
-  Future<void> addData6(ride_id,mobile) async {
+
+  Future<void> addData6(ride_id, mobile) async {
     final response = await http.post(
         "https://ridesher.000webhostapp.com/Update_trip_booked_ststus 2.php",
         body: {
@@ -222,14 +220,16 @@ class _TripsState extends State<Trips> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     var dataNotFound = Container(
       child: Column(
         children: <Widget>[
-          Center(child: Text('No Data Found.',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),))
+          Center(
+              child: Text(
+            'No Data Found.',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ))
         ],
       ),
     );
@@ -252,62 +252,97 @@ class _TripsState extends State<Trips> {
             },
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-              child: Card(color: Colors.blue.shade100,
+              child: Card(
+                color: Colors.blue.shade100,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Container(color: Colors.blue.shade100,
+                  child: Container(
+                      color: Colors.blue.shade100,
                       child: Column(
-                    children: <Widget>[
-                      Row(
                         children: <Widget>[
-                          Text('Start Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text(data1[index]['start_point']),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                'Start Point : ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(data1[index]['start_point']),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 7.0,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                'Destination Point : ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(data1[index]['end_point']),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 7.0,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                'Pick Up : ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(data1[index]['pick_up']),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 7.0,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                'Seats Available : ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(data1[index]['seats_available']),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 7.0,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                'Cost : ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(data1[index]['cost']),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 7.0,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                'Start Date : ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(data1[index]['start_date']),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 7.0,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                'Start Time : ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(data1[index]['start_time']),
+                            ],
+                          ),
                         ],
-                      ),
-                      SizedBox(height: 7.0,),
-                      Row(
-                        children: <Widget>[
-                          Text('Destination Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text(data1[index]['end_point']),
-                        ],
-                      ),
-                      SizedBox(height: 7.0,),
-                      Row(
-                        children: <Widget>[
-                          Text('Pick Up : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text(data1[index]['pick_up']),
-                        ],
-                      ),
-                      SizedBox(height: 7.0,),
-                      Row(
-                        children: <Widget>[
-                          Text('Seats Available : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text(data1[index]['seats_available']),
-                        ],
-                      ),
-                      SizedBox(height: 7.0,),
-                      Row(
-                        children: <Widget>[
-                          Text('Cost : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text(data1[index]['cost']),
-                        ],
-                      ),
-                      SizedBox(height: 7.0,),
-                      Row(
-                        children: <Widget>[
-                          Text('Start Date : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text(data1[index]['start_date']),
-                        ],
-                      ),
-                      SizedBox(height: 7.0,),
-                      Row(
-                        children: <Widget>[
-                          Text('Start Time : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text(data1[index]['start_time']),
-                        ],
-                      ),
-                    ],
-                  )),
+                      )),
                 ),
               ),
             ),
@@ -319,7 +354,8 @@ class _TripsState extends State<Trips> {
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
-            child: Card(color: Colors.green.shade100,
+            child: Card(
+              color: Colors.green.shade100,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Container(
@@ -327,53 +363,85 @@ class _TripsState extends State<Trips> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Text('Start Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(
+                          'Start Point : ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         Text(data2[index]['start_point']),
                       ],
                     ),
-                    SizedBox(height: 7.0,),
-                      Row(
-                        children: <Widget>[
-                          Text('Destination Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                          Text(data2[index]['end_point']),
-                        ],
-                      ),
-                    SizedBox(height: 7.0,),
+                    SizedBox(
+                      height: 7.0,
+                    ),
                     Row(
                       children: <Widget>[
-                        Text('Pick Up : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(
+                          'Destination Point : ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(data2[index]['end_point']),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 7.0,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          'Pick Up : ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         Text(data2[index]['pick_up']),
                       ],
                     ),
-                    SizedBox(height: 7.0,),
+                    SizedBox(
+                      height: 7.0,
+                    ),
                     Row(
                       children: <Widget>[
-                        Text('Seats Available : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(
+                          'Seats Available : ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         Text(data2[index]['seats_available']),
                       ],
                     ),
-                    SizedBox(height: 7.0,),
+                    SizedBox(
+                      height: 7.0,
+                    ),
                     Row(
                       children: <Widget>[
-                        Text('Cost : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(
+                          'Cost : ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         Text(data2[index]['cost']),
                       ],
                     ),
-                    SizedBox(height: 7.0,),
+                    SizedBox(
+                      height: 7.0,
+                    ),
                     Row(
                       children: <Widget>[
-                        Text('Start Date : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(
+                          'Start Date : ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         Text(data2[index]['start_date']),
                       ],
                     ),
-                    SizedBox(height: 7.0,),
+                    SizedBox(
+                      height: 7.0,
+                    ),
                     Row(
                       children: <Widget>[
-                        Text('Start Time : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text(
+                          'Start Time : ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         Text(data2[index]['start_time']),
                       ],
                     ),
-
                   ],
                 )),
               ),
@@ -384,64 +452,109 @@ class _TripsState extends State<Trips> {
     var complete_body = ListView.builder(
         itemCount: data3 == null ? 0 : data3.length,
         itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-            child: Card(color: Colors.yellow.shade100,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Container(
-                    child: Column(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text('Start Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                        Text(data3[index]['start_point']),
-                      ],
-                    ),
-                    SizedBox(height: 7.0,),
-                    Row(
-                      children: <Widget>[
-                        Text('Destination Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                        Text(data3[index]['end_point']),
-                      ],
-                    ),
-                    SizedBox(height: 7.0,),
-                    Row(
-                      children: <Widget>[
-                        Text('Pick Up : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                        Text(data3[index]['pick_up']),
-                      ],
-                    ),
-                    SizedBox(height: 7.0,),
-                    Row(
-                      children: <Widget>[
-                        Text('Seats Available : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                        Text(data3[index]['seats_available']),
-                      ],
-                    ),
-                    SizedBox(height: 7.0,),
-                    Row(
-                      children: <Widget>[
-                        Text('Cost : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                        Text(data3[index]['cost']),
-                      ],
-                    ),
-                    SizedBox(height: 7.0,),
-                    Row(
-                      children: <Widget>[
-                        Text('Start Date : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                        Text(data3[index]['start_date']),
-                      ],
-                    ),
-                    SizedBox(height: 7.0,),
-                    Row(
-                      children: <Widget>[
-                        Text('Start Time : ',style: TextStyle(fontWeight: FontWeight.bold),),
-                        Text(data3[index]['start_time']),
-                      ],
-                    ),
-                  ],
-                )),
+          return GestureDetector(
+            onTap: (){
+              setState(() {
+                  driver_mobile = data3[index]['mobile'];
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => rating(driver_mobile)));
+              });
+            },
+                      child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+              child: Card(
+                color: Colors.yellow.shade100,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                      child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Start Point : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(data3[index]['start_point']),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 7.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Destination Point : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(data3[index]['end_point']),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 7.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Pick Up : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(data3[index]['pick_up']),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 7.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Cost : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(data3[index]['cost']),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 7.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Start Date : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(data3[index]['start_date']),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 7.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Start Time : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(data3[index]['start_time']),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 7.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Driver Mobile : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(data3[index]['mobile']),
+                        ],
+                      ),
+                    ],
+                  )),
+                ),
               ),
             ),
           );
@@ -450,85 +563,119 @@ class _TripsState extends State<Trips> {
     var booked_body = ListView.builder(
         itemCount: data4 == null ? 0 : data4.length,
         itemBuilder: (BuildContext context, int index) {
-
 //          setState(() {
-          if(data55[index]['ststus'].toString()== '1'){
+          if (data55[index]['ststus'].toString() == '1') {
             isEnable = false;
-          }
-          else{
+          } else {
             isEnable = true;
           }
 //          });
           return GestureDetector(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-              child: Card(color: Colors.red.shade100,
+              child: Card(
+                color: Colors.red.shade100,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Container(
-
                       child: Column(
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          Text('Start Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            'Start Point : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(data4[index]['start_point']),
                         ],
                       ),
-
-                      SizedBox(height: 7.0,),
+                      SizedBox(
+                        height: 7.0,
+                      ),
                       Row(
                         children: <Widget>[
-                          Text('Destination Point : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            'Destination Point : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(data4[index]['end_point']),
                         ],
                       ),
-                      SizedBox(height: 7.0,),
+                      SizedBox(
+                        height: 7.0,
+                      ),
                       Row(
                         children: <Widget>[
-                          Text('Pick Up : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            'Pick Up : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(data4[index]['pick_up']),
                         ],
                       ),
-                      SizedBox(height: 7.0,),
+                      SizedBox(
+                        height: 7.0,
+                      ),
                       Row(
                         children: <Widget>[
-                          Text('Cost : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            'Cost : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(data4[index]['cost']),
                         ],
                       ),
-                      SizedBox(height: 7.0,),
+                      SizedBox(
+                        height: 7.0,
+                      ),
                       Row(
                         children: <Widget>[
-                          Text('Driver Mobile : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            'Driver Mobile : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(data4[index]['driver_mobile']),
                         ],
                       ),
-                      SizedBox(height: 7.0,),
+                      SizedBox(
+                        height: 7.0,
+                      ),
                       Row(
                         children: <Widget>[
-                          Text('Start Date : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            'Start Date : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(data4[index]['start_date']),
                         ],
                       ),
-                      SizedBox(height: 7.0,),
+                      SizedBox(
+                        height: 7.0,
+                      ),
                       Row(
                         children: <Widget>[
-                          Text('Start Time : ',style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            'Start Time : ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                           Text(data4[index]['start_time']),
                         ],
                       ),
-                      SizedBox(height: 7.0,),
+                      SizedBox(
+                        height: 7.0,
+                      ),
                       MaterialButton(
-                       onPressed: isEnable ? null : () {
-                         setState(() {
-                           addData6(data4[index]['ride_id'].toString(),data4[index]['mobile'].toString());
-                         });
-                       },
+                        onPressed: isEnable
+                            ? null
+                            : () {
+                                setState(() {
+                                  addData6(data4[index]['ride_id'].toString(),
+                                      data4[index]['mobile'].toString());
+                                });
+                              },
                         child: Text('CONFIRM'),
                         color: Colors.amberAccent,
                       ),
-
                     ],
                   )),
                 ),
@@ -539,7 +686,8 @@ class _TripsState extends State<Trips> {
 
     return DefaultTabController(
       length: 4,
-      child: Scaffold(backgroundColor: Colors.blue.shade100,
+      child: Scaffold(
+        backgroundColor: Colors.blue.shade100,
         appBar: AppBar(
           backgroundColor: Colors.deepOrange,
           title: Text('Trips'),
