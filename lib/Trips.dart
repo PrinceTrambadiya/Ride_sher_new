@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Trip_booked.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:rating_bar/rating_bar.dart';
 import 'rating.dart';
 
 class Trips extends StatefulWidget {
@@ -45,12 +44,11 @@ class _TripsState extends State<Trips> {
 
   @override
   void initState() {
-    // TODO: implement initState
     _getPrefrence();
     super.initState();
   }
 
-  void start_trip() {}
+  //void start_trip() {}
 
   _getPrefrence() async {
     SharedPreferences pref = await SharedPreferences.getInstance();

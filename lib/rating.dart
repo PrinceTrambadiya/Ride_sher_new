@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:map_demo/Driver_details.dart';
 import 'package:rating_bar/rating_bar.dart';
 import 'package:http/http.dart' as http;
-import 'package:toast/toast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Trips.dart';
 import 'dart:convert';
@@ -11,14 +9,14 @@ String _uname = '';
 
 var driver_mobile;
 var mobile;
-var sum = [] ;
+var sum = [];
 double total = 0;
-int length=0;
-class rating extends StatefulWidget {
+int length = 0;
 
+class rating extends StatefulWidget {
   var driver_mobile1;
 
-   rating(var driver_mobile1) {
+  rating(var driver_mobile1) {
     this.driver_mobile1 = driver_mobile1;
     driver_mobile = driver_mobile1;
   }
@@ -26,14 +24,12 @@ class rating extends StatefulWidget {
   _ratingState createState() => _ratingState();
 }
 
-
 class _ratingState extends State<rating> {
-  double _rating = 0.0 ;
+  double _rating = 0.0;
   TextEditingController cFeedBack = new TextEditingController();
-  
+
   @override
   void initState() {
-    // TODO: implement initState
     print(driver_mobile);
     _getPrefrence();
     fetchFeedback();
@@ -60,7 +56,7 @@ class _ratingState extends State<rating> {
           children: <Widget>[
             Container(
               child: RatingBar(
-                onRatingChanged: (rating){
+                onRatingChanged: (rating) {
                   setState(() {
                     _rating = rating;
                     print(_rating);
@@ -76,9 +72,8 @@ class _ratingState extends State<rating> {
                 size: 48,
               ),
             ),
-           // SizedBox(height: 20,),
             Padding(
-              padding: const EdgeInsets.fromLTRB(10,15,10,15),
+              padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
               child: Container(
                 child: TextField(
                   controller: cFeedBack,
@@ -103,9 +98,13 @@ class _ratingState extends State<rating> {
             ),
             MaterialButton(
               onPressed: addData,
-              child: Text("SUBMIT",style: TextStyle(fontWeight: FontWeight.bold),),
+              child: Text(
+                "SUBMIT",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               color: Colors.yellow,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
             )
           ],
         ),
@@ -114,30 +113,22 @@ class _ratingState extends State<rating> {
   }
 
   Future<void> fetchFeedback() async {
-    final response = await http.post(
-        "https://ridesher.000webhostapp.com/Fatch_Feedback.php",
-        body: {
-          "driver_mobile": driver_mobile.toString(),
-        });
+    final response = await http
+        .post("https://ridesher.000webhostapp.com/Fatch_Feedback.php", body: {
+      "driver_mobile": driver_mobile.toString(),
+    });
     setState(() {
-      data1 = json.decode(response.body);
-      List data11 = data1;
+      List data11 = json.decode(response.body);
       print(data11);
 
-      if(data11.isEmpty)
-        {
-          setState(() {
-            total = _rating;
-          });
+      if (data11.isEmpty) {
+        total = _rating;
+      } else {
+        for (int i = 0; i <= data11.length - 1; i++) {
+          print(data11[i]['rating']);
+          //sum.add(data11[i]['rating']);
         }
-      else{
-//        for(int i=0;i<=data11.length-1;i++)
-//        {
-//          setState(() {
-//            sum.add(data11[i]['rating']);
-//          });
-//        }
-//        print(sum);
+        print(sum);
 ////      for(int i=0;i<=sum.length;i++)
 ////        {
 ////          setState(() {
@@ -147,35 +138,27 @@ class _ratingState extends State<rating> {
 //        length = sum.length;
 //        print(length);
 //        print(total);
-      total = _rating;
+        total = _rating;
       }
-
     });
   }
 
-void addData() {
-
-  setState(() {
+  void addData() {
+    setState(() {
       var feedBck = cFeedBack.text;
-  print(_rating.toString());
-  print(feedBck.toString());
-  print(driver_mobile.toString());
-  print(mobile.toString());
-    var url = "https://ridesher.000webhostapp.com/feedback.php";
-    http.post(url, body: {
-      "rating": _rating.toString(),
-      "feedback": feedBck.toString(),
-      "driver_mobile": driver_mobile.toString(),
-      "rider_mobile": mobile.toString(),
-      "total": total.toString()
+      print(_rating.toString());
+      print(feedBck.toString());
+      print(driver_mobile.toString());
+      print(mobile.toString());
+      var url = "https://ridesher.000webhostapp.com/feedback.php";
+      http.post(url, body: {
+        "rating": _rating.toString(),
+        "feedback": feedBck.toString(),
+        "driver_mobile": driver_mobile.toString(),
+        "rider_mobile": mobile.toString(),
+        "total": total.toString()
+      });
     });
-  });
-  Navigator.pop(context);
-  Navigator.pop(context);
- Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Trips()));
-                        
+    Navigator.pop(context);
   }
 }
